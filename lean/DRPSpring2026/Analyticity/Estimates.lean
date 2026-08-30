@@ -11,6 +11,27 @@ analyticity theorem and in its pointwise-limit application.
 
 namespace DRPSpring2026
 
+/-- Pointwise bounded Taylor coefficients give an infinite convergence radius. -/
+theorem radius_eq_top_of_iteratedDeriv_bound {f : ℝ → ℝ} {x C : ℝ}
+    (hC : ∀ n : ℕ, ‖iteratedDeriv n f x‖ ≤ C) :
+    let p : FormalMultilinearSeries ℝ ℝ ℝ :=
+      FormalMultilinearSeries.ofScalars ℝ (fun n ↦ iteratedDeriv n f x / n.factorial)
+    p.radius = ⊤ := by
+  intro p
+  apply p.radius_eq_top_of_summable_norm
+  intro r
+  have hs : Summable (fun n : ℕ ↦ C * ((r : ℝ) ^ n / n.factorial)) :=
+    (Real.summable_pow_div_factorial (r : ℝ)).mul_left C
+  refine hs.of_nonneg_of_le (fun n ↦ mul_nonneg (norm_nonneg _) (pow_nonneg r.2 _)) ?_
+  intro n
+  simp only [p, FormalMultilinearSeries.ofScalars_norm, norm_div, Real.norm_natCast]
+  calc
+    (‖iteratedDeriv n f x‖ / (n.factorial : ℝ)) * (r : ℝ) ^ n
+        ≤ (C / (n.factorial : ℝ)) * (r : ℝ) ^ n :=
+      mul_le_mul_of_nonneg_right (div_le_div_of_nonneg_right (hC n) (by positivity))
+        (by positivity)
+    _ = C * ((r : ℝ) ^ n / (n.factorial : ℝ)) := by ring
+
 private lemma iteratedDeriv_iteratedDeriv (f : ℝ → ℝ) (n k : ℕ) :
     iteratedDeriv n (iteratedDeriv k f) = iteratedDeriv (n + k) f := by
   rw [iteratedDeriv_eq_iterate, iteratedDeriv_eq_iterate, iteratedDeriv_eq_iterate]

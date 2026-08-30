@@ -9,16 +9,26 @@ DRP project, *Iteration of Linear Differential Operators*.
   defines what it means for a real function to extend to an entire function.
 - `DRPSpring2026/Analyticity/Estimates.lean` contains the reusable exponential
   Taylor-series estimate for globally analytic functions.
+- `DRPSpring2026/Analyticity/ExponentialTaylor.lean` contains the
+  finite-head/small-tail estimate showing that decaying Taylor coefficients
+  give `o(exp x)` growth on the positive real axis.
 - `DRPSpring2026/IteratedDerivative/Limit.lean` states the ordinary-derivative
   application: a pointwise limit of iterated derivatives is smooth and fixed
   by differentiation.
+- `DRPSpring2026/Operators/FirstOrder.lean` provides the general nondegenerate
+  first-order change-of-variables interface.
+- `DRPSpring2026/Operators/Euler.lean` treats the operator `f ↦ x f'`.
+- `DRPSpring2026/Operators/QuadraticEuler.lean` treats `f ↦ x² f'` using the
+  reciprocal charts and identifies its limits with scalar multiples of
+  Mathlib's smooth function `expNegInvGlue`.
 - `DRPSpring2026.lean` is the umbrella import for the formalization.
 
 Tao's analyticity theorem and its ordinary-derivative application are fully
 proved using the Baire-category argument, Taylor-series estimates, the
 Fundamental Theorem of Calculus, and dominated convergence from the write-up.
-Future differential-operator results should live in
-`DRPSpring2026/Operators/` and build on the ordinary-derivative result.
+Further differential-operator results should live in
+`DRPSpring2026/Operators/` and build on the ordinary-derivative result and the
+reusable change-of-variables interfaces there.
 
 ## Building
 
