@@ -24,6 +24,8 @@ lemma contDiff_quadraticEulerOperator {f : ℝ → ℝ} (hf : ContDiff ℝ ∞ f
     ContDiff ℝ ∞ (quadraticEulerOperator f) := by
   exact (contDiff_id.pow 2).mul (contDiff_infty_iff_deriv.mp hf).2
 
+namespace QuadraticEuler
+
 /-- Pull a function back by the involution `y ↦ -1/y`. -/
 noncomputable def reciprocalPullback (f : ℝ → ℝ) : ℝ → ℝ :=
   fun y ↦ f (-y⁻¹)
@@ -190,6 +192,8 @@ private lemma negative_chart_constant_eq_zero {f g : ℝ → ℝ} {C : ℝ}
     rw [hqeq hy]
   exact tendsto_nhds_unique hqweighted hqweightedZero
 
+end QuadraticEuler
+
 /-- Classification of pointwise limits for `f ↦ x² f'`.  The sole free
 parameter is the coefficient of mathlib's standard smooth flat function. -/
 theorem quadraticEulerOperator_iterate_limit_classification {f g : ℝ → ℝ}
@@ -197,12 +201,14 @@ theorem quadraticEulerOperator_iterate_limit_classification {f g : ℝ → ℝ}
     (hlim : ∀ x : ℝ, Tendsto
       (fun n : ℕ ↦ (quadraticEulerOperator^[n]) f x) atTop (nhds (g x))) :
     ∃ C : ℝ, g = fun x ↦ C * expNegInvGlue x := by
-  obtain ⟨_, Cpos, hpos⟩ := reciprocal_chart_limit isOpen_Iio isPreconnected_Iio
-    ⟨-1, by norm_num⟩ reciprocal_ne_zero_on_Iio hf hlim
-  obtain ⟨hnegEntire, Cneg, hneg⟩ := reciprocal_chart_limit isOpen_Ioi isPreconnected_Ioi
-    ⟨1, by norm_num⟩ reciprocal_ne_zero_on_Ioi hf hlim
+  obtain ⟨_, Cpos, hpos⟩ := QuadraticEuler.reciprocal_chart_limit
+    isOpen_Iio isPreconnected_Iio ⟨-1, by norm_num⟩
+    QuadraticEuler.reciprocal_ne_zero_on_Iio hf hlim
+  obtain ⟨hnegEntire, Cneg, hneg⟩ := QuadraticEuler.reciprocal_chart_limit
+    isOpen_Ioi isPreconnected_Ioi ⟨1, by norm_num⟩
+    QuadraticEuler.reciprocal_ne_zero_on_Ioi hf hlim
   have hCneg : Cneg = 0 :=
-    negative_chart_constant_eq_zero hf hlim hnegEntire hneg
+    QuadraticEuler.negative_chart_constant_eq_zero hf hlim hnegEntire hneg
   refine ⟨Cpos, funext fun x ↦ ?_⟩
   rcases lt_trichotomy x 0 with hx | rfl | hx
   · have hy : -x⁻¹ ∈ Set.Ioi (0 : ℝ) := by
@@ -211,7 +217,8 @@ theorem quadraticEulerOperator_iterate_limit_classification {f g : ℝ → ℝ}
       linarith
     have hvalue := hneg hy
     rw [hCneg] at hvalue
-    simpa [reciprocalPullback, expNegInvGlue.zero_of_nonpos hx.le] using hvalue
+    simpa [QuadraticEuler.reciprocalPullback,
+      expNegInvGlue.zero_of_nonpos hx.le] using hvalue
   · have hshift := (tendsto_add_atTop_iff_nat 1).mpr (hlim 0)
     have hzero : (fun n : ℕ ↦ (quadraticEulerOperator^[n + 1]) f 0) = fun _ ↦ 0 := by
       funext n
@@ -225,7 +232,8 @@ theorem quadraticEulerOperator_iterate_limit_classification {f g : ℝ → ℝ}
       linarith
     have hvalue := hpos hy
     have hinvol : -(-x⁻¹)⁻¹ = x := by field_simp
-    simpa [reciprocalPullback, hinvol, expNegInvGlue, not_le_of_gt hx] using hvalue
+    simpa [QuadraticEuler.reciprocalPullback, hinvol,
+      expNegInvGlue, not_le_of_gt hx] using hvalue
 
 /-- The limit is smooth and is fixed by the quadratic Euler operator. -/
 theorem quadraticEulerOperator_iterate_limit {f g : ℝ → ℝ}

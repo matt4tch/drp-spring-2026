@@ -17,11 +17,19 @@ DRP project, *Iteration of Linear Differential Operators*.
   by differentiation.
 - `DRPSpring2026/Operators/FirstOrder.lean` provides the general nondegenerate
   first-order change-of-variables interface.
+- `DRPSpring2026/Operators/FirstOrderIntegral.lean` constructs that interface
+  from the document's integral coordinate and integrating factor, proves the
+  unconditional convergence theorem, and classifies its limits explicitly.
 - `DRPSpring2026/Operators/Euler.lean` treats the operator `f ↦ x f'`.
 - `DRPSpring2026/Operators/QuadraticEuler.lean` treats `f ↦ x² f'` using the
   reciprocal charts and identifies its limits with scalar multiples of
   Mathlib's smooth function `expNegInvGlue`.
 - `DRPSpring2026.lean` is the umbrella import for the formalization.
+
+The main convergence and classification theorems live directly in the
+`DRPSpring2026` namespace.  Reusable construction details are grouped under
+`DRPSpring2026.FirstOrder`, `DRPSpring2026.Euler`, and
+`DRPSpring2026.QuadraticEuler`.
 
 Tao's analyticity theorem and its ordinary-derivative application are fully
 proved using the Baire-category argument, Taylor-series estimates, the

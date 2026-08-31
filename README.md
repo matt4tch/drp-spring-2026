@@ -19,6 +19,8 @@ vanishes.
 ## Files
 
 - `drp.typ` — the full mathematical write-up and proofs.
+- `proof-comparison.md` — a theorem-by-theorem comparison of the write-up and
+  Lean formalization, including remaining formalization gaps.
 - `slides.typ` — the presentation slides.
 
 ## Building

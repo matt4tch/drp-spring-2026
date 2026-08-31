@@ -1,6 +1,6 @@
 import DRPSpring2026.Analyticity.ComplexGrowth
 import DRPSpring2026.Analyticity.PhragmenLindelof
-import DRPSpring2026.Operators.FirstOrder
+import DRPSpring2026.Analyticity.Tao
 
 /-!
 # Iteration of the Euler operator
@@ -19,14 +19,11 @@ namespace DRPSpring2026
 noncomputable def eulerOperator (f : ℝ → ℝ) : ℝ → ℝ :=
   fun x ↦ x * deriv f x
 
-lemma eulerOperator_eq_firstOrderOperator (f : ℝ → ℝ) :
-    eulerOperator f = firstOrderOperator id 0 f := by
-  ext x
-  simp [eulerOperator, firstOrderOperator]
-
 lemma contDiff_eulerOperator {f : ℝ → ℝ} (hf : ContDiff ℝ ∞ f) :
     ContDiff ℝ ∞ (eulerOperator f) := by
   exact contDiff_id.mul (contDiff_infty_iff_deriv.mp hf).2
+
+namespace Euler
 
 /-- Pull a real function back along the parametrization `y ↦ σ exp y`. -/
 noncomputable def expPullback (σ : ℝ) (f : ℝ → ℝ) : ℝ → ℝ :=
@@ -235,6 +232,8 @@ private lemma expPullback_eq_affine (σ : ℝ) (hσ : |σ| = 1)
       push_cast
       ring
 
+end Euler
+
 /--
 Classification for the simple-zero operator `f ↦ x f'`, following the two
 exponential coordinate charts in the DRP write-up.
@@ -245,8 +244,8 @@ theorem eulerOperator_iterate_limit_classification {f g : ℝ → ℝ}
       Tendsto (fun n : ℕ ↦ (eulerOperator^[n]) f x) atTop (nhds (g x))) :
     f = (fun x ↦ f 0 + deriv f 0 * x) ∧
       g = (fun x ↦ deriv f 0 * x) := by
-  have hpos := expPullback_eq_affine 1 (by norm_num) hf hlim
-  have hneg := expPullback_eq_affine (-1) (by norm_num) hf hlim
+  have hpos := Euler.expPullback_eq_affine 1 (by norm_num) hf hlim
+  have hneg := Euler.expPullback_eq_affine (-1) (by norm_num) hf hlim
   have hfaffine : f = fun x ↦ f 0 + deriv f 0 * x := by
     funext x
     rcases lt_trichotomy x 0 with hx | rfl | hx
@@ -256,25 +255,25 @@ theorem eulerOperator_iterate_limit_classification {f g : ℝ → ℝ}
         rw [Real.exp_log (neg_pos.mpr hx)]
         ring
       have := congrFun hneg y
-      simpa [expPullback, hexp] using this
+      simpa [Euler.expPullback, hexp] using this
     · simp
     · let y := Real.log x
       have hexp : Real.exp y = x := by simp [y, Real.exp_log hx]
       have := congrFun hpos y
-      simpa [expPullback, hexp] using this
+      simpa [Euler.expPullback, hexp] using this
   refine ⟨hfaffine, ?_⟩
   funext x
   have hshift := (tendsto_add_atTop_iff_nat 1).mpr (hlim x)
   let b : ℝ := deriv f 0
   have hLf : eulerOperator f = fun x ↦ b * x := by
     rw [hfaffine]
-    exact eulerOperator_affine _ _
+    exact Euler.eulerOperator_affine _ _
   have hiter : ∀ n : ℕ, (eulerOperator^[n + 1]) f = fun x ↦ b * x := by
     intro n
     induction n with
     | zero => simpa using hLf
     | succ n ih =>
-        rw [Nat.succ_add, Function.iterate_succ_apply', ih, eulerOperator_linear]
+        rw [Nat.succ_add, Function.iterate_succ_apply', ih, Euler.eulerOperator_linear]
   have hconst : (fun n : ℕ ↦ (eulerOperator^[n + 1]) f x) =
       fun _ ↦ deriv f 0 * x := by
     funext n
@@ -290,6 +289,6 @@ theorem eulerOperator_iterate_limit {f g : ℝ → ℝ}
     ContDiff ℝ ∞ g ∧ eulerOperator g = g := by
   obtain ⟨_, hg⟩ := eulerOperator_iterate_limit_classification hf hlim
   rw [hg]
-  exact ⟨contDiff_const.mul contDiff_id, eulerOperator_linear _⟩
+  exact ⟨contDiff_const.mul contDiff_id, Euler.eulerOperator_linear _⟩
 
 end DRPSpring2026

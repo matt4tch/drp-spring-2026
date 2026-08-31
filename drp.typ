@@ -462,9 +462,9 @@
   $
     I := Phi(RR) subs RR
   $
-  As before, $Phi$ is a smooth diffeomorphism from $RR$ onto $I$. Let $Phi^(-1): I -> RR$ denote the inverse diffeomorphism. Fix $y_0 in I$, and define
+  As before, $Phi$ is a smooth diffeomorphism from $RR$ onto $I$. Let $Phi^(-1): I -> RR$ denote the inverse diffeomorphism. Since $Phi(0)=0$, we have $0 in I$, so define
   $
-    W: I -> RR, quad W(y) := exp(integral_(y_0)^y b(Phi^(-1)(s)) dif s)
+    W: I -> RR, quad W(y) := exp(integral_0^y b(Phi^(-1)(s)) dif s)
   $
   Then by the Fundamental Theorem of Calculus,
   $
@@ -539,9 +539,19 @@
   $
     g' = (1-b)/a g
   $
-  Thus either $g=0$, or for some constant $C$,
+  Set
   $
-    g(x) = C exp(integral_(x_0)^x (1-b(t))/(a(t)) dif t)
+    P(x) := integral_0^x frac(1-b(t), a(t)) dif t,
+    quad H(x) := g(x) exp(-P(x)).
+  $
+  By the Fundamental Theorem of Calculus, $P'=(1-b)/a$. Hence the product rule gives
+  $
+    H' = exp(-P) (g' - P' g) = 0.
+  $
+  Therefore $H$ is constant, say $H=C$, and thus
+  $
+    g(x) = C exp(P(x))
+         = C exp(integral_0^x frac(1-b(t), a(t)) dif t).
   $
   This recovers the previous cases: if $b=0$, then $g$ is a scalar multiple of $exp(integral (1/a))$, while if $b=1$, then $g$ is constant.
 ]
@@ -566,17 +576,50 @@
   form of the Phragmén--Lindelöf uniqueness theorem.
 
   #lemma[Phragmén--Lindelöf uniqueness][
-    Let $H: CC -> CC$ be entire. Suppose there are constants $C,A>0$,
-    $tau>=0$, $alpha>tau$, and $T in RR$ such that
+    Let $H: CC -> CC$ be entire. Suppose there are constants $C,A>0$ and
+    $T in RR$ such that
     $
-      abs(H(z)) <= C exp(tau abs(z))
+      abs(H(z)) <= C exp(abs(z))
     $
     for every $z in CC$, and
     $
-      abs(H(t)) <= A exp(alpha t)
+      abs(H(t)) <= A exp(2t)
     $
     for every real $t<=T$. Then $H=0$.
   ]<lem:pl-uniqueness>
+
+  #pf[
+    We reduce this to the standard Phragmén--Lindelöf theorem on the right
+    half-plane. Set
+    $
+      q:=3/2, quad beta:=7/4, quad p(z):=z^q,
+    $
+    where the principal branch is used on ${z in CC st Re(z)>=0}$, and define
+    $
+      Q(z):=H(-p(z)) exp(beta p(z)).
+    $
+    This function is holomorphic on the open right half-plane and continuous
+    on its closure. The global bound on $H$ gives
+    $
+      abs(Q(z)) <= C exp((1+beta) abs(z)^q),
+    $
+    so $Q$ has growth order $q<2$ there.
+
+    On the imaginary axis,
+    $
+      Re(p(i y))=-abs(y)^q frac(sqrt(2), 2).
+    $
+    Since $1-beta frac(sqrt(2), 2)<0$, it follows that $abs(Q(i y))<=C$. On the
+    positive real axis, once $-x^q<=T$, the negative-ray bound gives
+    $
+      abs(Q(x)) <= A exp(-(2-beta)x^q).
+    $
+    Because $q>1$ and $2-beta>0$, this decays faster than every exponential
+    in $x$. The right-half-plane Phragmén--Lindelöf theorem therefore gives
+    $Q=0$. Since the complex exponential never vanishes,
+    $H(-x^q)=0$ for every $x>0$. These zeros have an accumulation point in
+    $CC$, so the identity theorem gives $H=0$.
+  ]
 
   The proof has three steps: conjugate $L$ to the ordinary derivative on each
   half-line, control the growth of the resulting entire functions, and use their
@@ -699,7 +742,7 @@
     for every real $y<=Y$.
   ]
 
-  Claims 2 and 3 verify the two growth hypotheses of @lem:pl-uniqueness with $tau=1$ and $alpha=2$. Therefore $H_sigma=0$, and hence
+  Claims 2 and 3 verify the two growth hypotheses of @lem:pl-uniqueness. Therefore $H_sigma=0$, and hence
   $
     F_sigma (y)=a+b Phi_sigma^(-1) (y)
   $
@@ -849,11 +892,10 @@
     $
       lim_(y->oo) F_-(y)=lim_(y->oo) f(-1/y)= f(lim_(y->oo) -1/y) = f(0)
     $
-    In particular, $F_-$ is bounded for all sufficiently large $y$. Thus there exist $Y>0$ and $M>0$ such that
+    Since $exp(-y)->0$ as $y->oo$, the product rule for limits gives
     $
-      abs(F_-(y)) <= M
+      lim_(y->oo) exp(-y)F_-(y)=0.
     $
-    for every $y>=Y$.
 
     By @lem:local-derivative-limit, $F_-$ agrees on $(0,oo)$ with the restriction of an entire function $tilde(F)_-$. Therefore, for every $y_0>0$, its Taylor series centered at $y_0$ has infinite radius of convergence. Set
     $
@@ -911,7 +953,7 @@
     Combining these estimates with @eq:split-exponential-series, we have
     $
       abs(exp(-r)H(y_0+r))
-      <= sum_(k=0)^(K-1) abs(a_k) exp(-r) r^k/(k!) + epsilon.
+      <= sum_(k=0)^(K-1) abs(a_k) exp(-r) r^k/(k!) + epsilon/2.
     $
     The finite sum is less than $epsilon/2$ for all sufficiently large $r$. Hence
     $
@@ -942,15 +984,8 @@
         lim_(y->oo) exp(-y) F_-(y) = C_-.
       $
     ]<eq:negative-limit-constant>
-    However, by the choice of $Y$ and $M$, for every $y>=Y$ we have
-    $
-      abs(exp(-y)F_-(y)) <= exp(-y) abs(F_-(y)) <= M exp(-y).
-    $
-    Since $lim_(y->oo) M exp(-y) = 0$, the squeeze theorem gives
-    $
-      lim_(y->oo) exp(-y) F_-(y) = 0.
-    $
-    Therefore, by @eq:negative-limit-constant, we have $C_-=0$.
+    The direct limit calculation at the start of the proof shows that the same
+    limit is $0$. Therefore, by @eq:negative-limit-constant, we have $C_-=0$.
   ]
 
   #lemma[Smooth gluing lemma][

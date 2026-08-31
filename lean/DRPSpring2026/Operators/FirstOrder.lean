@@ -1,5 +1,4 @@
 import DRPSpring2026.IteratedDerivative.Limit
-import Mathlib
 
 /-!
 # Nondegenerate first-order linear differential operators
@@ -7,7 +6,8 @@ import Mathlib
 This file isolates the change-of-variables calculation from the local Tao
 theorem.  `FirstOrderChangeOfVariables` records exactly the coordinate and
 integrating-factor identities used in the DRP write-up; the convergence
-argument below is independent of their eventual construction from integrals.
+argument below is independent of their concrete construction from integrals
+in `DRPSpring2026.Operators.FirstOrderIntegral`.
 -/
 
 open Filter
@@ -23,23 +23,27 @@ noncomputable def firstOrderOperator (a b f : ℝ → ℝ) : ℝ → ℝ :=
 The data and identities supplied by the coordinate
 `φ(x) = ∫ t in 0..x, (a t)⁻¹` and its integrating factor.  Keeping this as a
 structure makes the operator argument reusable and gives the construction of
-the integral coordinate a sharply delimited API.
+the integral coordinate a sharply delimited API.  The iterated identity is
+required for smooth functions, the operator's domain throughout the project.
 -/
 structure FirstOrderChangeOfVariables (a b : ℝ → ℝ) where
-  coefficient_ne_zero : ∀ x, a x ≠ 0
+  /-- The open coordinate image on which the transformed functions live. -/
   interval : Set ℝ
   isOpen_interval : IsOpen interval
   isPreconnected_interval : IsPreconnected interval
   interval_nonempty : interval.Nonempty
+  /-- The change of variables from the original real coordinate into `interval`. -/
   coordinate : ℝ → ℝ
+  /-- A total extension of the inverse coordinate; only its values on `interval` are used. -/
   inverse : ℝ → ℝ
   coordinate_mem : ∀ x, coordinate x ∈ interval
   inverse_coordinate : ∀ x, inverse (coordinate x) = x
+  /-- The nonvanishing integrating factor in the transformed coordinate. -/
   weight : ℝ → ℝ
   weight_ne_zero : ∀ y ∈ interval, weight y ≠ 0
   transform_contDiffOn : ∀ {h : ℝ → ℝ}, ContDiff ℝ ∞ h →
     ContDiffOn ℝ ∞ (fun y ↦ weight y * h (inverse y)) interval
-  iteratedDeriv_transform : ∀ (h : ℝ → ℝ) (n : ℕ),
+  iteratedDeriv_transform : ∀ (h : ℝ → ℝ), ContDiff ℝ ∞ h → ∀ (n : ℕ),
     Set.EqOn
       (iteratedDeriv n (fun y ↦ weight y * h (inverse y)))
       (fun y ↦ weight y * ((firstOrderOperator a b)^[n] h) (inverse y)) interval
@@ -95,7 +99,7 @@ theorem firstOrderOperator_iterate_limit_of_changeOfVariables
       (Filter.Eventually.of_forall fun n ↦ by
         change cv.weight y * ((firstOrderOperator a b)^[n] f) (cv.inverse y) =
           iteratedDeriv n (fun y ↦ cv.weight y * f (cv.inverse y)) y
-        exact (cv.iteratedDeriv_transform f n hy).symm)
+        exact (cv.iteratedDeriv_transform f hf n hy).symm)
   obtain ⟨_, hGsmooth, hGfixed⟩ :=
     iteratedDeriv_limit_on cv.isOpen_interval cv.isPreconnected_interval
       cv.interval_nonempty hFsmooth hFlim
@@ -105,7 +109,7 @@ theorem firstOrderOperator_iterate_limit_of_changeOfVariables
   refine ⟨hgSmooth, funext fun x ↦ ?_⟩
   let y := cv.coordinate x
   have hy : y ∈ cv.interval := cv.coordinate_mem x
-  have hone := cv.iteratedDeriv_transform g 1 hy
+  have hone := cv.iteratedDeriv_transform g hgSmooth 1 hy
   have htransformEq : cv.transform (firstOrderOperator a b g) y = cv.transform g y := by
     calc
       cv.transform (firstOrderOperator a b g) y = iteratedDeriv 1 G y := by
