@@ -1,0 +1,1272 @@
+\documentclass[11pt,reqno]{amsart}
+\usepackage[letterpaper,margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{needspace}
+\usepackage[hidelinks,bookmarksnumbered]{hyperref}
+\setlength{\emergencystretch}{2em}
+\setlength{\parskip}{2pt}
+\allowdisplaybreaks[1]
+\numberwithin{equation}{section}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{problem}[theorem]{Problem}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newcommand{\R}{\mathbb R}
+\newcommand{\C}{\mathbb C}
+\newcommand{\N}{\mathbb N_0}
+\newcommand{\B}{\mathcal B}
+\newcommand{\id}{\operatorname{Id}}
+\newcommand{\loc}{\mathrm{loc}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\norm}[1]{\left\lVert #1\right\rVert}
+\newcommand{\abs}[1]{\left\lvert #1\right\rvert}
+\newcommand{\clim}{C^\infty_{\loc}}
+\newcommand{\supp}{\operatorname{supp}}
+\hypersetup{
+ pdftitle={Pointwise Limits of Differential-Operator Iterates: A Sharp Order Threshold},
+ pdfauthor={Matvey Tchouikine, Jake Edmonstone, and Paul Cusson},
+ pdfsubject={Sharp order threshold, smooth higher-order counterexamples, automatic regularity, and algebraic rigidity},
+ pdfkeywords={differential operators, pointwise convergence, Baire category, ordinary differential equations, Laplacian}}
+\title[Pointwise limits and a sharp order threshold]{Pointwise Limits of Differential-Operator Iterates:\\A Sharp Order Threshold}
+\author{Matvey Tchouikine}
+\author{Jake Edmonstone}
+\author{Paul Cusson}
+\date{September 18, 2026}
+\thanks{Unified revised research draft for author review. This manuscript supersedes the earlier paper and separate higher-order counterexample note. Independent mathematical verification and a complete priority review remain outstanding.}
+\subjclass[2020]{Primary 34A30, 26A21; Secondary 30E10, 41A15, 46B99}
+\keywords{Differential-operator iterates, pointwise convergence, sharp order threshold, sparse derivatives, automatic regularity, Baire category, Runge approximation}
+\newcommand{\inter}{\operatorname{int}}
+\newcommand{\ind}{\mathbf 1}
+\begin{document}
+\begin{abstract}
+We establish a sharp order threshold for pointwise convergence of ordinary differential-operator iterates. For every regular smooth operator of order one or two, with bounded-operator coefficients on a Banach space, pointwise boundedness of an orbit yields locally uniform bounds on all its spatial derivatives; pointwise norm convergence therefore improves to smooth local convergence to a fixed point. In every order $r\ge3$, however, we construct a real $f_r\in C_c^\infty(\R)$ whose full orbit under $D^r$ converges everywhere to the indicator of the origin. The construction more generally prescribes arbitrary values at one point along derivative orders with consecutive gaps at least three, while those derivatives tend to zero at every other point. Building on the first-order conjugacy theorem in the authors' directed research project, we transfer the sharp threshold to powers of every regular real first-order operator and classify singular first-order limits. We retain positive all-orders results under one-sided bounds or analytic data and prove a countable-annihilation theorem for exact algebraic relations. A separate entire planar example gives a discontinuous Laplacian-orbit limit. Together, the one-dimensional and planar constructions classify the unrestricted regularity property for all powers of the Laplacian in all dimensions.
+\end{abstract}
+\maketitle
+
+\section{Introduction}
+Let $P$ be a linear differential operator and let $f$ be smooth. The formal implication
+\begin{equation}\label{eq:formal}
+ P^nf\longrightarrow g \quad\Longrightarrow\quad Pg=g
+\end{equation}
+is justified when convergence takes place in a topology in which $P$ is continuous. For pointwise convergence alone, neither regularity of $g$ nor passage of $P$ through the limit follows formally. The question is whether the orbit relation $P(P^nf)=P^{n+1}f$ provides the missing control.
+
+For ordinary differential operators the unrestricted answer changes at order three. We prove automatic regularity for every regular smooth operator of order one or two, but construct a discontinuous pointwise orbit limit for $D^r$ at each order $r\ge3$. Thus the order restriction in the positive theorem is sharp as a statement about all regular operators; it is not merely a limitation of the proof.
+
+\subsection{Main result}
+For an open interval $I$ and a real or complex Banach space $X$, call
+\[
+ P=\sum_{j=0}^r A_j(x)D^j
+\]
+\emph{regular} if each $A_j:I\to\mathcal B(X)$ is smooth in operator norm and $A_r(x)$ is boundedly invertible at every point. Write $D=d/dx$.
+
+\Needspace{8\baselineskip}
+\begin{theorem}[Sharp unrestricted order threshold]\label{thm:mainthreshold}
+The following statements hold.
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=2.3em]
+\item Let $r\in\{1,2\}$, let $P$ be regular on $I$, and let $f\in C^\infty(I;X)$. If $\sup_n\|P^nf(x)\|<\infty$ for every $x$, then for every compact $K\subset I$ and every $k\ge0$,
+\[
+ \sup_n\|D^kP^nf\|_{C^0(K)}<\infty.
+\]
+If the orbit converges pointwise in norm, it converges in $C^\infty_{\loc}(I;X)$ to a smooth solution of $Pg=g$.
+\item For every integer $r\ge3$ there exists a real $f_r\in C_c^\infty((-2,2))$, extended by zero to $\R$, such that
+\begin{equation}\label{eq:mainspike}
+ D^{rn}f_r(0)=1\quad(n\ge0),\qquad
+ D^{rn}f_r(x)\longrightarrow0\quad(x\ne0).
+\end{equation}
+Every positive iterate is sign-changing, and $f_r$ is nonanalytic at the origin.
+\end{enumerate}
+Consequently, for a positive integer $r$, the implication
+\[
+ \forall f\in C^\infty(\R),\quad
+ (D^r)^nf\to g\text{ pointwise}
+ \ \Longrightarrow\ g\in C^\infty(\R),\quad D^rg=g
+\]
+holds if and only if $r=1$ or $r=2$.
+\end{theorem}
+Part (i) is proved in Theorem~\ref{thm:loworder}; part (ii), including the full construction, is Theorem~\ref{ho:thm:counter}. The last assertion is Corollary~\ref{ho:cor:sharp}. No subsequence of an operator orbit is substituted for the full sequence in \eqref{eq:mainspike}, and convergence is verified at every point, including a residual null set on which the construction does not stabilize.
+
+The negative result follows from a more flexible interpolation theorem: if $0=d_0<d_1<\cdots$ and $d_{n+1}-d_n\ge3$, arbitrary values may be prescribed for $f^{(d_n)}(0)$ while $f^{(d_n)}(x)\to0$ for every $x\ne0$. The proof refines piecewise polynomials near nested finite knot sets. A finite moment-interpolation lemma makes each refinement small in all earlier controlled derivatives while prescribing the next derivative. Control on the entire intersection of the refining neighborhoods is essential.
+
+\subsection{Origins and further results}
+Cusson posed the ordinary-derivative question in~\cite{cusson}. Tao proved the stronger entire-extension theorem from pointwise boundedness of all derivatives~\cite{tao}; Adams established the $D^2$ case~\cite[Theorems 42 and 57]{adams}. The authors' directed research project~\cite{project} develops the derivative argument, treats $L=aD+b$ for real smooth coefficients with $a$ nowhere zero, and studies the singular examples $xD$ and $x^2D$. Its regular first-order theorem uses a coordinate change and integrating factor to conjugate $L$ to $D$. Those results are the foundation of this paper, not new special cases attributed to the present extension.
+
+That same conjugacy now has a second use: combined with \eqref{eq:mainspike}, it transfers the sharp threshold to the powers $L^r$ of \emph{every} regular real first-order operator (Corollary~\ref{cor:firstpowers}). This gives variable-coefficient counterexamples directly from the project's starting theorem. It does not claim a classification of all individual higher-order operators.
+
+The remaining results explain where positive conclusions survive. Near a simple zero of a scalar first-order leading coefficient, an exact normal form reduces bounded or convergent orbits to finitely many spectral modes. Finite-order degenerate zeros of a vector field instead support flat fixed modes. In arbitrary regular order, a one-sided local bound or analytic coefficients together with analytic input restores smooth local convergence. A countable-annihilation theorem treats exact point-dependent relations and forces a global eventual period from pointwise repetitions.
+
+The exceptional-set analysis also becomes concrete. For a pointwise-bounded real orbit, failure of local uniform boundedness occurs on a perfect nowhere-dense set and forces unbounded excursions of both signs in the same iterate near each exceptional point. For the constructed $D^r$ orbit, that set is a nonempty compact null set even though the limit is discontinuous only at the origin (Corollary~\ref{cor:realizedbad}).
+
+Finally, an independent Runge construction encodes polynomial approximants into one orbit of the planar Laplacian. Its initial function extends holomorphically to $\C^2$, yet its orbit converges to $\ind_{\{0\}}$. The higher-order and planar constructions together show that the unrestricted smooth-limit property for $\Delta_d^m$, $d,m\ge1$, holds exactly when $d=m=1$ (Corollary~\ref{cor:polyharmonic}).
+
+The Baire-category, interpolation, ODE, and approximation ingredients are attributed throughout. The norm-based theory of lacunary derivative estimates, including~\cite{rainer-schindl}, does not by itself supply the passage from pointwise bounds to local norm bounds studied here. Our counterexamples show that such a passage actually fails for selected derivative orders with gaps at least three. A complete publication-priority review remains outstanding.
+
+\subsection{Organization and conventions}
+Sections~\ref{sec:prelim}--\ref{sec:loworder} prove the positive regularity theorem. Section~\ref{sec:counter} proves the higher-order construction and the exact order threshold. Section~\ref{sec:firstorder} connects both directions to the first-order project and treats singular endpoints. Sections~\ref{sec:onesided}--\ref{sec:exceptional} give restricted positive results and the exceptional-set analysis; Section~\ref{sec:algebraic} treats algebraic rigidity. Section~\ref{sec:plane} supplies the planar counterexample and the order--dimension classification. Section~\ref{sec:scope} records the remaining scope questions.
+
+Throughout, $I$ is a nonempty connected open interval in $\R$, $D=d/dx$, and $\N=\{0,1,2,\ldots\}$. For a Banach space $X$, $\B(X)$ is its space of bounded linear operators. Our general regular operator is
+\begin{equation}\label{eq:regular}
+ P=\sum_{j=0}^r A_j(x)D^j,\qquad
+ A_j\in C^\infty(I;\B(X)),\qquad A_r(x)\text{ invertible for all }x.
+\end{equation}
+Coefficient smoothness is in operator norm; no global uniform invertibility is assumed. In the scalar case we write $a_j$ instead of $A_j$. Banach-valued pointwise convergence always means convergence in norm. For $f\in C^\infty(I;X)$ put $u_n=P^nf$, including $u_0=f$, and write
+\[
+ \norm{h}_{C^k(K)}=\max_{0\le j\le k}\sup_{x\in K}\norm{D^jh(x)}
+ \qquad(K\Subset I).
+\]
+The notation $\clim(I;X)$ denotes convergence in every such seminorm. Sign conditions always concern real scalar coefficients and real-valued functions. The symbol $\ind_{\{0\}}$ denotes a pointwise indicator, not a Dirac distribution.
+
+\section{Uniform estimates and the good-set method}\label{sec:prelim}
+The estimates in this section hold in arbitrary finite order. They do not yet assert that pointwise boundedness implies local boundedness everywhere.
+
+\begin{lemma}[Regular ODE estimates]\label{lem:ode}
+Let $P$ be as in \eqref{eq:regular}, of arbitrary order $r\ge1$. For every compact interval $J=[a,b]\Subset I$ with $a<b$, and every $k\ge0$, there is $C_{J,k}$ such that
+\begin{equation}\label{eq:odeestimate}
+ \norm{h}_{C^{r+k}(J)}
+ \le C_{J,k}\bigl(\norm{h}_{C^0(J)}+\norm{Ph}_{C^k(J)}\bigr)
+ \qquad(h\in C^\infty(I;X)).
+\end{equation}
+\end{lemma}
+\begin{proof}
+For $r\ge2$, Taylor expansion at $r$ equally spaced points to one side of any $x\in J$, followed by inversion of the scalar Vandermonde matrix, gives
+\begin{equation}\label{eq:interpolate}
+ \norm{D^jh}_{C^0(J)}
+ \le C_r\left(\delta^{-j}\norm{h}_{C^0(J)}
+              +\delta^{r-j}\norm{D^rh}_{C^0(J)}\right),
+ \qquad 1\le j<r,
+\end{equation}
+whenever $0<\delta\le(b-a)/(2(r-1))$. At each $x$, one of the two directions has room for all $r$ sample points. The integral Taylor remainder has the same estimate for Banach-valued functions, and the inverse Vandermonde matrix acts by scalar combinations. Thus the constants are independent of $X$.
+
+Normalize the equation to
+\[
+ D^rh=A_r^{-1}Ph-\sum_{j<r}A_r^{-1}A_jD^jh.
+\]
+All coefficients are bounded on $J$. Substitute \eqref{eq:interpolate} and choose $\delta$ sufficiently small that the terms containing $\norm{D^rh}_{C^0(J)}$ can be absorbed into the left side. This proves \eqref{eq:odeestimate} for $k=0$. For $r=1$, the normalized equation proves the same assertion directly. Differentiate the normalized equation and induct on $k$ to obtain the general estimate.
+\end{proof}
+
+\begin{lemma}[Sequence lift on the good set]\label{lem:good}
+Suppose $\sup_n\norm{u_n(x)}<\infty$ for every $x\in I$, and define
+\begin{equation}\label{eq:goodset}
+ M(x)=\sup_n\norm{u_n(x)},\qquad
+ G=\{x\in I:M\text{ is bounded on a neighborhood of }x\}.
+\end{equation}
+Then $G$ is open and dense. All derivatives of $(u_n)$ are locally uniformly bounded on $G$, and
+\[
+ U:G\longrightarrow E:=\ell^\infty(\N;X),\qquad U(x)=(u_n(x))_{n\ge0},
+\]
+is norm-smooth. If $S:E\to E$ is the left shift and $\widehat A$ denotes diagonal application of $A\in\B(X)$, then on $G$,
+\begin{equation}\label{eq:sequenceode}
+ U^{(r)}=\widehat{A_r^{-1}}SU
+       -\sum_{j<r}\widehat{A_r^{-1}A_j}U^{(j)}.
+\end{equation}
+On each component of $G$, the corresponding $E^r$-valued Cauchy solution extends to every finite endpoint in $I$. At such an endpoint $c$, its $j$th block is $(D^ju_n(c))_n$ for $0\le j<r$.
+\end{lemma}
+\begin{proof}
+The closed sets $\{M\le m\}$ cover $I$. Baire's theorem on an arbitrary nontrivial compact subinterval gives a subinterval where $M$ is uniformly bounded. This proves density of $G$; openness is part of its definition.
+
+On compact intervals in $G$, both $u_n$ and $Pu_n=u_{n+1}$ are uniformly bounded. Lemma~\ref{lem:ode}, applied repeatedly, bounds every derivative uniformly. For each $j$, these bounds justify
+\[
+ U^{(j)}(x)=(D^ju_n(x))_n
+\]
+in the supremum norm: bounds for the next two scalar derivative orders control the difference-quotient remainders uniformly in $n$. Equation~\eqref{eq:sequenceode} follows coordinatewise and hence in $E$.
+
+The companion equation for $(U,U',\ldots,U^{(r-1)})$ is a linear ODE on $E^r$ with norm-smooth bounded-operator coefficients. Coefficients are bounded on compact subintervals of $I$, so its initial-value solution has no finite-time blow-up there. It therefore extends to a finite component endpoint. Continuous coordinate evaluation and smoothness of the original $u_n$ identify the endpoint blocks as stated.
+\end{proof}
+
+\begin{remark}\label{rem:notglobal}
+The continuation in Lemma~\ref{lem:good} does not assert agreement with the original sequence beyond the good component. Moreover, before local bounds are proved, $(D^ju_n(x))_n$ need not be known to belong to $\ell^\infty$ for $1\le j<r$. Writing a companion system at every point without resolving that issue would assume the principal missing step.
+\end{remark}
+
+\begin{lemma}[From bounded derivatives to smooth convergence]\label{lem:convergence}
+Let $v_n\in C^\infty(I;X)$ converge pointwise in norm to $g$. If
+\[
+ \sup_n\norm{v_n}_{C^k(K)}<\infty
+ \quad\text{for every }K\Subset I\text{ and }k\ge0,
+\]
+then $g\in C^\infty(I;X)$ and $v_n\to g$ in $\clim(I;X)$. In particular, if $Pv_n=v_{n+1}$, then $Pg=g$.
+\end{lemma}
+\begin{proof}
+Uniform first-derivative bounds give equicontinuity on compact intervals. Pointwise norm convergence and a finite cover by sufficiently small intervals imply that $(v_n)$ is uniformly Cauchy on every compact interval. Completeness of $X$ gives uniform convergence there.
+
+For nested compact intervals $K\subset\operatorname{int}K'$, apply Taylor's formula to $w=v_n-v_m$:
+\begin{equation}\label{eq:cauchyderiv}
+ \norm{w'}_{C^0(K)}
+ \le \frac{2}{h}\norm{w}_{C^0(K')}
+       +\frac h2\norm{w''}_{C^0(K')},
+\end{equation}
+where $h>0$ is small enough that $x+[0,h]\subset K'$ for $x\in K$. Choose $h$ first, using the uniform second-derivative bound, and then choose $n,m$ large. Thus the first derivatives are uniformly Cauchy on $K$. Iteration proves the same for every derivative. The fundamental theorem of calculus identifies the successive limits as derivatives of $g$. Finally, $P$ is continuous in the smooth compact-open topology, so $Pv_n=v_{n+1}$ passes to $Pg=g$.
+\end{proof}
+
+\section{Automatic regularity in orders one and two}\label{sec:loworder}
+\begin{theorem}[First- and second-order automatic regularity]\label{thm:loworder}
+Let $P$ be a regular operator \eqref{eq:regular} on a real or complex Banach space, with $r\in\{1,2\}$. If $f\in C^\infty(I;X)$ and
+\begin{equation}\label{eq:pointbound}
+ \sup_{n\ge0}\norm{P^nf(x)}<\infty\qquad(x\in I),
+\end{equation}
+then
+\begin{equation}\label{eq:allbounds}
+ \sup_{n\ge0}\norm{P^nf}_{C^k(K)}<\infty
+ \qquad(K\Subset I,\ k\ge0).
+\end{equation}
+If the iterates converge pointwise in norm, then
+\begin{equation}\label{eq:smoothlimit}
+ P^nf\longrightarrow g\quad\text{in }\clim(I;X),\qquad Pg=g.
+\end{equation}
+\end{theorem}
+
+\subsection{The second-order interval estimate}
+\begin{lemma}\label{lem:gap}
+Let $E$ be a Banach space, $T\in C([c,e];\B(E))$, and $W\in C^2([c,e];E)$ satisfy $W''=T(x)W$. Put $\ell=e-c$ and $Q=\sup_{[c,e]}\norm{T(x)}$. If $Q\ell^2/8\le1/2$, then
+\begin{equation}\label{eq:gap}
+ \norm{W}_{C^0([c,e])}
+ \le2\max\{\norm{W(c)},\norm{W(e)}\}.
+\end{equation}
+\end{lemma}
+\begin{proof}
+Subtract the affine interpolation of the two endpoint values. The Dirichlet Green kernel for $D^2$ on $[c,e]$ satisfies
+\[
+ \sup_{x\in[c,e]}\int_c^e|G_{c,e}(x,t)|\,dt=\frac{\ell^2}{8}.
+\]
+The integral representation, valid also for Bochner integrals, gives
+\[
+ \norm{W}_{C^0}
+ \le\max\{\norm{W(c)},\norm{W(e)}\}
+       +\frac{Q\ell^2}{8}\norm{W}_{C^0}.
+\]
+Absorb the last term.
+\end{proof}
+
+\subsection{Removal of the first-derivative coefficient}
+Write $P=A_2D^2+A_1D+A_0$. Fix $x_*\in I$ and solve
+\begin{equation}\label{eq:gauge}
+ R'=-\frac12A_2^{-1}A_1R,\qquad R(x_*)=\id
+\end{equation}
+in $\B(X)$. Its solution exists on $I$, is norm-smooth, and is everywhere invertible. This follows either from the evolution operator or from the corresponding inverse equation. Conjugation gives
+\[
+ \widetilde P=R^{-1}PR=\widetilde A_2D^2+\widetilde A_0,
+\]
+where
+\[
+ \widetilde A_2=R^{-1}A_2R,\qquad
+ \widetilde A_0=R^{-1}(A_2R''+A_1R'+A_0R).
+\]
+Indeed, $2A_2R'+A_1R=0$. No commutation between coefficient operators is used.
+
+For $v_n=R^{-1}u_n$, the orbit relation becomes
+\begin{equation}\label{eq:reduced}
+ v_n''=B(x)v_{n+1}+C(x)v_n,\qquad
+ B=\widetilde A_2^{-1},\quad C=-\widetilde A_2^{-1}\widetilde A_0.
+\end{equation}
+Multiplication by $R$ and $R^{-1}$ preserves pointwise boundedness and the good set. On that set, $V=(v_n)_n$ is a smooth $E=\ell^\infty(\N;X)$-valued solution of
+\[
+ V''=T(x)V,\qquad (T(x)\xi)_n=B(x)\xi_{n+1}+C(x)\xi_n.
+\]
+Here $\norm{T(x)}\le\norm{B(x)}+\norm{C(x)}$.
+
+\subsection{Eliminating the exceptional set}
+\begin{proof}[Proof of Theorem~\ref{thm:loworder}, order two]
+Apply the definition of $M,G$ to $(v_n)$ and put $F=I\setminus G$. Suppose $F$ is nonempty. It is relatively closed and locally compact, hence a Baire space. Its closed subsets $F\cap\{M\le m\}$ cover it. Consequently, there are an interval $J\Subset I$ meeting $F$ and $m<\infty$ such that
+\[
+ M(x)\le m\qquad(x\in F\cap J).
+\]
+After shrinking $J$ about a point of $F\cap J$, Lemma~\ref{lem:gap} applies on every subinterval of $J$.
+
+Choose $x_0\in F\cap J$ and $a,b\in G\cap J$ with $a<x_0<b$. Set
+\[
+ M_0=\max\{m,M(a),M(b)\}.
+\]
+Each component $(c,e)$ of $G\cap(a,b)$ has endpoints in $F\cup\{a,b\}$. By Lemma~\ref{lem:good}, $V$ extends to those endpoints and its endpoint norms are at most $M_0$. Lemma~\ref{lem:gap} bounds $M$ by $2M_0$ on every such component. On $F\cap[a,b]$ it is already bounded by $m$. Thus $M$ is bounded on all of $[a,b]$, contradicting $x_0\notin G$.
+
+Therefore $G=I$. Lemma~\ref{lem:good} gives all local derivative bounds for $v_n$, and multiplication by $R$ gives \eqref{eq:allbounds} for $u_n$. The convergence assertion follows from Lemma~\ref{lem:convergence}.
+\end{proof}
+
+\begin{proof}[Proof in order one]
+The relation $Pu_n=u_{n+1}$ gives
+\[
+ U'=T(x)U,\qquad
+ T(x)=\widehat{A_1^{-1}}S-\widehat{A_1^{-1}A_0}
+\]
+on the good set. On any good interval with finite left endpoint $c$, its continued solution satisfies
+\[
+ \norm{U(x)}\le e^{Q(x-c)}\norm{U(c)},\qquad
+ Q=\sup\norm{T\!},
+\]
+with the supremum taken on a fixed surrounding compact interval. In the preceding Baire argument, this controls every complementary interval of $F\cap[a,b]$ by $e^{Q(b-a)}M_0$. The same contradiction proves $G=I$. Lemmas~\ref{lem:good} and~\ref{lem:convergence} finish the proof.
+\end{proof}
+
+\Needspace{13\baselineskip}
+\begin{corollary}[Rescaling and the space of limits]\label{cor:limits}
+Under the operator hypotheses of Theorem~\ref{thm:loworder}, the following hold.
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=2.3em]
+\item For any $R_0>0$, pointwise boundedness of $R_0^{-n}P^nf$ gives local uniform bounds for $R_0^{-n}D^kP^nf$ for every $k$.
+\item For any nonzero scalar $\lambda$ in the underlying field, pointwise norm convergence of $\lambda^{-n}P^nf$ improves to smooth local convergence to a solution of $Pg=\lambda g$.
+\item The set of possible pointwise limits is exactly $\ker(P-\id)\cap C^\infty(I;X)$.
+\end{enumerate}
+For scalar operators this limit space has dimension $r$; for $q$-component systems it has dimension $rq$.
+\end{corollary}
+\begin{proof}
+Apply the theorem to $P/R_0$ and $P/\lambda$. For the reverse inclusion in (iii), take $f=g$. The dimension statement follows from the Cauchy-data parametrization of the regular equation $(P-\id)g=0$.
+\end{proof}
+
+If $\mathcal C(P)$ denotes the smooth functions with pointwise-convergent orbits and $\mathcal N(P)$ those whose orbits tend to zero, the same argument gives the algebraic direct sum
+\begin{equation}\label{eq:decomposition}
+ \mathcal C(P)=\ker(P-\id)\oplus\mathcal N(P).
+\end{equation}
+Indeed, subtract the limiting fixed point. Both convergences are smooth locally by the theorem. This is the decomposition suggested for $D$ in \cite{cusson}; no assertion about continuity of the projection in the ambient $C^\infty$ topology is needed.
+
+\begin{remark}
+The finite-dimensional version is local in coordinates and bundle trivializations. It therefore also holds for first- and second-order operators with invertible principal symbol on smooth finite-rank vector bundles over a one-dimensional manifold. No claim is made for unbounded operator-valued coefficients.
+\end{remark}
+
+\section{Higher-order counterexamples and the sharp threshold}\label{sec:counter}
+The order restriction in Theorem~\ref{thm:loworder} is sharp. The construction below produces a discontinuous limit for the full orbit of one compactly supported smooth function under $D^r$, at every order $r\ge3$.
+
+\begin{theorem}[A discontinuous full-orbit limit at every order at least three]\label{ho:thm:counter}
+For every integer $r\ge3$, there is a real-valued function $f_r\in C_c^\infty((-2,2))$, extended by zero to $\R$, such that
+\begin{equation}\label{ho:eq:counter}
+ f_r^{(rn)}(0)=1\quad(n\in\N),\qquad
+ \lim_{n\to\infty}f_r^{(rn)}(x)=0\quad(x\ne0).
+\end{equation}
+Consequently, for the regular constant-coefficient operator $P=D^r$,
+\[
+ P^nf_r\longrightarrow\ind_{\{0\}}\qquad\text{pointwise on }\R.
+\]
+Every positive iterate $P^nf_r$, $n\ge1$, takes both positive and negative values. The initial function can be chosen nonanalytic at the origin.
+\end{theorem}
+
+The convergence concerns all iterates of one fixed function under one fixed operator. There is no subsequence of the $P$-orbit, and no exceptional point at which convergence is omitted. The limit is not continuous, so both the smooth-limit assertion and the stronger smooth-local-convergence assertion fail.
+
+\Needspace{10\baselineskip}
+The proof establishes the following more general statement.
+\begin{theorem}[Sparse derivative interpolation with point concentration]\label{ho:thm:sparse}
+Let $(d_n)_{n\in\N}$ be integers satisfying
+\[
+ 0=d_0<d_1<d_2<\cdots,\qquad d_{n+1}-d_n\ge3,
+\]
+and let $(a_n)_{n\in\N}$ be any sequence of real numbers. There exists a real function $f\in C_c^\infty((-2,2))$ such that
+\begin{align}
+ f^{(d_n)}(0)&=a_n &&(n\in\N),\label{ho:eq:prescribed}\\
+ f^{(j)}(0)&=0 &&(j\notin\{d_n:n\in\N\}),\label{ho:eq:unused}\\
+ \lim_{n\to\infty} f^{(d_n)}(x)&=0 &&(x\ne0).\label{ho:eq:away}
+\end{align}
+There is also a compact set $E\subset(-2,2)$ of measure zero, containing $0$, such that $f$ is locally polynomial on $\R\setminus E$. At each point outside $E$, the derivatives in \eqref{ho:eq:away} are eventually exactly zero.
+\end{theorem}
+
+No growth bound on $a_n$ is assumed. If $a_n\to a$, the selected derivatives converge pointwise to $a\ind_{\{0\}}$. Taking $d_n=rn$ and $a_n=1$ will give Theorem~\ref{ho:thm:counter}.
+
+\subsection{Finite-dimensional interpolation}
+A \emph{marked subdivision} of a piecewise-polynomial function is a finite set containing all its breakpoints. It may also contain points at which adjacent polynomial formulas happen to agree. Keeping such additional points lets us preserve the origin and all earlier interpolation sites even when a coefficient vanishes.
+
+\begin{lemma}[Endpoint interpolation with a piecewise-quadratic top derivative]\label{ho:lem:finite}
+Fix $m\ge1$. There is a finite marked subdivision of $[-1,1]$, containing $-1,0,1$ and depending only on $m$, with the following property. Given real data
+\[
+ A_j^-,A_j^+\quad(0\le j<m),\qquad \gamma\in\R,
+\]
+there exists $H\in C^m([-1,1])$ such that every polynomial piece has degree at most $m+2$, and
+\begin{align*}
+ H^{(j)}(-1)&=A_j^-,& H^{(j)}(1)&=A_j^+ &&(0\le j<m),\\
+ H^{(j)}(0)&=0 &&&&(0\le j<m),\\
+ H^{(m)}(0)&=\gamma.
+\end{align*}
+Furthermore, $H^{(m)}$ vanishes at every marked point other than $0$, and vanishes on neighborhoods of $-1$ and $1$. The construction is linear in the data, and
+\begin{equation}\label{ho:eq:Hbound}
+ \norm{H}_{C^m([-1,1])}\le C_m\left(|\gamma|+\sum_{j=0}^{m-1}(|A_j^-|+|A_j^+|)\right)
+\end{equation}
+for a constant $C_m$ independent of the data. Here $\norm{h}_{C^k}$ is the maximum of the supremum norms of its derivatives through order $k$.
+\end{lemma}
+
+\begin{proof}
+Put $\rho=1/4$. We first construct the continuous piecewise-quadratic function $g=H^{(m)}$. Start with
+\[
+ g_0(t)=
+ \begin{cases}
+ \gamma(1-t^2/\rho^2),& |t|\le\rho,\\
+ 0,& |t|>\rho.
+ \end{cases}
+\]
+Choose $m$ ordered pairwise disjoint closed intervals $[\alpha_i,\beta_i]$ inside $(\rho,1)$, with positive lengths and $\beta_i<\alpha_{i+1}$. On the $i$th interval use the continuous quadratic bubble
+\[
+ b_i(t)=
+ \begin{cases}
+ (t-\alpha_i)(\beta_i-t),&\alpha_i\le t\le\beta_i,\\
+ 0,&\text{otherwise}.
+ \end{cases}
+\]
+The moment matrix
+\[
+ M_{pi}=\int_{\alpha_i}^{\beta_i}t^p b_i(t)\,dt,
+ \qquad 0\le p<m,\quad 1\le i\le m,
+\]
+is invertible. Indeed, columnwise multilinearity of the determinant gives
+\begin{equation}\label{ho:eq:momentdet}
+ \det M=\int_{\prod_i[\alpha_i,\beta_i]}
+ \left(\prod_{i=1}^m b_i(t_i)\right)
+ \left(\prod_{i<j}(t_j-t_i)\right)\,dt_1\cdots dt_m>0.
+\end{equation}
+The integrand is strictly positive on the product of the interval interiors. Thus linear combinations of these bubbles can prescribe the first $m$ moments on the positive half-interval. Make an independent analogous choice of bubbles on $(-1,-\rho)$.
+
+For a continuous function $g$, define
+\begin{equation}\label{ho:eq:volterra}
+ H(t)=\frac1{(m-1)!}\int_0^t(t-s)^{m-1}g(s)\,ds,
+\end{equation}
+where the integral has its usual orientation when $t<0$. Then $H^{(m)}=g$ and $H^{(j)}(0)=0$ for $j<m$. The endpoint values are
+\begin{equation}\label{ho:eq:endpointmoments}
+ H^{(j)}(\pm1)=\frac1{(m-1-j)!}
+       \int_0^{\pm1}(\pm1-s)^{m-1-j}g(s)\,ds,
+ \qquad 0\le j<m.
+\end{equation}
+On each half-interval the kernels in \eqref{ho:eq:endpointmoments} form a basis for the polynomials of degree less than $m$. Invertibility of the moment matrices therefore lets us add a linear combination of the right-hand bubbles and, independently, the left-hand bubbles to $g_0$ so that all the prescribed endpoint values hold.
+
+The added bubbles vanish near $0$, so $g(0)=\gamma$. All breakpoints of $g$ are bubble endpoints or $\pm\rho$, at which $g$ is zero. Mark these points, together with $-1,0,1$. Also $g$ vanishes near both endpoints of $[-1,1]$. Formula~\eqref{ho:eq:volterra} gives a $C^m$ piecewise-polynomial function of degree at most $m+2$ with all the required properties. The bubble coefficients depend linearly on the data through two fixed finite matrices. Integrating a fixed finite-dimensional family is bounded in $C^m$, giving \eqref{ho:eq:Hbound}.
+\end{proof}
+
+\subsection{Local refinement with preservation of earlier derivatives}
+\begin{lemma}[Local refinement]\label{ho:lem:refine}
+Let $k\ge0$ and $m\ge k+3$. Suppose $p$ is $C^k$ near $c$, is polynomial of degree at most $k+2$ on each side of $c$, and has no other breakpoint in that neighborhood. Given $\alpha\in\R$, for every sufficiently small $\delta>0$ it can be replaced on $[c-\delta,c+\delta]$ by a piecewise-polynomial function $q_\delta$ such that:
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=2.4em]
+\item the joined function is $C^m$ throughout that neighborhood and equals $p$ outside the replacement interval;
+\item every new polynomial piece has degree at most $m+2$;
+\item at $c$, its derivatives through order $k$ agree with those of $p$, its derivatives of orders $k<j<m$ are zero, and $q_\delta^{(m)}(c)=\alpha$;
+\item all new marked points lie in $[c-\delta,c+\delta]$, include $c$ and the joining endpoints, and satisfy $q_\delta^{(m)}=0$ except possibly at $c$;
+\item $\norm{q_\delta-p}_{C^k}\to0$ as $\delta\downarrow0$, with the difference extended by zero outside the replacement interval.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Let $T_k$ be the common Taylor polynomial of $p$ at $c$ through order $k$. On the two sides,
+\[
+ p(c+x)-T_k(c+x)=A_\pm x^{k+1}+B_\pm x^{k+2}.
+\]
+Writing $x=\delta t$, define the $C^k$ piecewise polynomial
+\[
+ R_\delta(t)=\delta^{-(k+1)}\bigl(p(c+\delta t)-T_k(c+\delta t)\bigr)
+            =A_\pm t^{k+1}+\delta B_\pm t^{k+2}.
+\]
+Apply Lemma~\ref{ho:lem:finite} with
+\[
+ A_j^\pm=R_\delta^{(j)}(\pm1),\qquad
+ \gamma=\alpha\delta^{m-k-1},
+\]
+and denote the resulting function by $H_\delta$. The endpoint data are uniformly bounded as $\delta\downarrow0$, and so is $\gamma$. Thus \eqref{ho:eq:Hbound} bounds $H_\delta$ uniformly in $C^m$ for small $\delta$.
+
+On the replacement interval set
+\begin{equation}\label{ho:eq:replacement}
+ q_\delta(c+\delta t)=T_k(c+\delta t)+\delta^{k+1}H_\delta(t),
+ \qquad -1\le t\le1.
+\end{equation}
+The endpoint data match derivatives through order $m-1$. Since
+\begin{equation}\label{ho:eq:gap}
+ \deg p\le k+2<m,
+\end{equation}
+the original $m$th derivative is zero on both sides. The replacement also has zero $m$th derivative near its endpoints, so the joined function is $C^m$ there. It is $C^m$ at every internal subdivision point by the lemma. Its derivatives at the center are precisely those asserted, because
+\[
+ q_\delta^{(m)}(c)=\delta^{k+1-m}\gamma=\alpha.
+\]
+Its marked subdivision is the scaled subdivision of $H_\delta$.
+
+For $0\le j\le k$,
+\[
+ D_x^j(q_\delta-p)(c+\delta t)
+ =\delta^{k+1-j}D_t^j(H_\delta-R_\delta)(t).
+\]
+Both $H_\delta$ and $R_\delta$ are uniformly bounded in $C^k$. The right side is therefore $O(\delta)$ uniformly in $t$, proving the final assertion. Constants may depend on the fixed germ of $p$, $k$, $m$, and $\alpha$; no uniformity in the induction index is needed.
+\end{proof}
+
+\begin{remark}[Why the gap is three]
+Continuous piecewise-quadratic bubbles can vanish at all their endpoints without vanishing identically. Integrating them $m$ times produces pieces of degree at most $m+2$. The next selected derivative must have order strictly greater than that degree, which is exactly why $d_{n+1}\ge d_n+3$ is used. No corresponding construction for $D$ or $D^2$ is claimed.
+\end{remark}
+
+\subsection{The nested construction and convergence at every point}
+\begin{proof}[Proof of Theorem~\ref{ho:thm:sparse}]
+Set $\varepsilon_n=2^{-n}$ and $\eta_n=2^{-n-2}$. We construct compactly supported piecewise-polynomial functions $p_n\in C^{d_n}(\R)$ of degree at most $d_n+2$, finite marked subdivisions $K_n$, and compact sets $E_n$. The following properties will hold:
+\begin{enumerate}[label=\textup{(\arabic*)},leftmargin=2.4em]
+\item $0\in K_n$, $p_n^{(d_n)}(0)=a_n$, and $p_n^{(d_n)}(c)=0$ for every $c\in K_n\setminus\{0\}$.
+\item $E_n$ is a finite union of pairwise disjoint closed intervals, each containing exactly one point of $K_n$ in its interior. Each interval has diameter at most $2^{-n}$, and the total length satisfies $|E_n|\le2^{-n}$. Moreover, $E_0\Subset(-2,2)$.
+\item The component of $E_n$ containing $0$ is called central. On every noncentral component,
+\begin{equation}\label{ho:eq:noncentral}
+ |p_n^{(d_n)}(x)|\le\varepsilon_n.
+\end{equation}
+\item $E_{n+1}\subset\inter E_n$, $p_{n+1}=p_n$ outside $E_n$, and
+\begin{equation}\label{ho:eq:cauchy}
+ \norm{p_{n+1}-p_n}_{C^{d_n}(\R)}\le\eta_n.
+\end{equation}
+\item The marked sets are nested. At every point of $K_n$, the refinement preserves derivatives through order $d_n$ and sets derivatives of orders $d_n<j<d_{n+1}$ to zero.
+\end{enumerate}
+
+\smallskip\noindent\textbf{Initialization.}
+Let
+\[
+ p_0(x)=a_0\max\{1-|x|,0\},\qquad K_0=\{-1,0,1\}.
+\]
+This is a continuous piecewise-linear function and satisfies property (1), since $d_0=0$. The marked set is retained even when $a_0=0$. Choose disjoint sufficiently small closed intervals around the three marked points, contained in $(-2,2)$, to form $E_0$. Continuity and the vanishing of $p_0$ at $\pm1$ give (3); shrinking further gives the length and diameter requirements.
+
+\smallskip\noindent\textbf{Induction.}
+Suppose the data have been constructed at stage $n$. At every $c\in K_n$, apply Lemma~\ref{ho:lem:refine} with
+\[
+ k=d_n,\qquad m=d_{n+1},\qquad
+ \alpha=\begin{cases}a_{n+1},&c=0,\\0,&c\ne0.\end{cases}
+\]
+Choose its replacement interval strictly inside the component of $E_n$ containing $c$, with no other old marked point in that interval. Choose it small enough that the $C^{d_n}$ norm of the local change is at most $\eta_n$. There are only finitely many old marked points, and their replacement intervals are disjoint. Their simultaneous replacement defines $p_{n+1}$ and gives \eqref{ho:eq:cauchy}; there is no sum of errors at a fixed spatial point.
+
+All old knots have now been refined, so $p_{n+1}\in C^{d_{n+1}}(\R)$. Outside the replacement intervals, the old pieces have degree at most $d_n+2<d_{n+1}$, and inside they have degree at most $d_{n+1}+2$. Let $K_{n+1}$ consist of every new marked subdivision point, including all patch centers and joining endpoints. It contains $K_n$, is contained in $\inter E_n$, and its $d_{n+1}$st derivative vanishes at every noncentral marked point.
+
+Choose small pairwise disjoint closed neighborhoods of all points of $K_{n+1}$, with their union lying inside $\inter E_n$, to form $E_{n+1}$. The highest derivative is continuous and vanishes at every noncentral marked point. Shrinking those neighborhoods establishes \eqref{ho:eq:noncentral} for stage $n+1$. Further shrinking gives the required lengths and diameters. The refinement lemma gives exact preservation of all earlier jets and the intervening zero values. This completes the induction.
+
+\smallskip\noindent\textbf{The smooth limit.}
+All modifications are supported in $E_0$. Thus every $p_n$ is supported in the fixed compact set $[-1,1]\cup E_0\Subset(-2,2)$. For every fixed derivative order $j$, choose $N$ with $d_N\ge j$. The tail $(p_n)_{n\ge N}$ consists of $C^j$ functions, and \eqref{ho:eq:cauchy} makes it Cauchy in $C^j$. Completeness and compatibility of these limits give one function
+\[
+ f\in C_c^\infty((-2,2)).
+\]
+In particular,
+\begin{equation}\label{ho:eq:tail}
+ \norm{f-p_n}_{C^{d_n}(\R)}
+ \le\sum_{j=n}^{\infty}\eta_j=2^{-n-1}.
+\end{equation}
+The exact preservation of the earlier jets, followed by convergence in each fixed derivative norm, proves \eqref{ho:eq:prescribed} and \eqref{ho:eq:unused}.
+
+Put
+\[
+ E=\bigcap_{n=0}^{\infty}E_n.
+\]
+It is compact, contains $0$, and has measure zero since $|E_n|\le2^{-n}$.
+
+\smallskip\noindent\textbf{Points outside $E$.}
+If $x\notin E$, then $x\notin E_N$ for some $N$. Because $E_N$ is closed, $x$ has a neighborhood disjoint from it. Every later modification is contained in $E_N$, so $f=p_N$ throughout that neighborhood. Also $K_N\subset E_N$, so the neighborhood can be chosen to contain no knot of $p_N$. Consequently $f$ is locally a polynomial of degree at most $d_N+2$, and
+\[
+ f^{(d_n)}(x)=0\qquad(n\ge N+1).
+\]
+
+\smallskip\noindent\textbf{Points of $E$ other than $0$.}
+Fix $x\in E\setminus\{0\}$. The central component of $E_n$ contains $0$ and has diameter at most $2^{-n}$. For all sufficiently large $n$, it cannot contain $x$. Thus $x$ belongs to a noncentral component of $E_n$, where \eqref{ho:eq:noncentral} applies. By \eqref{ho:eq:tail},
+\[
+ |f^{(d_n)}(x)|
+ \le |p_n^{(d_n)}(x)|+\norm{f-p_n}_{C^{d_n}(\R)}
+ \le 2^{-n}+2^{-n-1}\longrightarrow0.
+\]
+This treats every point of the residual set, not merely a full-measure subset, and completes the proof.
+\end{proof}
+
+\Needspace{12\baselineskip}
+\subsection{Consequences and proof of the counterexample theorem}
+\begin{proof}[Proof of Theorem~\ref{ho:thm:counter}]
+Apply Theorem~\ref{ho:thm:sparse} with $d_n=rn$ and $a_n=1$. Since $(D^r)^n=D^{rn}$, equations \eqref{ho:eq:prescribed} and \eqref{ho:eq:away} give the asserted full-orbit limit.
+
+For $n\ge1$, compact support implies
+\[
+ \int_\R f_r^{(rn)}(x)\,dx=0.
+\]
+The continuous integrand equals $1$ at $0$, so it is strictly positive on a nontrivial interval and must be negative somewhere. Thus every positive iterate is sign-changing.
+
+By \eqref{ho:eq:unused}, the Taylor series of $f_r$ at $0$ is
+\[
+ F_r(z)=\sum_{n=0}^{\infty}\frac{z^{rn}}{(rn)!}.
+\]
+This entire function satisfies $D^rF_r=F_r$. If $f_r$ were analytic near $0$, it would agree there with $F_r$, so $f_r^{(rn)}(x)=F_r(x)$ for every $n$ in that neighborhood. Equation~\eqref{ho:eq:counter} would give $F_r(x)=0$ at every nearby nonzero point, contrary to continuity and $F_r(0)=1$. Hence the constructed input is nonanalytic at $0$.
+\end{proof}
+
+\begin{corollary}[Sharp threshold for powers of differentiation]\label{ho:cor:sharp}
+For a positive integer $r$, the implication
+\[
+ \left.
+ \begin{gathered}
+ f\in C^\infty(\R),\\
+ (D^r)^nf\to g\text{ pointwise on }\R
+ \end{gathered}
+ \right\}
+ \quad\Longrightarrow\quad
+ g\in C^\infty(\R),\quad D^rg=g
+\]
+holds precisely when $r=1$ or $r=2$.
+\end{corollary}
+\begin{proof}
+The positive cases are contained in Theorem~\ref{thm:loworder} (and have the prior scalar proofs~\cite{tao,adams}). Theorem~\ref{ho:thm:counter} gives a counterexample for every $r\ge3$.
+\end{proof}
+
+In particular, $D^4$ gives a one-dimensional constant-coefficient elliptic counterexample with a smooth compactly supported input. Analyticity of the operator coefficients does not restore the unrestricted conclusion: it is the initial function here that is nonanalytic. Nor does pointwise boundedness imply local uniform orbit bounds in these orders. Otherwise local derivative interpolation applied to $u_n=f_r^{(rn)}$ and $u_n^{(r)}=u_{n+1}$ would give equicontinuity, and the pointwise limit would be continuous.
+
+\begin{corollary}[Localization]\label{cor:localized}
+Let $J$ be an open interval containing $y_0$. For every $r\ge3$ there is a real $F\in C_c^\infty(J)$ such that
+\[
+ D^{rn}F(y_0)=1\quad(n\ge0),\qquad D^{rn}F(y)\longrightarrow0\quad(y\ne y_0).
+\]
+More generally, Theorem~\ref{ho:thm:sparse} holds with $0$ replaced by $y_0$ and support in any prescribed neighborhood of $y_0$.
+\end{corollary}
+\begin{proof}
+Choose a tent with peak $a_0$ at $y_0$ and support $[y_0-h,y_0+h]\Subset J$. Retain its three marked points even if $a_0=0$. Choose $E_0$ compactly inside $J$ and repeat the same local refinements, assigning the prescribed values directly in the physical coordinate. The estimates and the shrinking central-component argument are unchanged. No rescaling of an already constructed function is used, so no index-dependent derivative factor changes the pointwise limit.
+\end{proof}
+
+
+\section{The first-order foundation and singular endpoints}\label{sec:firstorder}
+This section makes the relation to \cite{project} explicit. The regular first-order result and the examples $xD$ and $x^2D$ are starting results of that project. The simple-zero classification and finite-order-zero formulation organize their extensions.
+
+\subsection{Ordinary differentiation and conjugacy}
+\begin{corollary}[Entire extension for ordinary differentiation]\label{cor:entire}
+Let $f\in C^\infty(I;\C)$ and suppose $\sup_n|f^{(n)}(x)|<\infty$ for every $x\in I$. Then $f$ extends to an entire function $F$, and, for each $x_*\in I$,
+\begin{equation}\label{eq:typeone}
+ |F(z)|\le M(x_*)e^{|z-x_*|},\qquad
+ M(x_*)=\sup_n|f^{(n)}(x_*)|.
+\end{equation}
+If $f^{(n)}$ converges pointwise on $I$ and $c=\lim_n f^{(n)}(x_*)$, then
+\[
+ F^{(n)}(z)\longrightarrow c e^{z-x_*}
+\]
+locally uniformly on $\C$. In particular, the real-variable limit satisfies $g'=g$.
+\end{corollary}
+\begin{proof}
+Theorem~\ref{thm:loworder} with $P=D$ gives local uniform bounds on all derivatives simultaneously. Taylor's remainder on the compact interval between $x_*$ and $x$ therefore tends to zero. The Taylor series at $x_*$ equals $f$ on $I$, and its bounded coefficients give an entire extension and \eqref{eq:typeone}. Moreover,
+\[
+ F^{(n)}(z)=\sum_{j=0}^{\infty}
+          f^{(n+j)}(x_*)\frac{(z-x_*)^j}{j!}.
+\]
+The coefficients tend to $c$ and are uniformly bounded by $M(x_*)$. Dominated convergence for the series, uniformly on compact disks, proves the last assertion.
+\end{proof}
+This recovers Tao's theorem \cite{tao} and the ordinary-derivative foundation of \cite{project}; it is not claimed as a new special case.
+
+\begin{proposition}[The project's regular first-order theorem]\label{prop:conjugacy}
+Let $a,b\in C^\infty(I;\R)$, with $a$ nowhere zero, and $L=aD+b$. If $L^nf$ converges pointwise for $f\in C^\infty(I;\R)$, then it converges in $\clim(I)$ to
+\begin{equation}\label{eq:firstlimit}
+ g(x)=C\exp\left(\int_{x_*}^x\frac{1-b(t)}{a(t)}\,dt\right)
+\end{equation}
+for a constant $C$. Every function in \eqref{eq:firstlimit} occurs as a limit.
+\end{proposition}
+\begin{proof}
+Set
+\[
+ \Phi(x)=\int_{x_*}^x\frac{dt}{a(t)},\qquad J=\Phi(I),\qquad
+ W(y)=\exp\left(\int_0^y b(\Phi^{-1}(s))\,ds\right).
+\]
+Since $a$ has constant sign, $\Phi:I\to J$ is a smooth diffeomorphism. For $F=W(f\circ\Phi^{-1})$, the chain rule gives the exact identity
+\begin{equation}\label{eq:firstconjugacy}
+ F^{(n)}=W\,(L^nf)\circ\Phi^{-1}\qquad(n\ge0).
+\end{equation}
+Corollary~\ref{cor:entire} gives a limiting function $G$ with $G'=G$. Multiplication and pullback by the fixed smooth functions preserve smooth local convergence. Undoing the transformation gives $Lg=g$, whose solutions are \eqref{eq:firstlimit}. Conversely, take $f=g$.
+\end{proof}
+In particular, $b=0$ yields multiples of $\exp(\int a^{-1})$, while $b=1$ yields constant limits. The smooth local convergence conclusion also follows directly from Theorem~\ref{thm:loworder}.
+
+\subsection{Powers of a regular first-order operator}
+The conjugacy used in Proposition~\ref{prop:conjugacy} transports the negative result as well as the positive one.
+
+\begin{corollary}[A sharp threshold for every regular first-order generator]\label{cor:firstpowers}
+Let $L=aD+b$ on $I$, where $a,b$ are real and smooth and $a$ is nowhere zero. For a positive integer $r$, the property
+\[
+ \forall f\in C^\infty(I),\quad
+ (L^r)^nf\to g\text{ pointwise}
+ \ \Longrightarrow\ g\in C^\infty(I),\quad L^rg=g
+\]
+holds exactly for $r=1$ and $r=2$. More precisely, for every $r\ge3$, every $x_0\in I$, and every interval neighborhood $V\Subset I$ of $x_0$, there is a real $f\in C_c^\infty(V)$ such that
+\[
+ (L^r)^nf(x)\longrightarrow\ind_{\{x_0\}}(x)\quad(x\in I),
+ \qquad (L^r)^nf(x_0)=1\quad(n\ge0).
+\]
+\end{corollary}
+\begin{proof}
+For $r=1,2$, $L^r$ is a regular smooth operator of order $r$, with leading coefficient $a^r$, so Theorem~\ref{thm:loworder} applies.
+
+For $r\ge3$, base the coordinate $\Phi$ and integrating factor $W$ in Proposition~\ref{prop:conjugacy} at $x_0$. Then $\Phi(x_0)=0$ and $W(0)=1$. By Corollary~\ref{cor:localized}, choose $F\in C_c^\infty(\Phi(V))$ with $D^{rn}F\to\ind_{\{0\}}$ and $D^{rn}F(0)=1$. Set
+\[
+ f(x)=\frac{F(\Phi(x))}{W(\Phi(x))}.
+\]
+Its support is a compact subset of $V$, and \eqref{eq:firstconjugacy} gives
+\[
+ (L^r)^nf(x)=L^{rn}f(x)
+ =\frac{D^{rn}F(\Phi(x))}{W(\Phi(x))}.
+\]
+The fixed nonzero denominator and its value one at $x_0$ give the asserted limit and central values.
+\end{proof}
+This describes all powers of any fixed regular real first-order generator; it does not say that every regular higher-order operator is such a power.
+
+\subsection{An entire-function uniqueness lemma}
+The following version of the ray-decay principle used for $xD$ in \cite{project} will be useful. We give a transform proof, so that no boundary-growth variant of Phragm\'en--Lindel\"of is left implicit.
+
+\begin{lemma}[Decay faster than exponential type]\label{lem:ray}
+Suppose $H$ is entire, $|H(z)|\le C e^{\sigma|z|}$ for some $\sigma\ge0$, and
+\[
+ |H(-t)|\le A e^{-\alpha t}\qquad(t\ge T)
+\]
+for some $\alpha>\sigma$. Then $H\equiv0$.
+\end{lemma}
+\begin{proof}
+Choose $R$ with $\sigma<R<\alpha$. Cauchy's estimates imply
+\[
+ |H^{(n)}(0)|\le C_R R^n\qquad(n\ge0).
+\]
+For example, optimizing the Cauchy radius when $\sigma>0$ gives a polynomial factor times $\sigma^n$, which is absorbed by $R^n$; when $\sigma=0$, Liouville's theorem already makes $H$ constant.
+
+The series
+\[
+ B(w)=\sum_{n=0}^{\infty}\frac{(-1)^nH^{(n)}(0)}{w^{n+1}}
+\]
+is holomorphic for $|w|>R$ and tends to zero at infinity. On the other hand,
+\[
+ A_0(w)=\int_0^{\infty}H(-t)e^{-wt}\,dt
+\]
+is holomorphic for $\operatorname{Re}w>-\alpha$. Termwise integration of the Taylor series gives $A_0=B$ when $\operatorname{Re}w>R$. Their domains have connected intersection, so the identity theorem gives agreement throughout the intersection. Since $R<\alpha$, the two domains cover $\C$. They therefore define an entire function that tends to zero at infinity, and Liouville's theorem makes it zero. Every coefficient of $B$ vanishes, hence $H=0$.
+\end{proof}
+
+\subsection{Exact classification at a simple zero}
+\begin{theorem}[Simple-zero spectral rigidity]\label{thm:simple}
+Let $L=aD+b$ have real smooth coefficients near an interior point $x_0$, and suppose
+\[
+ a(x_0)=0,\qquad \lambda=a'(x_0)\ne0,\qquad \beta=b(x_0).
+\]
+There are a smooth local coordinate $u$ and a positive smooth function $q$, depending only on $L$, such that
+\[
+ u(x_0)=0,\quad u'(x_0)=1,\quad q(x_0)=1,
+ \qquad TL T^{-1}=E:=\lambda uD_u+\beta,
+\]
+where $(Tf)(u(x))=q(x)f(x)$.
+
+For a real smooth $f$, pointwise boundedness of $(L^nf)$ on a neighborhood of $x_0$ is equivalent, after possibly shrinking that neighborhood, to
+\begin{equation}\label{eq:boundedmodes}
+ (Tf)(u)=\sum_{k\in K_b}c_k u^k,
+ \qquad K_b=\{k\in\N:|\beta+k\lambda|\le1\}.
+\end{equation}
+The equivalence is local: each condition holds on some neighborhood if and only if the other does. Pointwise convergence is equivalent to the same representation with
+\begin{equation}\label{eq:convergentmodes}
+ K_c=\{k\in\N:-1<\beta+k\lambda\le1\}.
+\end{equation}
+In the convergence case the convergence is smooth locally and
+\begin{equation}\label{eq:reslimit}
+ q(x)g(x)=
+ \begin{cases}
+ c_{k_*}u(x)^{k_*},& k_*=(1-\beta)/\lambda\in\N,\\
+ 0,&(1-\beta)/\lambda\notin\N.
+ \end{cases}
+\end{equation}
+\end{theorem}
+\begin{proof}
+Translate $x_0$ to zero. The function $\lambda/a(x)-1/x$ extends smoothly across zero. Define
+\[
+ u(x)=x\exp\left(\int_0^x
+        \left(\frac{\lambda}{a(t)}-\frac1t\right)dt\right).
+\]
+Then $u'(0)=1$ and $a u'=\lambda u$. In this coordinate, write $B(u)=b(x(u))$ and set
+\[
+ Q(u)=\exp\left(\int_0^u\frac{B(s)-\beta}{\lambda s}\,ds\right),
+ \qquad q(x)=Q(u(x)).
+\]
+The integrand is smooth, $Q(0)=1$, and direct calculation gives
+\[
+ Q(\lambda uD_u+B)Q^{-1}=\lambda uD_u+\beta.
+\]
+
+It remains to classify a smooth $h=Tf$ for $E$. Put $\eta=\sgn\lambda$. On each side $\epsilon\in\{-1,1\}$ of zero define, for sufficiently negative $s$,
+\[
+ F_\epsilon(s)=e^{\eta\beta s}
+                 h(\epsilon e^{|\lambda|s}).
+\]
+The derivatives satisfy
+\[
+ F_\epsilon^{(n)}(s)=\eta^n e^{\eta\beta s}
+                   (E^nh)(\epsilon e^{|\lambda|s}).
+\]
+Pointwise boundedness and Corollary~\ref{cor:entire} give an entire extension of $F_\epsilon$ with $|F_\epsilon(z)|\le C_\epsilon e^{|z|}$.
+
+Let $c_k=h^{(k)}(0)/k!$ and $\nu_k=\eta\beta+|\lambda|k$. Taylor expansion at zero gives, for each $N\ge0$,
+\begin{equation}\label{eq:rayexpansion}
+ F_\epsilon(s)=\sum_{k=0}^N c_k\epsilon^k e^{\nu_ks}
+                    +O(e^{\nu_{N+1}s})
+ \qquad(s\to-\infty).
+\end{equation}
+The $\nu_k$ increase strictly. The exponential-type bound forces $c_k=0$ for every $\nu_k<-1$, successively: after the earlier coefficients vanish, division by $e^{\nu_ks}$ in \eqref{eq:rayexpansion} has limit $c_k\epsilon^k$, whereas the type bound makes that limit zero.
+
+If some $\nu_k\le1$, let $N$ be the largest such index and subtract the terms with $-1\le\nu_k\le1$. The remainder is entire of type at most one and is $O(e^{\nu_{N+1}s})$ on the negative real ray, where $\nu_{N+1}>1$. Lemma~\ref{lem:ray} makes it identically zero. If $\nu_0>1$, apply the same lemma directly, using $h(u)=O(1)$. Since $|\nu_k|=|\beta+k\lambda|$, this proves \eqref{eq:boundedmodes} on both sides, with the same Taylor coefficients.
+
+Finally, $E(u^k)=(\beta+k\lambda)u^k$. All eigenvalues in \eqref{eq:boundedmodes} lie in $[-1,1]$. There is at most one mode with eigenvalue $-1$, and convergence at any nonzero nearby point forces its coefficient to vanish. All remaining powers converge, smoothly on compact sets, to zero except the eigenvalue-one mode. This proves \eqref{eq:convergentmodes}--\eqref{eq:reslimit}, as well as the converses.
+\end{proof}
+
+\begin{remark}[What resonance does and does not say]
+A nonzero local limiting mode is \emph{permitted} precisely when $(1-b(x_0))/a'(x_0)$ is a nonnegative integer. Resonance does not force the limit of a given orbit to be nonzero: the corresponding coefficient may vanish. Global behavior at other zeros may impose additional restrictions.
+\end{remark}
+
+\begin{corollary}[First-order operators with only simple zeros]\label{cor:globalsimple}
+Suppose every zero of $a\in C^\infty(I;\R)$ is simple, and let $b\in C^\infty(I;\R)$. Pointwise convergence of $(aD+b)^nf$ implies smooth local convergence to a smooth solution of $(aD+b)g=g$. On each component of $\{a\ne0\}$, $g$ has the form \eqref{eq:firstlimit}; at a zero the constants on adjacent components must match the single smooth mode in \eqref{eq:reslimit}, or both vanish when no such mode exists.
+\end{corollary}
+\begin{proof}
+Away from the zero set use Proposition~\ref{prop:conjugacy}; near each zero use Theorem~\ref{thm:simple}. These are local conclusions, so they cover $I$. A compact set admits a finite subcover, which also proves smooth local convergence across the zeros.
+\end{proof}
+
+\begin{example}[Euler operators]
+For $L=\lambda xD+\beta$, the coordinate and gauge are $u=x$ and $q=1$. In particular, $L=xD$ forces $f$ to be affine near zero. If convergence holds on all of $\R$, the entire functions $f(\pm e^s)$ agree near the negative end of the real axis with their affine-exponential expressions; the identity theorem extends this equality to all $s$. Thus $f$ is globally affine, recovering the project's $xD$ theorem. More generally, $L=xD/m$ with a positive integer $m$ admits exactly the polynomials of degree at most $m$ locally, and its limit is their degree-$m$ term. For $L=2xD$, only constants are allowed locally.
+\end{example}
+
+\subsection{Finite-order degenerate zeros of a vector field}
+We first record the endpoint observation used in the project's $x^2D$ argument.
+
+\begin{lemma}[A bounded endpoint kills the growing mode]\label{lem:poisson}
+Let $F$ be entire with bounded sequence $(F^{(n)}(0))_n$, and suppose $F^{(n)}(0)\to C$. Then
+\[
+ e^{-t}F(t)\longrightarrow C\qquad(t\to+\infty).
+\]
+Consequently, if $F$ is bounded on a positive real tail, then $C=0$.
+\end{lemma}
+\begin{proof}
+The Taylor expansion is
+\[
+ e^{-t}F(t)=\sum_{n=0}^{\infty}F^{(n)}(0)\,e^{-t}\frac{t^n}{n!}.
+\]
+The weights are nonnegative and sum to one. Their sum over any fixed finite set of indices tends to zero as $t\to\infty$. Split the sum at an index after which $|F^{(n)}(0)-C|<\varepsilon$. The finite part tends to zero and the tail error is at most $\varepsilon$.
+\end{proof}
+
+\begin{theorem}[Vector fields with finite-order zeros]\label{thm:finitezeros}
+Let $a\in C^\infty(I;\R)$ and assume every zero of $a$ has finite order. If $f\in C^\infty(I;\R)$ and $L^nf\to g$ pointwise for $L=aD$, then $g\in C^\infty(I)$ and $Lg=g$. On every component $J$ of $\{a\ne0\}$,
+\begin{equation}\label{eq:flowlimit}
+ g(x)=C_J e^{\tau_J(x)},\qquad
+ \tau_J(x)=\int_{x_J}^x\frac{dt}{a(t)},\quad x_J\in J.
+\end{equation}
+At a simple zero $z$, a nonzero crossing mode is possible only if $a'(z)=1/k$ for an integer $k\ge1$, and the two sides must be restrictions of the same smooth local mode. At a zero of order at least two, $C_J$ must vanish on an adjacent side where $\tau_J\to+\infty$; on a side where $\tau_J\to-\infty$, the mode $e^{\tau_J}$ extends smoothly and flatly by zero. Subject to these endpoint conditions, all resulting fixed functions occur as limits. Equivalently,
+\[
+ \{\text{pointwise limits of }L^nf:f\in C^\infty(I)\}
+   =\ker(L-\id)\cap C^\infty(I).
+\]
+\end{theorem}
+\begin{proof}
+Formula~\eqref{eq:flowlimit} follows from the regular first-order theorem on $J$. At any zero $z$, $L^nf(z)=0$ for $n\ge1$, hence $g(z)=0$. The simple-zero statement is Theorem~\ref{thm:simple} with $\beta=0$.
+
+Suppose $a(x)=c(x-z)^m(1+O(x-z))$, where $m\ge2$ and $c\ne0$. On either side,
+\begin{equation}\label{eq:timeasymptotic}
+ \tau_J(x)=-\frac{1+o(1)}{c(m-1)(x-z)^{m-1}}.
+\end{equation}
+In particular, flow time tends to one of the two infinities. In the $+\infty$ case, the function $F(t)=f(\tau_J^{-1}(t))$ has an entire extension, and $F^{(n)}(0)=L^nf(x_J)\to C_J$. Continuity of $f$ at $z$ makes $F(t)\to f(z)$ along that positive tail. Lemma~\ref{lem:poisson} gives $C_J=0$.
+
+In the $-\infty$ case, \eqref{eq:timeasymptotic} gives $e^{\tau_J(x)}\le \exp(-c_0|x-z|^{1-m})$ near $z$, for some $c_0>0$. Every derivative of $\tau_J$ has at most polynomial growth in $|x-z|^{-1}$, since $a$ has finite order. Repeated differentiation shows that every derivative of $e^{\tau_J}$ is a polynomially bounded factor times $e^{\tau_J}$, and hence tends to zero. Its extension by zero is flat.
+
+Every finite-order zero is isolated, and such zeros cannot accumulate in the interior of $I$: an interior accumulation of zeros of a smooth function is a zero of infinite order. The local descriptions therefore glue to a smooth $g$ satisfying $Lg=g$. Conversely, every smooth fixed point is its own constant orbit. The constants in \eqref{eq:flowlimit} must obey the conditions at both endpoints of the same component; no independent choice is asserted when those conditions conflict.
+\end{proof}
+
+\begin{corollary}[All monomial vector fields]\label{cor:monomials}
+Let $m\ge2$, $L=x^mD$ on $\R$, and suppose $L^nf$ converges pointwise. Put
+\[
+ E_m(x)=\exp\left(-\frac{1}{(m-1)x^{m-1}}\right),\qquad x\ne0.
+\]
+If $m$ is even, the possible limits are precisely
+\[
+ g(x)=\begin{cases} C E_m(x),&x>0,\\0,&x\le0.\end{cases}
+\]
+If $m$ is odd, they are precisely
+\[
+ g(x)=\begin{cases} C_-E_m(x),&x<0,\\0,&x=0,\\C_+E_m(x),&x>0,\end{cases}
+\]
+with independent real constants $C_-,C_+$. Every displayed function is smooth and is realized by taking $f=g$.
+\end{corollary}
+\begin{proof}
+Use $\tau(x)=-1/((m-1)x^{m-1})$ and inspect its sign on each side of zero in Theorem~\ref{thm:finitezeros}.
+\end{proof}
+For $m=2$, this is exactly the limiting profile in \cite{project}. Theorem~\ref{thm:finitezeros} asserts smoothness of the limit, not smooth local convergence of the entire orbit across a higher-order zero. Infinitely flat zeros and general zeroth-order terms at degenerate zeros are outside its scope.
+
+\section{Arbitrary order under a one-sided bound}\label{sec:onesided}
+In this section, $P=\sum_{j=0}^r a_jD^j$ is a regular scalar operator of any finite order $r\ge1$, with real smooth coefficients, and $f$ is real valued. The hypothesis below does not assume an absolute locally uniform bound. It permits a different orientation for each iterate.
+
+\begin{theorem}[One-sided automatic regularity]\label{thm:oneside}
+Assume $\sup_n|P^nf(x)|<\infty$ at every $x\in I$. Suppose also that for every compact interval $J\Subset I$ there are $M_J<\infty$ and signs $\varepsilon_{n,J}\in\{-1,1\}$ such that
+\begin{equation}\label{eq:oneside}
+ \varepsilon_{n,J}P^nf(x)\ge-M_J
+ \qquad(n\ge0,\ x\in J).
+\end{equation}
+Then every spatial derivative of the orbit is locally uniformly bounded. If $P^nf$ converges pointwise, it converges in $\clim(I)$ to a smooth solution of $Pg=g$.
+\end{theorem}
+The signs are constant in $x$ on each fixed $J$, but may depend on $n$ and $J$. The additional hypothesis is substantive: the counterexamples in Theorem~\ref{ho:thm:counter} show that it cannot be deduced from arbitrary pointwise convergence.
+
+\subsection{Positive factorization and interpolation}
+\begin{lemma}[Local positive factorization]\label{lem:factor}
+Each point of $I$ has an interval neighborhood $J$ on which
+\begin{equation}\label{eq:factor}
+ T:=\sgn(a_r)P=w_rD\,w_{r-1}D\cdots w_1D\,w_0,
+\end{equation}
+where every $w_j$ is smooth and strictly positive. The weights act by multiplication.
+\end{lemma}
+\begin{proof}
+Normalize to a monic operator $L=P/a_r$. Choose a local solution of $Ly=0$ with $y(x_*)=1$, and shrink the interval until $y>0$. The conjugate $y^{-1}Ly$ is monic and has zero zeroth-order coefficient, so it is $QD$ for a monic operator $Q$ of order $r-1$. Hence $L=yQD y^{-1}$. Induct on the order, choosing a positive local homogeneous solution at each step. The monic order-zero operator is the identity. Multiplication of the outer weight by $|a_r|$ gives \eqref{eq:factor}.
+\end{proof}
+
+\begin{lemma}[Generalized interpolation sign]\label{lem:sign}
+Let $T$ have the factorization \eqref{eq:factor} on $J$. Interpolation at any $r$ distinct nodes $z_1<\cdots<z_r$ by functions in $\ker T$ is uniquely solvable. If $Th\ge0$ and $H\in\ker T$ interpolates $h$ at those nodes, then
+\begin{equation}\label{eq:sign}
+ \frac{h(x)-H(x)}{\prod_{i=1}^r(x-z_i)}\ge0
+ \qquad(x\in J\setminus\{z_1,\ldots,z_r\}).
+\end{equation}
+\end{lemma}
+\begin{proof}
+Positive multiplication preserves zeros and their multiplicities. Rolle's theorem through the $r$ derivative factors shows that $r+1$ zeros of a function, counted with multiplicity, force a zero of its image under $T$.
+
+If $h\in\ker T$ has $r$ distinct zeros, its last-but-one weighted derivative is constant and has a zero, so it vanishes identically. Repeating this observation downward through the factors shows $h=0$. Since $\ker T$ has dimension $r$, interpolation is an isomorphism onto the $r$ prescribed values.
+
+Choose $v$ with $Tv=1$ and subtract its interpolant to obtain $\psi$ satisfying $T\psi=1$ and $\psi(z_i)=0$. There can be no additional zero or multiple zero. Its sign to the right of $z_r$ is positive: the last-but-one weighted derivative has positive derivative and one zero; moving downward, interlacing of Rolle zeros shows that each preceding weighted derivative is positive to the right of its last zero. Therefore $\psi$ has the sign of $\prod_i(x-z_i)$ everywhere away from the nodes.
+
+For fixed $x$ outside the nodes, put $c=(h(x)-H(x))/\psi(x)$. The function $h-H-c\psi$ has $r+1$ distinct zeros. Thus $T(h-H-c\psi)$ vanishes somewhere, say at $\xi$, so $c=Th(\xi)\ge0$. This proves \eqref{eq:sign}.
+\end{proof}
+
+\begin{lemma}[Finite-point bound]\label{lem:finitepoint}
+On an interval $J$ as in Lemma~\ref{lem:factor}, let $K$ be a compact interval contained in $J$. There exist $r+1$ fixed points $z_0,\ldots,z_r\in J\setminus K$ and a constant $C$ such that
+\begin{equation}\label{eq:finitepoint}
+ Ph\ge-M\text{ on }J
+ \quad\Longrightarrow\quad
+ \norm{h}_{C^0(K)}\le C\left(M+\max_{0\le i\le r}|h(z_i)|\right)
+\end{equation}
+for every real smooth $h$ and $M\ge0$. The same conclusion holds if $Ph\le M$.
+\end{lemma}
+\begin{proof}
+First suppose $Th\ge0$. Choose nodes with
+\[
+ z_0<\cdots<z_{r-1}<\inf K\le\sup K<z_r.
+\]
+Let $H_L\in\ker T$ interpolate $h$ at the $r$ left-hand nodes. Formula~\eqref{eq:sign} gives $h\ge H_L$ on $K$. Let $H_R\in\ker T$ interpolate at $z_0,\ldots,z_{r-2},z_r$; for $r=1$ this means the single node $z_r$. Exactly one interpolation factor is negative on $K$, so $h\le H_R$. Both interpolants depend linearly on finitely many sample values, with fixed basis functions bounded on $K$. They therefore bound $|h|$ by a constant times the largest sample value.
+
+For $Ph\ge-M$, choose a fixed $v$ with $Pv=1$ and set $k=\sgn(a_r)(h+Mv)$. Then $Tk=P(h+Mv)\ge0$. Apply the preceding estimate to $k$ and absorb the fixed norms and sample values of $v$ into $C$. Replacing $h$ by $-h$ proves the upper-bound version.
+\end{proof}
+
+\subsection{Proof and consequences}
+\begin{proof}[Proof of Theorem~\ref{thm:oneside}]
+Work near any point on a small interval $J$ where Lemma~\ref{lem:finitepoint} applies, and choose signs and a bound from a slightly larger compact interval. Put
+\[
+ h_n=\varepsilon_{n+1,J}u_n.
+\]
+Then $Ph_n=\varepsilon_{n+1,J}u_{n+1}\ge-M_J$. At each of the finitely many fixed sample points, $|h_n(z_i)|=|u_n(z_i)|$ is bounded uniformly in $n$ by the pointwise hypothesis. Lemma~\ref{lem:finitepoint} gives a uniform bound on $K$. A finite cover proves local uniform boundedness throughout $I$. Lemma~\ref{lem:ode}, applied repeatedly to $Pu_n=u_{n+1}$, gives all derivative bounds. Lemma~\ref{lem:convergence} proves the convergence conclusion.
+\end{proof}
+
+\begin{corollary}[Nonnegative and monotone orbits]\label{cor:monotone}
+For every real regular scalar $P$ of finite order, pointwise convergence improves to smooth local convergence to a fixed point in each of the following cases: all iterates are nonnegative; each iterate has a constant sign throughout $I$; or $(P^nf)$ is nondecreasing at every point, or nonincreasing at every point, with the same direction of monotonicity throughout $I$.
+\end{corollary}
+\begin{proof}
+The first two cases have $M_J=0$ in \eqref{eq:oneside}. For a nondecreasing orbit, $u_n\ge f$, so take $M_J=\norm{f}_{C^0(J)}$ and $\varepsilon_{n,J}=1$. For a nonincreasing orbit use $u_n\le f$ and $\varepsilon_{n,J}=-1$.
+\end{proof}
+A finite initial segment may be discarded in these conditions: its finitely many local norms can be absorbed into $M_J$.
+
+\begin{corollary}[Derivative powers]\label{cor:powers}
+Under the boundedness hypotheses of Theorem~\ref{thm:oneside} with $P=D^r$, $f$ extends to an entire function of exponential type at most one. If the iterates converge, then
+\begin{equation}\label{eq:rootprofile}
+ g(x)=\sum_{\zeta^r=1}c_\zeta e^{\zeta x},
+\end{equation}
+with conjugate coefficients at conjugate roots for a real-valued limit.
+\end{corollary}
+\begin{proof}
+For each residue $0\le j<r$, the theorem bounds $D^{rn+j}f=D^jP^nf$ uniformly in $n$ on compact intervals. Taking the maximum over the finitely many residues bounds all derivatives simultaneously. Taylor's remainder and the coefficient estimate in Corollary~\ref{cor:entire} give the entire extension. The regular equation $D^rg=g$ has the distinct characteristic roots $\zeta^r=1$, proving \eqref{eq:rootprofile}.
+\end{proof}
+For $r=3$, a real limit is consequently of the form
+\[
+ g(x)=A e^x+e^{-x/2}
+       \left(B\cos\frac{\sqrt3x}{2}+C\sin\frac{\sqrt3x}{2}\right).
+\]
+This describes the fixed-point equation; particular positivity assumptions can further restrict the displayed coefficients.
+
+\section{Exceptional sets and analytic data}\label{sec:exceptional}
+\subsection{The structure of the exceptional set}
+\begin{theorem}[Perfect exceptional set and two-sided oscillation]\label{thm:exceptional}
+Let $P$ be a real regular scalar operator of any finite order, and suppose its orbit is pointwise bounded. Define $M,G$ by \eqref{eq:goodset} and put $F=I\setminus G$. Then $F$ is relatively closed, nowhere dense, and has no isolated points. In particular, a nonempty $F$ is uncountable.
+
+For every $x\in F$, every interval neighborhood $J\subset I$ of $x$, and every $M_0>0$, there is a single index $n$ for which
+\begin{equation}\label{eq:twosigns}
+ \sup_{t\in J}u_n(t)>M_0,
+ \qquad
+ \inf_{t\in J}u_n(t)<-M_0.
+\end{equation}
+If the orbit converges pointwise, it converges in $\clim(G)$ and its limit satisfies $Pg=g$ on $G$.
+\end{theorem}
+\begin{proof}
+Lemma~\ref{lem:good} gives openness and density of $G$, all local derivative bounds there, and the Banach-valued companion equation. Lemma~\ref{lem:convergence} proves the convergence assertion on $G$.
+
+Suppose $c$ were isolated in $F$. There are good intervals immediately to its left and right. Their $\ell^\infty$-valued companion solutions extend to $c$ by Lemma~\ref{lem:good}. Their Cauchy jets agree, since each coordinate is the corresponding derivative of the original smooth $u_n$ at $c$. Uniqueness for the Banach-space ODE glues these extensions and supplies a local uniform bound across $c$, contradicting $c\in F$. Thus $F$ has no isolated points. A nonempty relatively closed perfect subset of an interval contains a Cantor subset, so is uncountable.
+
+Finally, if \eqref{eq:twosigns} failed for some $J,M_0$, then for every $n$ either $u_n\le M_0$ throughout $J$ or $u_n\ge-M_0$ throughout $J$. Choose a sign for each $n$ accordingly. The local proof of Theorem~\ref{thm:oneside} then makes $M$ locally bounded inside $J$, contradicting $x\in F$.
+\end{proof}
+
+\begin{remark}
+The set $F$ records failure of local uniform boundedness, not necessarily discontinuity of the limit. Its last condition requires both large signs in the \emph{same} iterate, not just different positive and negative members of the sequence. The no-isolated-points conclusion, without the sign assertion, also follows for regular Banach-valued systems from the same continuation argument. The next corollary shows that the nonempty case is realized by the higher-order construction.
+\end{remark}
+
+\begin{corollary}[A realized perfect null obstruction]\label{cor:realizedbad}
+For the function $f_r$ in Theorem~\ref{ho:thm:counter}, put
+\[
+ M_r(x)=\sup_n|D^{rn}f_r(x)|,\qquad
+ F_r=\{x:M_r\text{ is not bounded on any neighborhood of }x\}.
+\]
+Then $F_r$ is a nonempty compact perfect set of measure zero, contains $0$, and is contained in the residual set $E$ of the construction. At every point of $F_r$, both excursions in \eqref{eq:twosigns} occur for a single iterate in every neighborhood, with arbitrarily large amplitude. Nevertheless, the pointwise limit is continuous on $\R\setminus\{0\}$.
+\end{corollary}
+\begin{proof}
+The orbit converges at every point, so it is pointwise bounded. Outside $E$, the function agrees locally with one fixed polynomial. All sufficiently high selected derivatives vanish throughout a smaller neighborhood, while the finitely many remaining derivatives are bounded there. Hence $F_r\subset E$.
+
+If $0\notin F_r$, local uniform orbit bounds near $0$, Lemma~\ref{lem:ode}, and Lemma~\ref{lem:convergence} would make the limit smooth there, contradicting \eqref{ho:eq:counter}. Thus $0\in F_r$. Apply Theorem~\ref{thm:exceptional}; closedness and containment in the compact null set $E$ give the remaining topological and measure assertions. The limit is zero off the origin.
+\end{proof}
+
+\subsection{An all-orders result for analytic input}
+\begin{theorem}[Analytic coefficients and initial function]\label{thm:analytic}
+Let $P$ be a regular scalar operator of arbitrary finite order with real-analytic real or complex coefficients, and let $f$ be real analytic on $I$. If $(P^nf(x))_n$ is bounded at every point, all spatial derivatives of the orbit are locally uniformly bounded. If the orbit converges pointwise, it converges in $\clim(I)$ to a real-analytic solution of $Pg=g$.
+\end{theorem}
+\begin{proof}
+Lemma~\ref{lem:good} gives a nonempty interval on which $U=(P^nf)_n$ is a norm-smooth $\ell^\infty$-valued solution of \eqref{eq:sequenceode}. Solve its companion initial-value problem on all of $I$. The coefficient operators are real analytic, so the Banach-valued solution is real analytic. Locally, this follows by extending the coefficients holomorphically and applying the convergent Picard iteration on a sufficiently small complex disk.
+
+Every coordinate of its first block agrees with the real-analytic function $P^nf$ on the starting interval. The identity theorem extends that equality along the connected interval $I$. The global Banach-valued solution thus supplies local uniform bounds for all spatial derivatives of the original orbit. Apply Lemma~\ref{lem:convergence}; the regular analytic ODE $(P-\id)g=0$ makes $g$ analytic.
+\end{proof}
+Both analyticity assumptions are used: the coefficient assumption produces an analytic sequence-valued solution, and the assumption on $f$ identifies it with the original orbit outside the starting interval. The assumption on the input cannot be dropped: Theorem~\ref{ho:thm:counter} already fails for analytic, constant coefficients and a smooth nonanalytic initial function.
+
+\section{Countable algebraic relations and finite orbits}\label{sec:algebraic}
+This section concerns exact relations, not limits. Coefficients and functions may be complex. The classical Corominas--Sunyer i Balaguer theorem says that a smooth function with some vanishing derivative at every point must be a polynomial \cite{corominas}. The Baire arguments recorded in \cite{gogolev} provide a useful model. Here regular ODE uniqueness and commutation replace the special properties of ordinary differentiation.
+
+\begin{theorem}[Countable-polynomial annihilation]\label{thm:algebraic}
+Let $P$ be a regular smooth scalar operator of positive finite order on $I$, and let $(q_j)_{j\ge1}$ be a fixed countable family of nonzero complex polynomials. If
+\begin{equation}\label{eq:countable}
+ \text{for every }x\in I\text{ there exists }j=j(x)
+ \text{ such that }[q_j(P)f](x)=0,
+\end{equation}
+then for some single $j_0$,
+\begin{equation}\label{eq:globalann}
+ q_{j_0}(P)f\equiv0\quad\text{on }I.
+\end{equation}
+No boundedness, sign, or convergence assumption is required.
+\end{theorem}
+
+We prove the following slightly more general statement, which makes the mechanism explicit.
+\begin{proposition}[Commuting-family formulation]\label{prop:commuting}
+Let $(Q_j)_{j\ge1}$ be a countable pairwise commuting family of smooth scalar differential operators on $I$. Assume each $Q_j$ is either regular of positive finite order or a nonzero constant multiple of the identity. If the zero sets $\{x:Q_jf(x)=0\}$ cover $I$, one $Q_j$ annihilates $f$ identically on $I$.
+\end{proposition}
+\begin{proof}
+Let $G$ be the union of open intervals on which at least one relation $Q_jf=0$ holds identically. The closed zero sets cover $I$, so Baire's theorem makes $G$ open and dense.
+
+\emph{Propagation on a good component.} Suppose $Qf=0$ on a nonempty subinterval of a connected component $J$ of $G$, where $Q$ is a listed operator, and put $h=Qf$. Near every point of $J$, some listed $R$ satisfies $Rf=0$. Commutation gives $Rh=RQf=QRf=0$ there. If $h$ vanishes on a nonempty part of this neighborhood, regular ODE uniqueness makes it vanish throughout the neighborhood. More explicitly, at a limit point of intervals of vanishing, all Cauchy data of $h$ vanish, so the same uniqueness argument applies. Thus the set of points of $J$ near which $h=0$ is both open and closed in $J$. One listed relation consequently holds on the whole component. A nonzero constant multiplication operator has the same uniqueness property trivially.
+
+\emph{No isolated exceptional points.} Put $F=I\setminus G$. If $c\in F$ were isolated, choose $Qf=0$ on the good interval immediately to the left and $Rf=0$ immediately to the right. The smooth function $h=Qf$ has all derivatives zero at $c$, since it vanishes on the left. On the right it satisfies $Rh=0$. Cauchy uniqueness therefore extends its vanishing to the right. This gives a listed relation on a neighborhood of $c$, a contradiction.
+
+\emph{Elimination of the exceptional set.} If $F$ is nonempty, it is a locally compact Baire space. The closed sets $F\cap\{Q_jf=0\}$ cover it. There exist an interval $V\subset I$ meeting $F$ and a listed $Q$ such that $h=Qf$ vanishes on $F\cap V$. Since $F$ has no isolated points, every derivative of $h$ vanishes on $F\cap V$: compute the derivative along a sequence of distinct zeros in that set, and induct.
+
+Consider any component $J$ of $G$ meeting $V$. Because $V$ meets $F$, the part of $J$ in $V$ has at least one endpoint $c\in F\cap V$. On $J$, some listed $R$ annihilates $f$, hence also $h$. Its Cauchy jet at $c$ is zero, so uniqueness gives $h=0$ on $J$. It follows that $h=0$ on all of $V$, contradicting $V\cap F\ne\varnothing$. Therefore $G=I$, and propagation on the single component $I$ gives one global listed relation.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:algebraic}]
+The operators $q_j(P)$ commute. If $q_j$ has degree $d\ge1$ and leading coefficient $c$, then $q_j(P)$ has order $rd$ and leading coefficient $c a_r^d$, which never vanishes. A nonzero constant polynomial gives a nonzero constant multiple of the identity. Proposition~\ref{prop:commuting} therefore applies.
+\end{proof}
+
+\begin{corollary}[One point-dependent repetition]\label{cor:periodic}
+Suppose that at every $x\in I$ there are integers $0\le m(x)<n(x)$ for which
+\[
+ P^{n(x)}f(x)=P^{m(x)}f(x).
+\]
+Then there are fixed integers $0\le m<n$ such that $P^nf=P^mf$ on $I$. The orbit is globally eventually periodic, with period $n-m$.
+\end{corollary}
+\begin{proof}
+Apply Theorem~\ref{thm:algebraic} to the countable family $q_{m,n}(t)=t^n-t^m$. Further application of $P^k$ gives
+\[
+ P^{m+k+(n-m)}f=P^{m+k}f\qquad(k\ge0).
+\]
+\end{proof}
+
+\begin{corollary}[Pointwise finite orbits]\label{cor:finiteorbit}
+If $\{P^nf(x):n\ge0\}$ is finite at every point, the orbit is globally eventually periodic. If it also converges pointwise, there is a single $N$ for which
+\[
+ P^{N+1}f=P^Nf,\qquad P^nf=P^Nf\quad(n\ge N).
+\]
+The limit is the smooth fixed point $P^Nf$.
+\end{corollary}
+\begin{proof}
+Finite pointwise range supplies a point-dependent repetition. A convergent periodic scalar sequence has a constant periodic tail. Apply this pointwise to the global tail supplied by Corollary~\ref{cor:periodic}.
+\end{proof}
+Likewise, a point-dependent adjacent equality $P^{N(x)+1}f(x)=P^{N(x)}f(x)$ forces one global adjacent equality without assuming convergence. If some iterate vanishes at every point, one fixed iterate vanishes identically. Taking $P=D$ and $q_j(t)=t^j$ recovers the classical polynomial theorem.
+
+\begin{example}[Countability cannot be removed]
+Let $P=D$ and $f(x)=e^{x^2}$. For each point $x$, the polynomial $q_x(t)=t-2x$ satisfies $[q_x(D)f](x)=0$. But no fixed nonzero polynomial $q$ annihilates $f$ on an interval. Indeed, $e^{-x^2}D^kf$ is a polynomial of degree $k$ with leading coefficient $2^k$, so the highest-degree term of $e^{-x^2}q(D)f$ cannot cancel. The uncountable family of point-dependent relations therefore does not collapse to a global one.
+\end{example}
+
+\begin{remark}[Exact relations versus convergence on a residual set]
+The higher-order construction does not contradict Corollary~\ref{cor:periodic}. Its scalar orbit is eventually zero outside $E$ and is identically one at $0$, but convergence at points of $E\setminus\{0\}$ is not asserted to be eventually exact. In fact, at least one such point must have no repeated scalar orbit value: otherwise Corollary~\ref{cor:periodic} would give a global periodic orbit, and its convergence would force a smooth stationary tail, contrary to \eqref{ho:eq:counter}. The residual-set estimates cannot be replaced by a claim of pointwise eventual stationarity everywhere.
+\end{remark}
+
+\section{A planar Laplacian orbit with a discontinuous limit}\label{sec:plane}
+The preceding higher-order counterexamples have nonanalytic input. The following independent construction shows that in two dimensions the regularity conclusion can fail even in order two with constant coefficients and entire input. Classical Runge constructions already produce sequences of holomorphic functions with irregular pointwise limits; see, for example, Krantz~\cite{krantz}. The additional requirement here is that all members of the sequence be iterates of \emph{one} function under \emph{one} differential operator.
+
+\begin{theorem}[An entire planar counterexample]\label{thm:plane}
+There is a real-valued function $f$ on $\R^2$, extending holomorphically to the complexification $\C^2$, such that, for $\Delta=\partial_x^2+\partial_y^2$,
+\begin{equation}\label{eq:spike}
+ \lim_{N\to\infty}\Delta^Nf(x,y)
+ =\begin{cases}
+ 1,&(x,y)=(0,0),\\
+ 0,&(x,y)\ne(0,0).
+ \end{cases}
+\end{equation}
+In fact, $\Delta^Nf(0,0)=1$ for every $N\ge0$.
+\end{theorem}
+
+\subsection{Polynomial approximants and fixed paths}
+For $j\ge2$, remove a moving wedge from an annulus:
+\[
+ W_j=\{re^{i\theta}:r>0,\ 1/j<\theta<2/j\},\qquad
+ K_j=\{z:1/j\le |z|\le j\}\setminus W_j.
+\]
+The compact set $K_j\cup\{0\}$ has connected complement. Indeed, the deleted wedge connects the inner disk to the exterior, and puncturing the inner disk at zero does not disconnect that complement. On disjoint neighborhoods of $K_j$ and $\{0\}$, prescribe a holomorphic function equal to zero and one, respectively. Runge's polynomial approximation theorem, followed by division by the approximant's value at zero, gives polynomials $p_j$ such that
+\begin{equation}\label{eq:polyapprox}
+ p_j(0)=1,\qquad \sup_{K_j}|p_j|\le2^{-j}.
+\end{equation}
+For clarity, the normalization is harmless: approximate with error $\delta_j<1/2$ so small that $\delta_j/(1-\delta_j)\le2^{-j}$, and then divide by the value at zero.
+
+Every fixed nonzero point belongs to $K_j$ for all sufficiently large $j$. More is needed for the construction: for every $z\ne0$ there is a fixed piecewise smooth path $\Gamma_z$ from $1$ to $z$ such that
+\begin{equation}\label{eq:path}
+ \Gamma_z\subset K_j\text{ eventually},\qquad
+ \sup_{\Gamma_z}|p_j|\longrightarrow0.
+\end{equation}
+For positive real $z$, use the positive real segment. Otherwise write $z=re^{i\theta}$, $0<\theta<2\pi$, travel \emph{clockwise} along the unit circle from $1$ to $e^{i\theta}$, and then radially to $z$. The arguments on the circular portion can be taken in $[\theta,2\pi]$, so the path eventually misses the wedge with arguments in $(1/j,2/j)$. Its radii are bounded above and bounded away from zero. This proves \eqref{eq:path}.
+
+\subsection{Slowing the sequence and forming an entire series}
+Choose strictly increasing integers $N_j$ such that
+\[
+ \sup_{|z|\le j}|p_j(z)|\le2^{N_j}.
+\]
+Define $q_n=p_j$ for $N_j\le n<N_{j+1}$, using $p_2$ for the finitely many initial terms. Every block is finite. Thus $q_n(0)=1$, and $q_n\to0$ uniformly on each of the fixed paths $\Gamma_z$. Also, for each $R\ge1$ there is a finite constant $C_R$ such that
+\begin{equation}\label{eq:polygrowth}
+ \sup_{|z|\le R}|q_n(z)|\le C_R2^n\qquad(n\ge0).
+\end{equation}
+For blocks with $j\ge R$, the bound holds with $C_R=1$; the finitely many preceding indices are absorbed into $C_R$.
+
+Let $J$ denote the primitive based at $1$:
+\[
+ (Jh)(z)=\int_1^z h(\zeta)\,d\zeta,\qquad J^0h=h.
+\]
+For entire $h$ the integral is path independent, and repeated integration gives
+\begin{equation}\label{eq:primitive}
+ J^kh(z)=\frac1{(k-1)!}\int_1^z(z-\zeta)^{k-1}h(\zeta)\,d\zeta,
+ \qquad k\ge1.
+\end{equation}
+In two independent complex variables, define
+\begin{equation}\label{eq:entireseries}
+ F(z,w)=\sum_{n=0}^{\infty}\frac{w^n}{4^n n!}\,J^nq_n(z).
+\end{equation}
+For $|z|,|w|\le R$ with $R\ge1$, use the straight segment from $1$ to $z$. Equation~\eqref{eq:polygrowth} gives
+\[
+ |J^nq_n(z)|\le C_R2^n\frac{(R+1)^n}{n!},
+ \qquad
+ \left|\frac{w^n}{4^n n!}J^nq_n(z)\right|
+ \le C_R\frac{[R(R+1)/2]^n}{(n!)^2}.
+\]
+The series therefore converges normally on every compact subset of $\C^2$ and defines an entire function.
+
+Set
+\begin{equation}\label{eq:realplane}
+ f(x,y)=\operatorname{Re}F(x+iy,x-iy).
+\end{equation}
+This real-valued function has an entire extension in the complexified coordinates. Explicitly, if $F^\#(z,w)=\overline{F(\bar z,\bar w)}$, then
+\[
+ \widetilde f(X,Y)=\frac12\bigl[F(X+iY,X-iY)+F^\#(X-iY,X+iY)\bigr]
+\]
+is entire on $\C^2$ and restricts to $f$ on $\R^2$.
+
+\subsection{An exact formula for every iterate}
+For $z=x+iy$ and $w=x-iy$, the real Laplacian acting on the restriction of an entire function in $(z,w)$ corresponds to $4\partial_z\partial_w$. Normal convergence permits termwise differentiation of \eqref{eq:entireseries}. Terms with $n<N$ disappear under $\partial_w^N$; for $n\ge N$, differentiation of $J^nq_n$ $N$ times leaves $J^{n-N}q_n$. Reindexing by $k=n-N$ yields
+\begin{equation}\label{eq:planeiterate}
+ \Delta^Nf(x,y)=\operatorname{Re}\sum_{k=0}^{\infty}
+ \frac{\bar z^k}{4^k k!}\,J^kq_{N+k}(z).
+\end{equation}
+At the origin every term with $k\ge1$ vanishes, whereas $q_N(0)=1$. Hence $\Delta^Nf(0,0)=1$ for all $N$.
+
+Fix $z\ne0$. Along its fixed path $\Gamma_z$ the functions $q_n$ converge uniformly to zero, and
+\[
+ M_z:=\sup_n\sup_{\Gamma_z}|q_n|<\infty.
+\]
+Let $L_z$ be the path length and set
+\[
+ A_z=\max\{1,\sup_{\zeta\in\Gamma_z}|z-\zeta|\}.
+\]
+For every fixed $k\ge1$, equation~\eqref{eq:primitive} gives
+\[
+ J^kq_{N+k}(z)\longrightarrow0,
+ \qquad
+ |J^kq_{N+k}(z)|\le\frac{L_zM_z A_z^{k-1}}{(k-1)!}.
+\]
+The terms with $k\ge1$ in \eqref{eq:planeiterate} are consequently dominated, independently of $N$, by the summable series
+\[
+ \sum_{k=1}^{\infty}
+ \frac{|z|^k L_zM_z A_z^{k-1}}{4^k k!(k-1)!}.
+\]
+The $k=0$ term is $q_N(z)\to0$. Dominated convergence in the series proves \eqref{eq:spike}, completing the proof of Theorem~\ref{thm:plane}.
+
+\begin{corollary}[The dimension threshold for the Laplacian]\label{cor:dimension}
+For a positive integer $d$, the property
+\[
+ \text{for every }f\in C^\infty(\R^d),\quad
+ \Delta^nf\to g\text{ pointwise}
+ \ \Longrightarrow\ g\in C^\infty(\R^d),\quad\Delta g=g
+\]
+holds if and only if $d=1$. For every $d\ge2$, failure occurs even for real-valued functions extending holomorphically to $\C^d$.
+\end{corollary}
+\begin{proof}
+For $d=1$, apply Theorem~\ref{thm:loworder} to $P=D^2$. For $d\ge2$, regard the planar function in Theorem~\ref{thm:plane} as independent of the remaining coordinates. Its iterates under $\Delta_d$ converge to $\mathbf1_{\{x_1=x_2=0\}}$, which is discontinuous. Its entire extension is likewise independent of the additional complex variables.
+\end{proof}
+
+\begin{remark}[Signs and powers]
+Inserting $(-1)^n$ into the $n$th summand of \eqref{eq:entireseries} gives an input whose iterates under $-\Delta$ have the same discontinuous limit. The analogue of \eqref{eq:planeiterate} has only an additional factor $(-1)^k$ in the $k$th term. Taking subsequences gives counterexamples for every positive integer power of $\Delta$ or $-\Delta$ in dimension at least two. For the one-dimensional powers of order at least four, the counterexample is instead supplied by Theorem~\ref{ho:thm:counter}.
+\end{remark}
+
+
+\begin{corollary}[The order--dimension classification for Laplacian powers]\label{cor:polyharmonic}
+Let $d,m\ge1$ be integers and let $P=\Delta_d^m$ on $\R^d$. The property
+\[
+ \forall f\in C^\infty(\R^d),\quad
+ P^nf\to g\text{ pointwise}
+ \ \Longrightarrow\ g\in C^\infty(\R^d),\quad Pg=g
+\]
+holds if and only if $(d,m)=(1,1)$.
+For $d=1$ and $m\ge2$, failure is witnessed by compactly supported smooth input. For $d\ge2$ and every $m\ge1$, failure is witnessed by input extending holomorphically to $\C^d$.
+\end{corollary}
+\begin{proof}
+When $d=m=1$, $P=D^2$ and Theorem~\ref{thm:loworder} applies. If $d=1$ and $m\ge2$, then $P=D^{2m}$, so Theorem~\ref{ho:thm:counter} applies. If $d\ge2$, use the entire input from Corollary~\ref{cor:dimension}. Since its full $\Delta_d$ orbit converges to a discontinuous limit, the subsequence $\Delta_d^{mn}f=(\Delta_d^m)^nf$ has the same limit. This subsequence is the full orbit for the fixed operator $P$.
+\end{proof}
+
+\section{Scope, consequences, and remaining questions}\label{sec:scope}
+\subsection{The unrestricted higher-order assertion is false}
+Theorem~\ref{ho:thm:counter} resolves the universal smooth higher-order question negatively for every $r\ge3$, already for $P=D^r$. Both conclusions under discussion fail: the pointwise limit need not be smooth, and the orbit need not converge in $C^\infty_{\loc}$. Since the counterexample is convergent and hence pointwise bounded, it also disproves automatic local uniform boundedness in those orders.
+
+This establishes a sharp boundary for the class of regular ordinary differential operators. Orders one and two admit an unconditional theorem, even for Banach-valued systems and arbitrary smooth bounded-operator coefficients. No theorem of that form can extend to all regular scalar operators of any fixed order $r\ge3$. The one-sided and analytic-data theorems are positive results under genuine restrictions, rather than partial steps toward a true unrestricted assertion.
+
+The earlier failure of a two-endpoint proof reflects this boundary but is not itself a counterexample. For $r\ge3$, the function $h(x)=A x(\ell-x)$ has $h(0)=h(\ell)=0$ and $D^rh=0$ while its interior norm is arbitrarily large. In the actual construction, continuous piecewise-quadratic top derivatives provide the additional freedom, and the strict inequality $d_n+2<d_{n+1}$ allows that freedom to be repeated indefinitely.
+
+\subsection{Individual operators, singularities, and derivative sets}
+A universal assertion can fail without every individual operator failing it. Corollary~\ref{cor:firstpowers} classifies the powers of every regular real first-order generator, but does not classify all regular higher-order operators with arbitrary lower-order coefficients. Such a classification would require further arguments beyond those here.
+
+The sparse interpolation theorem assumes every consecutive gap is at least three. Its combination with the positive $D$ and $D^2$ results gives the exact threshold for arithmetic progressions of selected derivative orders. It does not classify general sets of derivative orders containing a mixture of smaller and larger gaps. Nor do we prescribe an arbitrary discontinuity set or identify all pointwise limit functions for a fixed higher-order operator.
+
+For singular first-order operators, Theorem~\ref{thm:simple} supplies a local finite-dimensional classification at simple zeros, and Theorem~\ref{thm:finitezeros} describes possible limits of vector fields with finite-order zeros. The latter asserts smoothness of the limit, not smooth local convergence of the whole orbit across a degenerate zero. Infinitely flat zeros, a general zeroth-order term at a degenerate first-order zero, and singular higher-order leading coefficients remain outside these classifications.
+
+\subsection{Proof dependencies and manuscript status}
+The construction in Section~\ref{sec:counter} consists of the finite moment-interpolation lemma, the rescaled local refinement, and the nested limit with pointwise control on the entire residual set. It does not depend on numerical evidence. Supplementary exact rational checks verified finite patches for $(k,m)=(0,3),(0,4),(3,6),(6,9)$, including endpoint jets, $C^m$ matching, degree bounds, and the assigned top derivatives. Such checks do not constitute a formal verification of the infinite construction.
+
+The derivative and $D^2$ precedents are credited to Tao and Adams; the first-order foundation comes from the authors' project~\cite{project}. This unified revision supersedes the earlier separate drafts. AI assistance was used in developing, checking, and consolidating the arguments and in preparing the manuscript. This is a draft for the named authors' review, not a record of their completed independent verification. Independent proof checking and a complete literature and priority review remain outstanding.
+
+\clearpage
+\begin{thebibliography}{10}
+
+\bibitem{adams}
+S. Adams, \emph{Paul Cusson's question}, online research note, linked in the author's MathOverflow answer of January 4, 2023 to~\cite{cusson}; especially Theorems 42 and 57. Accessed September 18, 2026.
+\url{https://www-users.cse.umn.edu/~adams005/PaulCussonQ/ptbddevenderivs.pdf}.
+
+\bibitem{corominas}
+E. Corominas and F. Sunyer i Balaguer, \emph{Sur des conditions pour qu'une fonction infiniment d\'erivable soit un polynome}, C. R. Acad. Sci. Paris \textbf{238} (1954), 558--559.
+
+\bibitem{cusson}
+P. Cusson, \emph{Does iterating the derivative infinitely many times give a smooth function whenever it converges?}, MathOverflow, question 413165, January 5, 2022. Accessed September 18, 2026.
+\url{https://mathoverflow.net/questions/413165}.
+
+\bibitem{project}
+J. Edmonstone and M. Tchouikine, with mentor P. Cusson, \emph{Iteration of linear differential operators}, University of Waterloo Directed Research Program, 2026. Project write-up and slide sources, \texttt{main} branch, retrieved September 18, 2026; in particular \texttt{drp.typ}, \texttt{slides.typ}, and the first-order operator sections.
+\url{https://github.com/matt4tch/drp-spring-2026}.
+
+\bibitem{gogolev}
+A. Gogolev and A. Ferretti, answers to \emph{If $f$ is infinitely differentiable then $f$ coincides with a polynomial}, MathOverflow, question 34059, 2010. Accessed September 18, 2026.
+\url{https://mathoverflow.net/questions/34059}.
+
+\bibitem{krantz}
+S. G. Krantz, \emph{On limits of sequences of holomorphic functions}, Rocky Mountain J. Math. \textbf{43} (2013), no.~1, 273--283. DOI: \href{https://doi.org/10.1216/RMJ-2013-43-1-273}{10.1216/RMJ-2013-43-1-273}. Preprint: \url{https://arxiv.org/abs/1010.1285}.
+
+\bibitem{rainer-schindl}
+A. Rainer and G. Schindl, \emph{Interpolation of derivatives and ultradifferentiable regularity}, Math. Nachr. \textbf{298} (2025), no.~2, 617--635. DOI: \href{https://doi.org/10.1002/mana.202300567}{10.1002/mana.202300567}. Preprint: \url{https://arxiv.org/abs/2312.07020}.
+
+\bibitem{tao}
+T. Tao, answer of January 6, 2022 to~\cite{cusson}, MathOverflow, question 413165. Accessed September 18, 2026.
+\url{https://mathoverflow.net/questions/413165}.
+
+\end{thebibliography}
+\end{document}
