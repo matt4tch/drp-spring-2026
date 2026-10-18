@@ -1,4 +1,4 @@
-#import "../drp-spring-2026/drp-style.typ": *
+#import "drp-style.typ": *
 
 #show: preamble
 #show: setup-shared-counters(2)
@@ -104,33 +104,33 @@ open disk, and $overline(B(z,R))$ its closure.
   on $m$, such that for every compact interval $J=[alpha,beta]$ with
   $alpha<beta$, every real function $h$ of class $C^m$ on a neighborhood
   of $J$, and
-  $0<delta<=frac(beta-alpha,2m)$,
+  $0<delta<=frac(beta-alpha, 2m)$,
   $
     norm(h^((j)))_J
     <= C_m delta^(-j) norm(h)_J
-      +C_m delta^(m-j) norm(h^((m)))_J
+    +C_m delta^(m-j) norm(h^((m)))_J
     quad (0<=j<m).
   $
 ]<lem:interpolation>
 
 #pf[
-  Fix $x in J$. Choose $epsilon=1$ if $x<=frac(alpha+beta,2)$,
+  Fix $x in J$. Choose $epsilon=1$ if $x<=frac(alpha+beta, 2)$,
   and $epsilon=-1$ otherwise. Then all points $x+epsilon ell delta$,
   $1<=ell<=m$, lie in $J$. Taylor's theorem gives
   $
     h(x+epsilon ell delta)
-    =sum_(j=0)^(m-1) frac((epsilon ell)^j,j!) delta^j h^((j)) (x)+R_ell,
+    =sum_(j=0)^(m-1) frac((epsilon ell)^j, j!) delta^j h^((j)) (x)+R_ell,
   $
   where
   $
-    abs(R_ell)<=frac((m delta)^m,m!) norm(h^((m)))_J.
+    abs(R_ell)<=frac((m delta)^m, m!) norm(h^((m)))_J.
   $
   These are $m$ linear equations for the unknowns
   $delta^j h^((j)) (x)$, $0<=j<m$. Their coefficient matrix has
-  entries $V_(ell,j)=frac((epsilon ell)^j,j!)$.
+  entries $V_(ell,j)=frac((epsilon ell)^j, j!)$.
 
   If $V v=0$, the polynomial
-  $p(t)=sum_(j=0)^(m-1) frac(v_j,j!)t^j$ vanishes at the $m$
+  $p(t)=sum_(j=0)^(m-1) frac(v_j, j!)t^j$ vanishes at the $m$
   distinct points $epsilon,2epsilon,dots,m epsilon$. Since its degree
   is at most $m-1$, it is zero. Thus $V$ is invertible.
 
@@ -140,10 +140,10 @@ open disk, and $overline(B(z,R))$ its closure.
   $
     abs(h^((j)) (x))
     <= A_m delta^(-j)
-      (norm(h)_J+frac((m delta)^m,m!) norm(h^((m)))_J).
+    (norm(h)_J+frac((m delta)^m, m!) norm(h^((m)))_J).
   $
   Take the supremum over $x in J$ and set
-  $C_m=A_m max{1,frac(m^m,m!)}$.
+  $C_m=A_m max{1,frac(m^m, m!)}$.
 ]
 
 We will also use the following first-derivative estimate. Let $J$ be
@@ -200,7 +200,7 @@ Indeed, subtract $h(x)$ from the formula for $h(x+t)$ and divide by $t$.
   $
     norm(v_n^((j+1))-v_m^((j+1)))_K
     <= frac(2, t) norm(v_n^((j))-v_m^((j)))_J
-      +t B_(J,j+2).
+    +t B_(J,j+2).
   $
   Given $epsilon>0$, first fix $t$ small enough that the last term is
   less than $epsilon/2$. The induction hypothesis then makes the first
@@ -241,8 +241,8 @@ radius, so it can be used uniformly along a fixed path.
   $n in NN_0$, $0<=j<m$, are holomorphic on a common neighborhood
   of $overline(B(z_*,R))$ and satisfy
   $
-    v_(n,j) ' &= v_(n,j+1) quad (0<=j<m-1), \
-    v_(n,m-1) ' &= c v_(n+1,0)+sum_(j=0)^(m-1)b_j v_(n,j).
+      v_(n,j) ' & = v_(n,j+1) quad (0<=j<m-1), \
+    v_(n,m-1) ' & = c v_(n+1,0)+sum_(j=0)^(m-1)b_j v_(n,j).
   $
   Put $E=overline(B(z_*,R))$. Choose
   $
@@ -253,7 +253,7 @@ radius, so it can be used uniformly along a fixed path.
   $abs(v_(n,j) (z_*))<=M$ for all $n,j$, then
   $
     abs(v_(n,j) (z))<=2M
-    quad "whenever" abs(z-z_*)<=frac(1,2A),
+    quad "whenever" abs(z-z_*)<=frac(1, 2A),
   $
   for every $n in NN_0$ and $0<=j<m$.
 ]<lem:propagation>
@@ -261,9 +261,9 @@ radius, so it can be used uniformly along a fixed path.
 #pf[
   Expand at $z_*$:
   $
-    v_(n,j) (z)&=sum_(k=0)^oo d_(n,j,k)(z-z_*)^k, \
-    c(z)&=sum_(ell=0)^oo c_ell (z-z_*)^ell,
-    quad b_j (z)=sum_(ell=0)^oo b_(j,ell)(z-z_*)^ell.
+    v_(n,j) (z) & =sum_(k=0)^oo d_(n,j,k)(z-z_*)^k, \
+           c(z) & =sum_(ell=0)^oo c_ell (z-z_*)^ell,
+                  quad b_j (z)=sum_(ell=0)^oo b_(j,ell)(z-z_*)^ell.
   $
   Cauchy's estimates give
   $
@@ -273,10 +273,11 @@ radius, so it can be used uniformly along a fixed path.
   the value $oo$. The hypothesis gives $T_0<=M$.
   Comparing coefficients in the differential relations, we obtain
   $
-    (k+1)d_(n,j,k+1)&=d_(n,j+1,k) quad (j<m-1), \
-    (k+1)d_(n,m-1,k+1)
-      &=sum_(ell=0)^k lr((c_ell d_(n+1,0,k-ell)
-        +sum_(j=0)^(m-1)b_(j,ell)d_(n,j,k-ell))).
+      (k+1)d_(n,j,k+1) & =d_(n,j+1,k) quad (j<m-1), \
+    (k+1)d_(n,m-1,k+1) & =sum_(ell=0)^k lr(
+                           (c_ell d_(n+1,0,k-ell)
+                             +sum_(j=0)^(m-1)b_(j,ell)d_(n,j,k-ell))
+                         ).
   $
   Consequently, whenever $T_0,dots,T_k$ are finite,
   $
@@ -289,13 +290,12 @@ radius, so it can be used uniformly along a fixed path.
   We claim that $T_k<=M A^k$ for all $k>=0$. It holds at $k=0$.
   Assuming it through degree $k$ and using $R A>=2$, we get
   $
-    (k+1)T_(k+1)
-    &<=C_0 M A^k sum_(ell=0)^k (R A)^(-ell) \
-    &<=2C_0 M A^k<=M A^(k+1).
+    (k+1)T_(k+1) & <=C_0 M A^k sum_(ell=0)^k (R A)^(-ell) \
+                 & <=2C_0 M A^k<=M A^(k+1).
   $
   Since $k+1>=1$, this proves the induction step.
   The Taylor series of every $v_(n,j)$ represents it on $B(z_*,R)$,
-  and $frac(1,2A)<=R/4$. Hence, for $abs(z-z_*)<=frac(1,2A)$,
+  and $frac(1, 2A)<=R/4$. Hence, for $abs(z-z_*)<=frac(1, 2A)$,
   $
     abs(v_(n,j) (z))
     <=sum_(k=0)^oo M A^k abs(z-z_*)^k<=2M.
@@ -337,18 +337,17 @@ radius, so it can be used uniformly along a fixed path.
   $J=[alpha,beta] subs E_N$ with $alpha<beta$. Thus
   $norm(u_n)_J<=N$ for all $n$.
 
-  On $J$, set $c=1/a_m$ and $b_j=-frac(a_j,a_m)$ for $0<=j<m$.
+  On $J$, set $c=1/a_m$ and $b_j=-frac(a_j, a_m)$ for $0<=j<m$.
   The orbit relation becomes
   $
     u_n^((m))=c u_(n+1)+sum_(j=0)^(m-1)b_j u_n^((j)).
   $
   Write $H_(n,j)=norm(u_n^((j)))_J$. Applying @lem:interpolation
-  to each $u_n$, for $0<delta<=frac(beta-alpha,2m)$, yields
+  to each $u_n$, for $0<delta<=frac(beta-alpha, 2m)$, yields
   $
-    H_(n,m)
-    &<=norm(c)_J N
-      +C_m N sum_(j=0)^(m-1)norm(b_j)_J delta^(-j) \
-    &quad +C_m H_(n,m)sum_(j=0)^(m-1)norm(b_j)_J delta^(m-j).
+    H_(n,m) & <=norm(c)_J N
+              +C_m N sum_(j=0)^(m-1)norm(b_j)_J delta^(-j) \
+            & quad +C_m H_(n,m)sum_(j=0)^(m-1)norm(b_j)_J delta^(m-j).
   $
   All powers $m-j$ in the last sum are positive. Choose a fixed
   $delta>0$ small enough that the coefficient of $H_(n,m)$ on the
@@ -356,7 +355,7 @@ radius, so it can be used uniformly along a fixed path.
   term to the left gives
   $
     H_(n,m)<=2norm(c)_J N
-      +2C_m N sum_(j=0)^(m-1)norm(b_j)_J delta^(-j).
+    +2C_m N sum_(j=0)^(m-1)norm(b_j)_J delta^(-j).
   $
   This bound is independent of $n$. Interpolation now bounds every
   $H_(n,j)$ for $j<m$, uniformly in $n$. In particular, at a chosen
@@ -383,7 +382,7 @@ radius, so it can be used uniformly along a fixed path.
   $
   has no accumulation point in $Omega$, because $a_m$ is holomorphic
   and not identically zero. It is also closed in $Omega$. The functions
-  $c=1/a_m$ and $b_j=-frac(a_j,a_m)$ are holomorphic on
+  $c=1/a_m$ and $b_j=-frac(a_j, a_m)$ are holomorphic on
   $Omega without Z$.
 
   *Propagation along paths.* The domain $Omega without Z$ is path
@@ -408,7 +407,7 @@ radius, so it can be used uniformly along a fixed path.
 
   Apply that lemma with $v_(n,j)=u_n^((j))$, $0<=j<m$.
   Uniform continuity of the path allows a finite subdivision whose
-  consecutive centers have distance less than $frac(1,2A)$.
+  consecutive centers have distance less than $frac(1, 2A)$.
   Starting with the bound $M_*$ at $x_*$, each application gives
   a bound on the next disk at most twice the preceding bound.
   After finitely many steps, all the $u_n$ are uniformly bounded
@@ -463,8 +462,8 @@ radius, so it can be used uniformly along a fixed path.
   $
   Taylor's theorem therefore bounds the remainder at $x_0$ by
   $
-    abs(g(x)-sum_(q=0)^N frac(g^((q)) (x_0),q!)(x-x_0)^q)
-    <=C lr((frac(abs(x-x_0),r)))^(N+1).
+    abs(g(x)-sum_(q=0)^N frac(g^((q)) (x_0), q!)(x-x_0)^q)
+    <=C lr((frac(abs(x-x_0), r)))^(N+1).
   $
   For $abs(x-x_0)<r$ this tends to zero as $N$ tends to infinity.
   Thus $g$ is real analytic at every $x_0 in I$.
@@ -505,7 +504,7 @@ $
   frac(dif t, dif x)=-frac(2, x^3),
   quad -frac(x^3, 2) frac(dif t, dif x)=1.
 $
-Thus the operator $-frac(x^3,2)D$ becomes differentiation with respect
+Thus the operator $-frac(x^3, 2)D$ becomes differentiation with respect
 to $t$. Multiplication by $p$ introduces an extra term, which we
 cancel using $frac(p'(t), p(t))=1/t-1$. This leads to
 $
@@ -518,10 +517,9 @@ For $H in C^oo ((0,oo))$, define
 $w_H (x)=p(t(x))H(t(x))$ on $RR without {0}$. Writing $t=t(x)$,
 the chain rule gives
 $
-  (L w_H)(x)
-  &=frac(dif, dif t)[p(t)H(t)]+(1-1/t)p(t)H(t) \
-  &=p(t)H'(t)+[p'(t)+(1-1/t)p(t)]H(t) \
-  &=p(t)H'(t).
+  (L w_H)(x) & =frac(dif, dif t)[p(t)H(t)]+(1-1/t)p(t)H(t) \
+             & =p(t)H'(t)+[p'(t)+(1-1/t)p(t)]H(t) \
+             & =p(t)H'(t).
 $
 In particular, $L w_(H_n)=w_(H_(n+1))$ on each half-line.
 
@@ -658,19 +656,19 @@ convergent orbit. The failure here occurs for the smooth input
 $f=1-eta$, whose nonanalyticity at zero was established above.
 
 #block(breakable: false)[
-== The positive-order assumption
+  == The positive-order assumption
 
-Positive order is also necessary. On $I=(-1,1)$, let
-$
-  L h=(1-x^2)h, quad f=1.
-$
-Both the coefficient and the input are real analytic, but
-$
-  L^n f(x)=(1-x^2)^n --> cases(1 & quad "if" x=0, 0 & quad "if" x!=0).
-$
-Indeed, $0<1-x^2<1$ whenever $0<abs(x)<1$, whereas the value at
-zero is always one. Thus @thm:analytic-convergence does not extend
-to operators of order zero.
+  Positive order is also necessary. On $I=(-1,1)$, let
+  $
+    L h=(1-x^2)h, quad f=1.
+  $
+  Both the coefficient and the input are real analytic, but
+  $
+    L^n f(x)=(1-x^2)^n --> cases(1 & quad "if" x=0, 0 & quad "if" x!=0).
+  $
+  Indeed, $0<1-x^2<1$ whenever $0<abs(x)<1$, whereas the value at
+  zero is always one. Thus @thm:analytic-convergence does not extend
+  to operators of order zero.
 ]
 
 #block(breakable: false)[
