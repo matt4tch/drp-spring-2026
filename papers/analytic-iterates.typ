@@ -60,7 +60,8 @@ In @thm:analytic-convergence we consider operators of arbitrary
 positive order with analytic coefficients and input, allowing zeros
 of the leading coefficient.
 Pointwise boundedness of the orbit gives
-local uniform bounds on every derivative; pointwise convergence
+local uniform bounds on every derivative by @prop:analytic-bounds;
+pointwise convergence
 then gives a real-analytic limit satisfying $L g=g$. The proof
 obtains bounds on one real interval, propagates them along complex
 paths avoiding the zeros, and uses the maximum-modulus principle
@@ -88,12 +89,12 @@ For a continuous function $h$ on a nonempty compact set $K$, put
 $norm(h)_K=sup_(x in K) abs(h(x))$. We say that $v_n$ converges to $g$
 *locally uniformly with all derivatives* if $g$ is smooth and
 $
-  norm(v_n^((q))-g^((q)))_K --> 0
+  norm(v_n^((q))-g^((q)))_K toinf(n) 0
   quad "for every" q in NN_0 "and every compact interval" K subs I.
 $
 We write $v_n -> g$ in $C^oo_("loc") (I)$ for this convergence.
-In the complex plane, $B(z,R)={w in CC st abs(w-z)<R}$ denotes an
-open disk, and $overline(B(z,R))$ its closure.
+In the complex plane, $D(z,R)={w in CC st abs(w-z)<R}$ denotes an
+open disk, and $overline(D(z,R))$ its closure.
 
 = Elementary estimates
 
@@ -239,12 +240,12 @@ radius, so it can be used uniformly along a fixed path.
   Fix an integer $m>=1$, a radius $R>0$, and $z_* in CC$. Suppose that
   $c,b_0,dots,b_(m-1)$ and the functions $v_(n,j)$,
   $n in NN_0$, $0<=j<m$, are holomorphic on a common neighborhood
-  of $overline(B(z_*,R))$ and satisfy
+  of $overline(D(z_*,R))$ and satisfy
   $
       v_(n,j) ' & = v_(n,j+1) quad (0<=j<m-1), \
     v_(n,m-1) ' & = c v_(n+1,0)+sum_(j=0)^(m-1)b_j v_(n,j).
   $
-  Put $E=overline(B(z_*,R))$. Choose
+  Put $E=overline(D(z_*,R))$. Choose
   $
     C_0>=max{1,norm(c)_E+sum_(j=0)^(m-1)norm(b_j)_E},
     quad A=max{2/R,2C_0}.
@@ -294,7 +295,7 @@ radius, so it can be used uniformly along a fixed path.
                  & <=2C_0 M A^k<=M A^(k+1).
   $
   Since $k+1>=1$, this proves the induction step.
-  The Taylor series of every $v_(n,j)$ represents it on $B(z_*,R)$,
+  The Taylor series of every $v_(n,j)$ represents it on $D(z_*,R)$,
   and $frac(1, 2A)<=R/4$. Hence, for $abs(z-z_*)<=frac(1, 2A)$,
   $
     abs(v_(n,j) (z))
@@ -302,30 +303,28 @@ radius, so it can be used uniformly along a fixed path.
   $
 ]
 
-== The main theorem
+== Local derivative estimates
 
-#thm[Analytic input with zeros of the leading coefficient][
-  Let $m>=1$ be an integer, let $a_0,dots,a_m$ be real analytic on $I$,
-  and suppose $a_m$ is not identically zero. Define
+#prop[Local derivative estimates][
+  Let $m>=1$ be an integer and define
   $
-    L h=sum_(j=0)^m a_j h^((j)).
+    L=sum_(j=0)^m a_j D^j,
   $
-  Let $f$ be real analytic on $I$, and put $u_n=L^n f$.
-
-  If $(u_n (x))_(n>=0)$ is bounded for every $x in I$, then for
-  every compact interval $K subs I$ and every $q in NN_0$,
+  where $a_0,dots,a_m$ are real analytic on $I$ and $a_m$ is not
+  identically zero. Let $f$ be real analytic on $I$ and suppose that
   $
-    sup_(n>=0) norm(u_n^((q)))_K<oo.
+    sup_(n>=0)abs((L^n f)(x))<oo quad "for every" x in I.
   $
-  If $u_n (x)->g(x)$ for every $x in I$, then $g$ is real analytic,
+  For every compact interval $K subs I$, there are constants
+  $C,r>0$ such that
   $
-    L g=g,
-    quad u_n --> g "in" C^oo_("loc") (I).
+    norm((L^n f)^((q)))_K<=C q! r^(-q)
+    quad (n,q in NN_0).
   $
-]<thm:analytic-convergence>
+]<prop:analytic-bounds>
 
 #pf[
-  *Bounds on one real interval.* First assume pointwise boundedness.
+  *Bounds on one real interval.* Put $u_n=L^n f$.
   Since $a_m$ is not identically zero, there is a compact interval
   $J_0=[alpha_0,beta_0] subs I$, with $alpha_0<beta_0$, on which
   $a_m$ does not vanish. For each positive integer $N$, set
@@ -337,28 +336,32 @@ radius, so it can be used uniformly along a fixed path.
   $J=[alpha,beta] subs E_N$ with $alpha<beta$. Thus
   $norm(u_n)_J<=N$ for all $n$.
 
-  On $J$, set $c=1/a_m$ and $b_j=-frac(a_j, a_m)$ for $0<=j<m$.
-  The orbit relation becomes
+  On $J$, the orbit relation $L u_n=u_(n+1)$ gives
   $
-    u_n^((m))=c u_(n+1)+sum_(j=0)^(m-1)b_j u_n^((j)).
+    u_n^((m))=frac(u_(n+1),a_m)
+      -sum_(j=0)^(m-1)frac(a_j,a_m)u_n^((j)).
   $
-  Write $H_(n,j)=norm(u_n^((j)))_J$. Applying @lem:interpolation
-  to each $u_n$, for $0<delta<=frac(beta-alpha, 2m)$, yields
+  Applying @lem:interpolation to each $u_n$, for
+  $0<delta<=frac(beta-alpha,2m)$, yields
   $
-    H_(n,m) & <=norm(c)_J N
-              +C_m N sum_(j=0)^(m-1)norm(b_j)_J delta^(-j) \
-            & quad +C_m H_(n,m)sum_(j=0)^(m-1)norm(b_j)_J delta^(m-j).
+    norm(u_n^((m)))_J
+      &<=N norm(frac(1,a_m))_J
+        +C_m N sum_(j=0)^(m-1)norm(frac(a_j,a_m))_J delta^(-j) \
+      &quad +C_m norm(u_n^((m)))_J
+        sum_(j=0)^(m-1)norm(frac(a_j,a_m))_J delta^(m-j).
   $
   All powers $m-j$ in the last sum are positive. Choose a fixed
-  $delta>0$ small enough that the coefficient of $H_(n,m)$ on the
-  right is at most $1/2$. Each $H_(n,m)$ is finite, so moving that
-  term to the left gives
+  $delta>0$ small enough that the coefficient of
+  $norm(u_n^((m)))_J$ on the right is at most $1/2$. This norm is
+  finite for each $n$, so moving that term to the left gives
   $
-    H_(n,m)<=2norm(c)_J N
-    +2C_m N sum_(j=0)^(m-1)norm(b_j)_J delta^(-j).
+    norm(u_n^((m)))_J
+    <=2N norm(frac(1,a_m))_J
+      +2C_m N sum_(j=0)^(m-1)norm(frac(a_j,a_m))_J delta^(-j).
   $
-  This bound is independent of $n$. Interpolation now bounds every
-  $H_(n,j)$ for $j<m$, uniformly in $n$. In particular, at a chosen
+  This bound is independent of $n$. Interpolation now bounds
+  $norm(u_n^((j)))_J$ uniformly in $n$ for every $0<=j<m$.
+  In particular, at a chosen
   $x_* in (alpha,beta)$,
   $
     sup_(n>=0,0<=j<m)abs(u_n^((j)) (x_*))<=M_*
@@ -381,9 +384,7 @@ radius, so it can be used uniformly along a fixed path.
     Z={z in Omega st a_m (z)=0}
   $
   has no accumulation point in $Omega$, because $a_m$ is holomorphic
-  and not identically zero. It is also closed in $Omega$. The functions
-  $c=1/a_m$ and $b_j=-frac(a_j, a_m)$ are holomorphic on
-  $Omega without Z$.
+  and not identically zero. It is also closed in $Omega$.
 
   *Propagation along paths.* The domain $Omega without Z$ is path
   connected. Indeed, two points can be joined by a polygonal path
@@ -394,10 +395,15 @@ radius, so it can be used uniformly along a fixed path.
   $z$ in this domain. Its image $Gamma$ is compact. Choose $R>0$
   small enough that the compact set
   $
-    E=union.big_(w in Gamma)overline(B(w,R))
+    E=union.big_(w in Gamma)overline(D(w,R))
   $
-  is contained in $Omega without Z$. The coefficients
-  $c,b_0,dots,b_(m-1)$ are bounded on $E$. Set
+  is contained in $Omega without Z$. To apply @lem:propagation, set
+  $
+    c=frac(1,a_m), quad b_j=-frac(a_j,a_m),
+    quad v_(n,j)=u_n^((j)) quad (0<=j<m).
+  $
+  These coefficients are holomorphic on $Omega without Z$ and bounded
+  on $E$. Set
   $
     C_0=max{1,norm(c)_E+sum_(j=0)^(m-1)norm(b_j)_E},
     quad A=max{2/R,2C_0}.
@@ -405,7 +411,6 @@ radius, so it can be used uniformly along a fixed path.
   These choices satisfy @lem:propagation on every disk of radius
   $R$ centered on the path.
 
-  Apply that lemma with $v_(n,j)=u_n^((j))$, $0<=j<m$.
   Uniform continuity of the path allows a finite subdivision whose
   consecutive centers have distance less than $frac(1, 2A)$.
   Starting with the bound $M_*$ at $x_*$, each application gives
@@ -415,7 +420,7 @@ radius, so it can be used uniformly along a fixed path.
   bounded on $Omega without Z$.
 
   *Bounds across a zero.* Fix $z_0 in Z$. Choose $rho>0$ such that
-  $overline(B(z_0,rho)) subs Omega$ and this disk contains no other
+  $overline(D(z_0,rho)) subs Omega$ and this disk contains no other
   zero. Its boundary circle is a compact subset of $Omega without Z$.
   A finite cover by neighborhoods with uniform orbit bounds gives
   a constant $C$ such that
@@ -434,39 +439,55 @@ radius, so it can be used uniformly along a fixed path.
   *Bounds on derivatives.* Let $K subs I$ be a compact interval.
   Choose $r>0$ so that its closed complex $r$-neighborhood is
   contained in $Omega$. Local boundedness and a finite cover give
-  a constant $C_K$ bounding every $u_n$ on this compact neighborhood.
+  a constant $C_K>0$ bounding every $u_n$ on this compact neighborhood.
   Cauchy's estimates on disks of radius $r$ centered at $x in K$ give
   $
     norm(u_n^((q)))_K<=C_K q! r^(-q)
     quad (n,q in NN_0).
   $
-  This proves the first assertion.
+  This proves the estimate.
+]
 
-  *Convergence and analyticity of the limit.* Suppose now that
-  $u_n (x)->g(x)$ for every $x in I$. Each pointwise orbit is bounded,
-  so the preceding estimates apply. By @lem:convergence, $g$ is smooth
-  and $u_n -> g$ locally uniformly with all derivatives. Hence we
-  can pass to the limit in
+
+== Analytic fixed-point limits
+
+#thm[Analytic fixed-point limits][
+  Let $m>=1$ be an integer and define
+  $
+    L=sum_(j=0)^m a_j D^j,
+  $
+  where $a_0,dots,a_m$ are real analytic on $I$ and $a_m$ is not
+  identically zero. If $f$ is real analytic on $I$ and $L^n f$
+  converges pointwise to $g$, then $g$ is real analytic and $L g=g$.
+]<thm:analytic-convergence>
+
+#text(style: "oblique", weight: "bold")[Proof:]
+#block[
+  Put $u_n=L^n f$. Pointwise convergence implies pointwise boundedness,
+  so @prop:analytic-bounds supplies local uniform bounds on every
+  derivative of the iterates. By @lem:convergence, $g$ is smooth and
+  $u_n -> g$ in $C^oo_("loc") (I)$. Passing to the limit in
   $
     sum_(j=0)^m a_j u_n^((j))=u_(n+1)
   $
-  to obtain $L g=g$ throughout $I$, including at zeros of $a_m$.
+  gives $L g=g$ throughout $I$.
 
-  Fix $x_0 in I$ and choose $r>0$ such that
-  $[x_0-r,x_0+r] subs I$ and $overline(B(x_0,2r)) subs Omega$.
-  Let $C$ bound all the $u_n$ on this closed disk. For every real
-  $x$ with $abs(x-x_0)<=r$, Cauchy's estimates on $B(x,r)$ and
-  convergence of derivatives give
+  To prove analyticity, fix $x_0 in I$ and choose $s>0$ such that
+  $K=[x_0-s,x_0+s] subs I$. Apply @prop:analytic-bounds on $K$ and
+  pass to the limit in each derivative. For some constants $C,r>0$,
   $
-    abs(g^((q)) (x))<=C q! r^(-q) quad (q>=0).
+    norm(g^((q)))_K<=C q! r^(-q) quad (q in NN_0).
   $
-  Taylor's theorem therefore bounds the remainder at $x_0$ by
-  $
-    abs(g(x)-sum_(q=0)^N frac(g^((q)) (x_0), q!)(x-x_0)^q)
-    <=C lr((frac(abs(x-x_0), r)))^(N+1).
-  $
-  For $abs(x-x_0)<r$ this tends to zero as $N$ tends to infinity.
-  Thus $g$ is real analytic at every $x_0 in I$.
+  #block(breakable: false)[
+    Taylor's theorem therefore gives
+    $
+      abs(g(x)-sum_(q=0)^N frac(g^((q)) (x_0), q!)(x-x_0)^q)
+      <=C lr((frac(abs(x-x_0), r)))^(N+1)
+    $
+    for $abs(x-x_0)<min{s,r}$. The right side tends to zero as $N$
+    tends to infinity, so $g$ is real analytic at $x_0$.
+    #qed()
+  ]
 ]
 
 For analytic input, the theorem applies to $D^r$ for every integer $r>=1$,
@@ -540,7 +561,7 @@ In particular, $L w_(H_n)=w_(H_(n+1))$ on each half-line.
   $
   To verify this, put $y=frac(1, x^2)$ and choose an integer $q>N/2$.
   Since $e^y>=frac(y^q, q!)$ for $y>0$, we have
-  $0<=y^(N/2)e^(-y)<=q! y^(N/2-q) ->0$.
+  $0<=y^(N/2)e^(-y)<=q! y^(N/2-q) toinf(y) 0$.
 
   Off zero, repeated differentiation gives
   $eta^((j)) (x)=P_j (1/x)e^(-frac(1, x^2))$ for polynomials $P_j$.
