@@ -18,10 +18,15 @@ vanishes.
 
 ## Files
 
-- `drp.typ` — the full mathematical write-up and proofs.
-- `proof-comparison.md` — a theorem-by-theorem comparison of the write-up and
-  Lean formalization, including remaining formalization gaps.
+- `drp.typ` — the original mathematical write-up and proofs.
 - `slides.typ` — the presentation slides.
+- `analytic-continuation.typ` — analytic differential-operator iterates and
+  a singular counterexample.
+- `continuation.typ` — reading notes for the continuation project.
+- `pointwise_iterates_unified.tex` — the earlier AI-generated research draft.
+- `analytic-singular-operator-research.md` and
+  `undergraduate-continuation-proposal.md` — supporting research notes.
+- `lean/` — the Lean formalization of the original results.
 
 ## Building
 
@@ -31,11 +36,13 @@ run:
 ```sh
 typst compile drp.typ
 typst compile slides.typ
+typst compile analytic-continuation.typ
+typst compile continuation.typ
 ```
 
-This produces `drp.pdf` and `slides.pdf` in the repository root. The slides use
-the Typst packages `touying`, `thmbox`, and `numbly`, which Typst downloads
-automatically when needed.
+Each command produces the corresponding PDF in the repository root. The
+documents use the Typst packages `touying`, `thmbox`, and `numbly`, which Typst
+downloads automatically when needed.
 
 ## Commit hook
 
