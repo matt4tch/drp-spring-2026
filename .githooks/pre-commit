@@ -2,24 +2,10 @@
 
 set -eu
 
-if ! command -v typst >/dev/null 2>&1; then
-  printf '%s\n' 'pre-commit: Typst is required to compile the project documents.' >&2
-  printf '%s\n' 'Install Typst and try the commit again.' >&2
-  exit 1
-fi
-
 repo_root="$(git rev-parse --show-toplevel)"
 cd "$repo_root"
 
-for source in slides.typ drp.typ; do
-  output="${source%.typ}.pdf"
-  printf 'pre-commit: compiling %s...\n' "$source"
-  if ! typst compile "$source" "$output"; then
-    printf 'pre-commit: %s failed to compile.\n' "$source" >&2
-    exit 1
-  fi
-  printf 'pre-commit: %s compiled successfully.\n' "$source"
-done
+./build.sh
 
-git add -- slides.pdf drp.pdf
-printf '%s\n' 'pre-commit: staged slides.pdf and drp.pdf.'
+git add -- papers/smooth-iterates.pdf papers/analytic-iterates.pdf presentation/slides.pdf
+printf '%s\n' 'pre-commit: staged the paper and presentation PDFs.'

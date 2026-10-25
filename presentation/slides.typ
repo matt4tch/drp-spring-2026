@@ -1,7 +1,7 @@
 #import "@preview/touying:0.7.4": *
 #import themes.university: *
 #import "@preview/numbly:0.1.0": numbly
-#import "deck-style.typ": *
+#import "../styles/slides.typ": *
 
 #show: university-theme.with(
   aspect-ratio: "16-9",

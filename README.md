@@ -18,36 +18,48 @@ vanishes.
 
 ## Files
 
-- `drp.typ` — the original mathematical write-up and proofs.
-- `slides.typ` — the presentation slides.
-- `analytic-continuation.typ` — analytic differential-operator iterates and
-  a singular counterexample.
-- `lean/` — the Lean formalization of the original results.
+- [papers/smooth-iterates.typ](papers/smooth-iterates.typ) — the original
+  mathematical write-up and proofs ([PDF](papers/smooth-iterates.pdf)).
+- [papers/analytic-iterates.typ](papers/analytic-iterates.typ) — analytic
+  differential-operator iterates and a singular counterexample
+  ([PDF](papers/analytic-iterates.pdf)). Its bibliography is
+  `papers/analytic-iterates.bib`.
+- [presentation/slides.typ](presentation/slides.typ) — the presentation
+  ([PDF](presentation/slides.pdf)), with its sections and assets in
+  `presentation/sections/` and `presentation/assets/`.
+- `styles/` — shared paper and presentation formatting.
+- `lean/` — the Lean formalization of the original results; see its
+  [README](lean/README.md) for build instructions.
 
 ## Building
 
 The documents are written in [Typst](https://typst.app/). With Typst installed,
-run:
+build both papers and the presentation from the repository root:
 
 ```sh
-typst compile drp.typ
-typst compile slides.typ
-typst compile analytic-continuation.typ
+./build.sh
 ```
 
-Each command produces the corresponding PDF in the repository root. The
-documents use the Typst packages `touying`, `thmbox`, and `numbly`, which Typst
-downloads automatically when needed.
+PDFs are placed beside their sources. The script sets the repository as the
+Typst project root so documents can import the shared styles. To compile a
+single document, use the same root explicitly:
+
+```sh
+typst compile --root . papers/analytic-iterates.typ
+```
+
+The documents use the Typst packages `touying`, `thmbox`, and `numbly`, which
+Typst downloads automatically when needed.
 
 ## Commit hook
 
-To compile the presentation and write-up automatically before each commit,
+To compile the papers and presentation automatically before each commit,
 enable the repository's versioned Git hooks:
 
 ```sh
 git config core.hooksPath .githooks
 ```
 
-The pre-commit hook regenerates the tracked `slides.pdf` and `drp.pdf` files,
-stages them for the current commit, and blocks the commit if Typst is
-unavailable or either compilation fails.
+The pre-commit hook runs `build.sh` and stages `papers/smooth-iterates.pdf`,
+`papers/analytic-iterates.pdf`, and `presentation/slides.pdf` for the current
+commit. It blocks the commit if a compilation fails.

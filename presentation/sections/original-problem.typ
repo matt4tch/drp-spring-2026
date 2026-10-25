@@ -1,5 +1,5 @@
 #import "@preview/touying:0.7.4": *
-#import "../deck-style.typ": intro-border, intro-paper, nospace, theme-primary, theme-secondary, thm
+#import "../../styles/slides.typ": intro-border, intro-paper, nospace, theme-primary, theme-secondary, thm
 
 = The original problem
 

@@ -1,4 +1,4 @@
-#import "drp-style.typ": *
+#import "../styles/paper.typ": *
 
 #show: preamble
 #show: setup-shared-counters(2)

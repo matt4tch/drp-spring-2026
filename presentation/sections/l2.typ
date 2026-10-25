@@ -1,6 +1,6 @@
 #import "@preview/touying:0.7.4": *
 #import themes.university: *
-#import "../deck-style.typ": section-subtitle
+#import "../../styles/slides.typ": section-subtitle
 
 = Extensions
 

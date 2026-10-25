@@ -1,4 +1,4 @@
-#import "drp-style.typ": *
+#import "../styles/paper.typ": *
 
 #show: preamble
 #show: setup-shared-counters(2)
@@ -672,5 +672,5 @@ $f=1-eta$, whose nonanalyticity at zero was established above.
 ]
 
 #block(breakable: false)[
-  #bibliography("analytic-continuation.bib", title: "References", style: "chicago-author-date")
+  #bibliography("analytic-iterates.bib", title: "References", style: "chicago-author-date")
 ]
