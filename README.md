@@ -22,7 +22,6 @@ vanishes.
 - `slides.typ` — the presentation slides.
 - `analytic-continuation.typ` — analytic differential-operator iterates and
   a singular counterexample.
-- `continuation.typ` — reading notes for the continuation project.
 - `lean/` — the Lean formalization of the original results.
 
 ## Building
@@ -34,7 +33,6 @@ run:
 typst compile drp.typ
 typst compile slides.typ
 typst compile analytic-continuation.typ
-typst compile continuation.typ
 ```
 
 Each command produces the corresponding PDF in the repository root. The
