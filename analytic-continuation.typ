@@ -56,9 +56,9 @@ application of $L$ into repeated ordinary differentiation. For
 $f in C^oo (RR)$, pointwise convergence of $L^n f$ therefore implies
 that the limit is smooth and satisfies $L g=g$.
 
-The higher-order result @unified[Section 7.2] assumes analytic
-coefficients and input, with a nowhere-zero leading coefficient.
-In @thm:analytic-convergence we allow that coefficient to vanish.
+In @thm:analytic-convergence we consider operators of arbitrary
+positive order with analytic coefficients and input, allowing zeros
+of the leading coefficient.
 Pointwise boundedness of the orbit gives
 local uniform bounds on every derivative; pointwise convergence
 then gives a real-analytic limit satisfying $L g=g$. The proof

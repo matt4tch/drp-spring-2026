@@ -30,14 +30,9 @@
 
 #v(1em)
 These notes are a place to reconstruct the continuation in my own words.
-The first goal is to understand the real scalar case $P=D^2$ before treating
-general coefficients or higher-order counterexamples. Statements below are
-targets to prove; the proof drafts are unfinished.
-
-The source is #link("pointwise_iterates_unified.pdf")[
-  _Pointwise Limits of Differential-Operator Iterates: A Sharp Order Threshold_
-]. Sections 2–3 develop the first proof; Section 5.1 connects it to the original
-#link("drp.pdf")[DRP write-up].
+The goal is to understand the real scalar case $P=D^2$, building on the
+#link("drp.pdf")[original DRP write-up]. Statements below are targets to
+prove; the proof drafts are unfinished.
 
 #outline()
 #pagebreak()
@@ -111,8 +106,6 @@ then use $u_n ''=u_(n+1)$ to control their derivatives.
 
 == Two endpoints control a short interval
 
-_Source: Section 3.1, Lemma 3.2; PDF page 5._
-
 #lemma[Scalar endpoint estimate][
   Let $c<e$, $ell=e-c$, and $h in C^2 ([c,e])$. Then
   $
@@ -137,8 +130,6 @@ $h''$.
 
 == The good set and the first Baire argument
 
-_Source: Section 2, Lemma 2.2; PDF page 4._
-
 #defn[Good and exceptional points][
   Define
   $
@@ -162,8 +153,6 @@ $
 ]
 
 == Putting the orbit in a sequence space
-
-_Source: Lemmas 2.1–2.2 and Remark 2.3; PDF pages 3–4._
 
 Let $E=ell^oo (NN_0;RR)$ be the Banach space of bounded real sequences with
 the supremum norm. Define the left shift by
@@ -194,8 +183,6 @@ The intended equation is $U''=S U$, with $norm(S)=1$ and $norm(U(x))=M(x)$.
 
 == Eliminating the exceptional set
 
-_Source: Section 3.3; PDF page 6._
-
 *Proof draft: $F$ is empty.* Suppose otherwise. Apply Baire again, now to
 the relatively closed set $F$, to obtain a small interval $J$ meeting $F$
 and a bound $m$ for $M$ on $F inter J$. Choose
@@ -211,8 +198,6 @@ $a<x_0<b$ with $x_0 in F inter J$ and $a,b in G inter J$.
 
 == Passing to the limit
 
-_Source: Lemma 2.4; PDF pages 4–5._
-
 #to-write[
   Explain why local uniform derivative bounds and pointwise convergence
   imply uniform convergence on compact intervals. For $w=u_n-u_m$, use
@@ -222,31 +207,9 @@ _Source: Lemma 2.4; PDF pages 4–5._
   Finish the proof of @thm:second-derivative-target.
 ]
 
-= Questions and the next step
-
-== Questions to bring to a meeting
+= Questions to bring to a meeting
 
 #to-write[
   Record the exact statement or proof step I cannot yet justify, what I
   tried, and which hypothesis seems to matter.
-]
-
-== From order two to order three
-
-_Next source: Section 4, especially Lemma 4.4 and the nested construction;
-PDF pages 7–11._
-
-For $r>=3$, the draft constructs a compactly supported smooth function with
-$
-  f^((r n)) (0)=1 quad (n>=0), quad
-  f^((r n)) (x)->0 quad (x!=0).
-$
-The resulting pointwise limit is discontinuous at the origin. My next goal
-is to reconstruct the construction for $r=3$, starting with the local
-refinement for $k=0$ and $m=3$.
-
-#to-write[
-  Explain how refinements preserve earlier derivatives and prescribe a
-  new one. Check smoothness of the limit and convergence at every nonzero
-  point, including those in all refining neighborhoods.
 ]

@@ -23,9 +23,6 @@ vanishes.
 - `analytic-continuation.typ` — analytic differential-operator iterates and
   a singular counterexample.
 - `continuation.typ` — reading notes for the continuation project.
-- `pointwise_iterates_unified.tex` — the earlier AI-generated research draft.
-- `analytic-singular-operator-research.md` and
-  `undergraduate-continuation-proposal.md` — supporting research notes.
 - `lean/` — the Lean formalization of the original results.
 
 ## Building
