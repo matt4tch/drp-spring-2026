@@ -83,7 +83,7 @@ $D=frac(dif, dif x)$, and $h^((0))=h$. For an operator
 $
   L h=sum_(j=0)^m a_j h^((j)),
 $
-write $u_n=L^n f$ for $n in NN_0$, with $u_0=f$. Thus $L u_n=u_(n+1)$.
+write $L^0 f=f$. Thus $L(L^n f)=L^(n+1) f$ for $n in NN_0$.
 
 For a continuous function $h$ on a nonempty compact set $K$, put
 $norm(h)_K=sup_(x in K) abs(h(x))$. We say that $v_n$ converges to $g$
@@ -230,8 +230,8 @@ Indeed, subtract $h(x)$ from the formula for $h(x+t)$ and divide by $t$.
 == Uniform propagation on a complex disk
 
 Away from a zero of the leading coefficient, the relation
-$L u_n=u_(n+1)$ expresses $u_n^((m))$ in terms of $u_(n+1)$ and the
-lower derivatives of $u_n$. The following lemma propagates a bound
+$L(L^n f)=L^(n+1) f$ expresses $(L^n f)^((m))$ in terms of $L^(n+1) f$ and the
+lower derivatives of $L^n f$. The following lemma propagates a bound
 for these functions from the center of a disk to a smaller disk.
 The smaller radius depends only on the coefficients and the original
 radius, so it can be used uniformly along a fixed path.
@@ -324,46 +324,46 @@ radius, so it can be used uniformly along a fixed path.
 ]<prop:analytic-bounds>
 
 #pf[
-  *Bounds on one real interval.* Put $u_n=L^n f$.
+  *Bounds on one real interval.*
   Since $a_m$ is not identically zero, there is a compact interval
   $J_0=[alpha_0,beta_0] subs I$, with $alpha_0<beta_0$, on which
   $a_m$ does not vanish. For each $N in NN$, set
   $
-    E_N={x in J_0 st abs(u_n (x))<=N "for every" n in NN_0}.
+    E_N={x in J_0 st abs((L^n f)(x))<=N "for every" n in NN_0}.
   $
   These sets are closed and cover $J_0$. Baire's theorem gives an
   $E_N$ with nonempty relative interior. Choose a compact interval
   $J=[alpha,beta] subs E_N$ with $alpha<beta$. Thus
-  $norm(u_n)_J<=N$ for all $n$.
+  $norm(L^n f)_J<=N$ for all $n$.
 
-  On $J$, the orbit relation $L u_n=u_(n+1)$ gives
+  On $J$, the orbit relation $L(L^n f)=L^(n+1) f$ gives
   $
-    u_n^((m))=frac(u_(n+1), a_m)
-    -sum_(j=0)^(m-1)frac(a_j, a_m)u_n^((j)).
+    (L^n f)^((m))=frac(L^(n+1) f, a_m)
+    -sum_(j=0)^(m-1)frac(a_j, a_m)(L^n f)^((j)).
   $
-  Applying @lem:interpolation to each $u_n$, for
+  Applying @lem:interpolation to each $L^n f$, for
   $0<delta<=frac(beta-alpha, 2m)$, yields
   $
-    norm(u_n^((m)))_J & <=N norm(frac(1, a_m))_J
+    norm((L^n f)^((m)))_J & <=N norm(frac(1, a_m))_J
                         +C_m N sum_(j=0)^(m-1)norm(frac(a_j, a_m))_J delta^(-j) \
-                      & quad +C_m norm(u_n^((m)))_J
+                      & quad +C_m norm((L^n f)^((m)))_J
                         sum_(j=0)^(m-1)norm(frac(a_j, a_m))_J delta^(m-j).
   $
   All powers $m-j$ in the last sum are positive. Choose a fixed
   $delta>0$ small enough that the coefficient of
-  $norm(u_n^((m)))_J$ on the right is at most $1/2$. This norm is
+  $norm((L^n f)^((m)))_J$ on the right is at most $1/2$. This norm is
   finite for each $n$, so moving that term to the left gives
   $
-    norm(u_n^((m)))_J
+    norm((L^n f)^((m)))_J
     <=2N norm(frac(1, a_m))_J
     +2C_m N sum_(j=0)^(m-1)norm(frac(a_j, a_m))_J delta^(-j).
   $
   This bound is independent of $n$. Interpolation now bounds
-  $norm(u_n^((j)))_J$ uniformly in $n$ for every $0<=j<m$.
+  $norm((L^n f)^((j)))_J$ uniformly in $n$ for every $0<=j<m$.
   In particular, at a chosen
   $x_* in (alpha,beta)$,
   $
-    sup_(n in NN_0,0<=j<m)abs(u_n^((j)) (x_*))<=M_*
+    sup_(n in NN_0,0<=j<m)abs((L^n f)^((j)) (x_*))<=M_*
   $
   for some finite $M_*$.
 
@@ -377,7 +377,7 @@ radius, so it can be used uniformly along a fixed path.
   The set $Omega$ is connected, since each disk meets $I$.
 
   Differentiation and multiplication preserve holomorphy on $Omega$,
-  so all iterates $u_n=L^n f$ are holomorphic on this same domain.
+  so all iterates $L^n f$ are holomorphic on this same domain.
   The zero set
   $
     Z={z in Omega st a_m (z)=0}
@@ -399,7 +399,7 @@ radius, so it can be used uniformly along a fixed path.
   is contained in $Omega without Z$. To apply @lem:propagation, set
   $
     c=frac(1, a_m), quad b_j=-frac(a_j, a_m),
-    quad v_(n,j)=u_n^((j)) quad (0<=j<m).
+    quad v_(n,j)=(L^n f)^((j)) quad (0<=j<m).
   $
   These coefficients are holomorphic on $Omega without Z$ and bounded
   on $E$. Set
@@ -414,8 +414,8 @@ radius, so it can be used uniformly along a fixed path.
   consecutive centers have distance less than $frac(1, 2A)$.
   Starting with the bound $M_*$ at $x_*$, each application gives
   a bound on the next disk at most twice the preceding bound.
-  After finitely many steps, all the $u_n$ are uniformly bounded
-  on a neighborhood of $z$. Thus the family $(u_n)$ is locally
+  After finitely many steps, all iterates $L^n f$ are uniformly bounded
+  on a neighborhood of $z$. Thus the family $(L^n f)$ is locally
   bounded on $Omega without Z$.
 
   *Bounds across a zero.* Fix $z_0 in Z$. Choose $rho>0$ such that
@@ -424,24 +424,24 @@ radius, so it can be used uniformly along a fixed path.
   A finite cover by neighborhoods with uniform orbit bounds gives
   a constant $C$ such that
   $
-    abs(u_n (z))<=C
+    abs((L^n f)(z))<=C
     quad (n in NN_0, abs(z-z_0)=rho).
   $
-  Every $u_n$ is holomorphic on a neighborhood of the closed disk,
+  Every $L^n f$ is holomorphic on a neighborhood of the closed disk,
   including at $z_0$. The maximum-modulus principle gives
   $
-    abs(u_n (z))<=C
+    abs((L^n f)(z))<=C
     quad (n in NN_0, abs(z-z_0)<=rho).
   $
-  Consequently, $(u_n)$ is locally bounded on all of $Omega$.
+  Consequently, $(L^n f)$ is locally bounded on all of $Omega$.
 
   *Bounds on derivatives.* Let $K subs I$ be a compact interval.
   Choose $r>0$ so that its closed complex $r$-neighborhood is
   contained in $Omega$. Local boundedness and a finite cover give
-  a constant $C_K>0$ bounding every $u_n$ on this compact neighborhood.
+  a constant $C_K>0$ bounding every $L^n f$ on this compact neighborhood.
   Cauchy's estimates on disks of radius $r$ centered at $x in K$ give
   $
-    norm(u_n^((q)))_K<=C_K q! r^(-q)
+    norm((L^n f)^((q)))_K<=C_K q! r^(-q)
     quad (n,q in NN_0).
   $
   This proves the estimate.
@@ -481,7 +481,7 @@ radius, so it can be used uniformly along a fixed path.
     Fix $x in I$. Then
     $
                                       lim_(n->oo) (L(L^n f))(x) & = lim_(n->oo) (L^(n+1) f)(x) \
-      ==> lim_(n->oo) sum_(j=0)^m a_j (x) dot (L^n f)^((j)) (x) & = g(x) quad "(since" L^(n+1) f (x) -> g(x)")" \
+      ==> lim_(n->oo) sum_(j=0)^m a_j (x) dot (L^n f)^((j)) (x) & = g(x) quad "(since" (L^(n+1) f)(x) -> g(x)")" \
       ==> sum_(j=0)^m a_j (x) dot lim_(n->oo) (L^n f)^((j)) (x) & = g(x) \
                         ==> sum_(j=0)^m a_j (x) dot g^((j)) (x) & = g(x) quad "(by" diamond.filled")" \
                                                    ==> (L g)(x) & = g(x).
@@ -630,15 +630,15 @@ real analytic at zero.
     L h=-frac(x^3, 2)h'+(1-x^2)h,
     quad f=1-eta,
   $
-  where $eta$ is the function in @lem:flat. Write $u_n=L^n f$.
-  Then every $u_n$ is smooth, and for every $n in NN_0$,
+  where $eta$ is the function in @lem:flat.
+  Then every $L^n f$ is smooth, and for every $n in NN_0$,
   $
-    u_n (x)=cases(
+    (L^n f)(x)=cases(
       frac(1, x^2) integral_0^1 s^n e^(-frac(1-s, x^2)) dif s & quad "if" x!=0,
       1 & quad "if" x=0.
     )
   $
-  Moreover, $0<=u_(n+1)<=u_n<=1$ on $RR$, and the sequence
+  Moreover, $0<=L^(n+1) f<=L^n f<=1$ on $RR$, and the sequence
   converges pointwise to the discontinuous function
   $
     g(x)=cases(1 & quad "if" x=0, 0 & quad "if" x!=0).
@@ -648,13 +648,13 @@ real analytic at zero.
 #pf[
   Smoothness of $f$ follows from @lem:flat. Since differentiation and
   multiplication by polynomial coefficients preserve smoothness,
-  induction shows that every $u_n$ is smooth on all of $RR$.
+  induction shows that every $L^n f$ is smooth on all of $RR$.
 
   On $RR without {0}$, we have $f=w_(H_0)$ and
   $L w_(H_n)=w_(H_(n+1))$. Induction therefore gives, with
   $t=frac(1, x^2)$,
   $
-    u_n (x)=p(t)H_n (t)
+    (L^n f)(x)=p(t)H_n (t)
     =t integral_0^1 s^n e^(-(1-s)t) dif s.
   $
   Substituting $t=frac(1, x^2)$ gives the asserted formula.
@@ -663,19 +663,19 @@ real analytic at zero.
   $
     (L h)(0)=h(0).
   $
-  Since $f(0)=1$, induction gives $u_n (0)=1$ for all $n$.
+  Since $f(0)=1$, induction gives $(L^n f)(0)=1$ for all $n$.
 
   For a fixed $x!=0$, the integral formula implies
   $
-    0<=u_n (x)<=frac(1, x^2) integral_0^1 s^n dif s
+    0<=(L^n f)(x)<=frac(1, x^2) integral_0^1 s^n dif s
     =frac(1, x^2(n+1)).
   $
   The right side tends to zero as $n$ tends to infinity. Together
   with the value at zero, this proves the pointwise limit.
 
   Since $0<=s^(n+1)<=s^n$ on $[0,1]$, the same formula shows
-  $0<=u_(n+1) (x)<=u_n (x)$ off zero; the inequalities also hold
-  at zero. Finally, $u_0=f<=1$. Hence the orbit is nonnegative,
+  $0<=(L^(n+1) f)(x)<=(L^n f)(x)$ off zero; the inequalities also hold
+  at zero. Finally, $f<=1$. Hence the orbit is nonnegative,
   decreasing, and bounded by one everywhere.
 ]
 
@@ -684,27 +684,27 @@ real analytic at zero.
 The convergence is uniform on every compact set avoiding zero: if
 $abs(x)>=delta>0$, the bound in the proof is at most
 $frac(1, delta^2(n+1))$. On any interval containing zero in its
-interior, however, convergence cannot be uniform. In fact, each $u_n$
+interior, however, convergence cannot be uniform. In fact, each $L^n f$
 is continuous and equals one at zero, while $g$ is zero at every
 nearby nonzero point. Consequently
 $
-  sup_(0<abs(x)<=epsilon) abs(u_n (x)-g(x))=1
+  sup_(0<abs(x)<=epsilon) abs((L^n f)(x)-g(x))=1
   quad (epsilon>0).
 $
 
 There is also an explicit failure of uniform derivative bounds.
-Integrating the formula for $u_n$ by parts in $s$, for $n in NN$,
+Integrating the formula for $L^n f$ by parts in $s$, for $n in NN$,
 gives
 $
-  u_n (x)=1-n x^2 u_(n-1) (x) quad (x!=0).
+  (L^n f)(x)=1-n x^2 (L^(n-1) f)(x) quad (x!=0).
 $
 Indeed, the differential of $e^(-(1-s)t)$ is
 $t e^(-(1-s)t) dif s$; the boundary term is one and the
-remaining integral is $frac(n, t)u_(n-1)$. By continuity the
+remaining integral is $frac(n, t)L^(n-1) f$. By continuity the
 recurrence holds at zero as well. Differentiating it twice at zero
 therefore gives
 $
-  u_n ''(0)=-2n u_(n-1) (0)=-2n.
+  (L^n f)^((2)) (0)=-2n (L^(n-1) f)(0)=-2n.
 $
 Consequently, the local bound on second derivatives required in
 @lem:convergence fails at the origin.
@@ -723,7 +723,7 @@ $f=1-eta$, whose nonanalyticity at zero was established above.
   $
   Both the coefficient and the input are real analytic, but
   $
-    L^n f(x)=(1-x^2)^n --> cases(1 & quad "if" x=0, 0 & quad "if" x!=0).
+    (L^n f)(x)=(1-x^2)^n --> cases(1 & quad "if" x=0, 0 & quad "if" x!=0).
   $
   Indeed, $0<1-x^2<1$ whenever $0<abs(x)<1$, whereas the value at
   zero is always one. Thus @thm:analytic-convergence does not extend
