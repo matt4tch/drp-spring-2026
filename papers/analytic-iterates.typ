@@ -262,9 +262,9 @@ radius, so it can be used uniformly along a fixed path.
 #pf[
   Expand at $z_*$:
   $
-    v_(n,j) (z) & =sum_(k=0)^oo d_(n,j,k)(z-z_*)^k, \
+    v_(n,j) (z) & =sum_(k=0)^oo d_(n,j,k) (z-z_*)^k, \
            c(z) & =sum_(ell=0)^oo c_ell (z-z_*)^ell,
-                  quad b_j (z)=sum_(ell=0)^oo b_(j,ell)(z-z_*)^ell.
+                  quad b_j (z)=sum_(ell=0)^oo b_(j,ell) (z-z_*)^ell.
   $
   Cauchy's estimates give
   $
@@ -315,7 +315,7 @@ radius, so it can be used uniformly along a fixed path.
   $
     sup_(n>=0)abs((L^n f)(x))<oo quad "for every" x in I.
   $
-  For every compact interval $K subs I$, there are constants
+  Then, for every compact interval $K subs I$, there are constants
   $C,r>0$ such that
   $
     norm((L^n f)^((q)))_K<=C q! r^(-q)
@@ -338,17 +338,16 @@ radius, so it can be used uniformly along a fixed path.
 
   On $J$, the orbit relation $L u_n=u_(n+1)$ gives
   $
-    u_n^((m))=frac(u_(n+1),a_m)
-      -sum_(j=0)^(m-1)frac(a_j,a_m)u_n^((j)).
+    u_n^((m))=frac(u_(n+1), a_m)
+    -sum_(j=0)^(m-1)frac(a_j, a_m)u_n^((j)).
   $
   Applying @lem:interpolation to each $u_n$, for
-  $0<delta<=frac(beta-alpha,2m)$, yields
+  $0<delta<=frac(beta-alpha, 2m)$, yields
   $
-    norm(u_n^((m)))_J
-      &<=N norm(frac(1,a_m))_J
-        +C_m N sum_(j=0)^(m-1)norm(frac(a_j,a_m))_J delta^(-j) \
-      &quad +C_m norm(u_n^((m)))_J
-        sum_(j=0)^(m-1)norm(frac(a_j,a_m))_J delta^(m-j).
+    norm(u_n^((m)))_J & <=N norm(frac(1, a_m))_J
+                        +C_m N sum_(j=0)^(m-1)norm(frac(a_j, a_m))_J delta^(-j) \
+                      & quad +C_m norm(u_n^((m)))_J
+                        sum_(j=0)^(m-1)norm(frac(a_j, a_m))_J delta^(m-j).
   $
   All powers $m-j$ in the last sum are positive. Choose a fixed
   $delta>0$ small enough that the coefficient of
@@ -356,8 +355,8 @@ radius, so it can be used uniformly along a fixed path.
   finite for each $n$, so moving that term to the left gives
   $
     norm(u_n^((m)))_J
-    <=2N norm(frac(1,a_m))_J
-      +2C_m N sum_(j=0)^(m-1)norm(frac(a_j,a_m))_J delta^(-j).
+    <=2N norm(frac(1, a_m))_J
+    +2C_m N sum_(j=0)^(m-1)norm(frac(a_j, a_m))_J delta^(-j).
   $
   This bound is independent of $n$. Interpolation now bounds
   $norm(u_n^((j)))_J$ uniformly in $n$ for every $0<=j<m$.
@@ -399,7 +398,7 @@ radius, so it can be used uniformly along a fixed path.
   $
   is contained in $Omega without Z$. To apply @lem:propagation, set
   $
-    c=frac(1,a_m), quad b_j=-frac(a_j,a_m),
+    c=frac(1, a_m), quad b_j=-frac(a_j, a_m),
     quad v_(n,j)=u_n^((j)) quad (0<=j<m).
   $
   These coefficients are holomorphic on $Omega without Z$ and bounded
@@ -458,43 +457,82 @@ radius, so it can be used uniformly along a fixed path.
   $
   where $a_0,dots,a_m$ are real analytic on $I$ and $a_m$ is not
   identically zero. If $f$ is real analytic on $I$ and $L^n f$
-  converges pointwise to $g$, then $g$ is real analytic and $L g=g$.
+  converges pointwise to $g$, then
+  #enum[
+    $L g = g$
+  ][
+    $g$ is real analytic
+  ]
 ]<thm:analytic-convergence>
 
 #text(style: "oblique", weight: "bold")[Proof:]
 #block[
-  Put $u_n=L^n f$. Pointwise convergence implies pointwise boundedness,
-  so @prop:analytic-bounds supplies local uniform bounds on every
-  derivative of the iterates. By @lem:convergence, $g$ is smooth and
-  $u_n -> g$ in $C^oo_("loc") (I)$. Passing to the limit in
-  $
-    sum_(j=0)^m a_j u_n^((j))=u_(n+1)
-  $
-  gives $L g=g$ throughout $I$.
+  #enum[
+    Since $L^n f -> g$ pointwise, $((L^n f)(x))_(n>=0)$ is bounded for all $x in I$, so $sup_(n>=0) abs((L^n f)(x))<oo$. Hence, @prop:analytic-bounds applies, and we obtain that for every compact interval $K subs I$, there exist $C,r>0$ such that
+    $
+      norm((L^n f)^((q)))_K <= C q! r^(-q)
+      quad "for all" n,q in NN_0. quad (suit.heart)
+    $
+    Therefore, @lem:convergence applies, and we obtain that $g$ is smooth and that $(L^n f)^((j)) -> g^((j))$ locally uniformly on $I$ for all $j in NN_0$ $(circle.filled)$. Locally uniform convergence implies pointwise convergence, so
+    $
+      (L^n f)^((j)) (x) -> g^((j)) (x)
+      quad "for every" x in I "and every" j in NN_0. quad (diamond.filled)
+    $
+    Fix $x in I$. Then
+    $
+                                      lim_(n->oo) (L(L^n f))(x) & = lim_(n->oo) (L^(n+1) f)(x) \
+      ==> lim_(n->oo) sum_(j=0)^m a_j (x) dot (L^n f)^((j)) (x) & = g(x) quad "(since" L^(n+1) f (x) -> g(x)")" \
+      ==> sum_(j=0)^m a_j (x) dot lim_(n->oo) (L^n f)^((j)) (x) & = g(x) \
+                        ==> sum_(j=0)^m a_j (x) dot g^((j)) (x) & = g(x) quad "(by" diamond.filled")" \
+                                                   ==> (L g)(x) & = g(x).
+    $
+    Since $x in I$ was arbitrary, $L g=g$, as desired.
 
-  To prove analyticity, fix $x_0 in I$ and choose $s>0$ such that
-  $K=[x_0-s,x_0+s] subs I$. Apply @prop:analytic-bounds on $K$ and
-  pass to the limit in each derivative. For some constants $C,r>0$,
-  $
-    norm(g^((q)))_K<=C q! r^(-q) quad (q in NN_0).
-  $
-  #block(breakable: false)[
-    Taylor's theorem therefore gives
+  ][
+    Fix $x_0 in I$ and choose $s>0$ such that
+    $K=[x_0-s,x_0+s] subs I$. Choose $C,r>0$ as in $(suit.heart)$
+    for this interval $K$.
+    Fix $q in NN_0$. By $(circle.filled)$,
+    $(L^n f)^((q)) -> g^((q))$ uniformly on $K$. The reverse triangle
+    inequality gives
     $
-      abs(g(x)-sum_(q=0)^N frac(g^((q)) (x_0), q!)(x-x_0)^q)
-      <=C lr((frac(abs(x-x_0), r)))^(N+1)
+      abs(norm((L^n f)^((q)))_K-norm(g^((q)))_K)
+      <=norm((L^n f)^((q))-g^((q)))_K -> 0.
     $
-    for $abs(x-x_0)<min{s,r}$. The right side tends to zero as $N$
-    tends to infinity, so $g$ is real analytic at $x_0$.
+    Since $C$ and $r$ are independent of $n$ and $q$, we have
+    $
+      norm(g^((q)))_K & = lim_(n->oo) norm((L^n f)^((q)))_K \
+                      & <= lim_(n->oo) C q! r^(-q) quad "(by" (suit.heart)")" \
+                      & = C q! r^(-q).
+    $
+    Since $q in NN_0$ was arbitrary, this bound holds for every derivative order.
+    Fix $x$ with $abs(x-x_0)<min{s,r}$. Since $g$ is smooth,
+    Taylor's theorem and the bound with $q=N+1$ give, for every $N in NN_0$,
+    $
+      abs(g(x)-sum_(q=0)^N frac(g^((q)) (x_0), q!)(x-x_0)^q) & <= frac(norm(g^((N+1)))_K, (N+1)!) abs(x-x_0)^(N+1) \
+                                                             & <= frac(C (N+1)! r^(-(N+1)), (N+1)!) abs(x-x_0)^(N+1) \
+                                                             & = C lr((frac(abs(x-x_0), r)))^(N+1).
+    $
+    Since $abs(x-x_0)/r<1$, the right side tends to zero as $N -> oo$.
+    Therefore,
+    $
+      g(x)=sum_(q=0)^oo frac(g^((q)) (x_0), q!)(x-x_0)^q
+      quad "whenever" abs(x-x_0)<min{s,r}.
+    $
+    Thus $g$ equals its Taylor series on a neighborhood of $x_0$,
+    so it is real analytic at $x_0$. Since $x_0 in I$ was arbitrary,
+    $g$ is real analytic on $I$, as desired.
     #qed()
   ]
 ]
 
-For analytic input, the theorem applies to $D^r$ for every integer $r>=1$,
-and to $x D$ and $x^2 D$, including on intervals containing zero.
-It gives the corresponding fixed-point equations
-$g^((r))=g$, $x g'=g$, and $x^2 g'=g$. Our previous results
-@drp[Section 3] allow smooth input for $x D$ and $x^2 D$.
+#remark[
+  For analytic input, @thm:analytic-convergence applies to $D^r$ for every integer $r>=1$,
+  and to $x D$ and $x^2 D$, including on intervals containing zero.
+  It gives the corresponding fixed-point equations
+  $g^((r))=g$, $x g'=g$, and $x^2 g'=g$. Our previous results
+  @drp[Section 3] allow smooth input for $x D$ and $x^2 D$.
+]
 
 = A singular counterexample
 
