@@ -78,7 +78,7 @@ in the smooth first-order theorem cannot be omitted.
 
 Throughout, $I subs RR$ is a nonempty open interval. Inputs and
 coefficients on $I$ are real valued. Holomorphic extensions are denoted
-by the same symbols as the original functions. Write $NN_0={0,1,2,dots}$,
+by the same symbols as the original functions. Write $NN={1,2,3,dots}$, $NN_0={0,1,2,dots}$,
 $D=frac(dif, dif x)$, and $h^((0))=h$. For an operator
 $
   L h=sum_(j=0)^m a_j h^((j)),
@@ -101,7 +101,7 @@ open disk, and $overline(D(z,R))$ its closure.
 == Interpolation
 
 #lemma[Scaled interpolation][
-  Fix an integer $m>=1$. There is a constant $C_m$, depending only
+  Fix $m in NN$. There is a constant $C_m$, depending only
   on $m$, such that for every compact interval $J=[alpha,beta]$ with
   $alpha<beta$, every real function $h$ of class $C^m$ on a neighborhood
   of $J$, and
@@ -161,7 +161,7 @@ Indeed, subtract $h(x)$ from the formula for $h(x+t)$ and divide by $t$.
 
 #lemma[Pointwise convergence and local derivative bounds][
   Suppose $v_n in C^oo (I)$ and $v_n (x) -> g(x)$ for every $x in I$.
-  Assume that for every compact interval $J subs I$ and every $j>=0$
+  Assume that for every compact interval $J subs I$ and every $j in NN_0$
   there is a finite constant $B_(J,j)$ such that
   $
     norm(v_n^((j)))_J<=B_(J,j) quad "for every" n.
@@ -237,7 +237,7 @@ The smaller radius depends only on the coefficients and the original
 radius, so it can be used uniformly along a fixed path.
 
 #lemma[Uniform propagation][
-  Fix an integer $m>=1$, a radius $R>0$, and $z_* in CC$. Suppose that
+  Fix $m in NN$, a radius $R>0$, and $z_* in CC$. Suppose that
   $c,b_0,dots,b_(m-1)$ and the functions $v_(n,j)$,
   $n in NN_0$, $0<=j<m$, are holomorphic on a common neighborhood
   of $overline(D(z_*,R))$ and satisfy
@@ -270,7 +270,7 @@ radius, so it can be used uniformly along a fixed path.
   $
     abs(c_ell)+sum_(j=0)^(m-1)abs(b_(j,ell))<=C_0 R^(-ell).
   $
-  Set $T_k=sup_(n>=0,0<=j<m)abs(d_(n,j,k))$, initially allowing
+  Set $T_k=sup_(n in NN_0,0<=j<m)abs(d_(n,j,k))$, initially allowing
   the value $oo$. The hypothesis gives $T_0<=M$.
   Comparing coefficients in the differential relations, we obtain
   $
@@ -288,7 +288,7 @@ radius, so it can be used uniformly along a fixed path.
   since $C_0>=1$. For the last relation, use the coefficient bound
   above. This also proves inductively that every $T_k$ is finite.
 
-  We claim that $T_k<=M A^k$ for all $k>=0$. It holds at $k=0$.
+  We claim that $T_k<=M A^k$ for all $k in NN_0$. It holds at $k=0$.
   Assuming it through degree $k$ and using $R A>=2$, we get
   $
     (k+1)T_(k+1) & <=C_0 M A^k sum_(ell=0)^k (R A)^(-ell) \
@@ -306,14 +306,14 @@ radius, so it can be used uniformly along a fixed path.
 == Local derivative estimates
 
 #prop[Local derivative estimates][
-  Let $m>=1$ be an integer and define
+  Let $m in NN$ and define
   $
     L=sum_(j=0)^m a_j D^j,
   $
   where $a_0,dots,a_m$ are real analytic on $I$ and $a_m$ is not
   identically zero. Let $f$ be real analytic on $I$ and suppose that
   $
-    sup_(n>=0)abs((L^n f)(x))<oo quad "for every" x in I.
+    sup_(n in NN_0)abs((L^n f)(x))<oo quad "for every" x in I.
   $
   Then, for every compact interval $K subs I$, there are constants
   $C,r>0$ such that
@@ -327,9 +327,9 @@ radius, so it can be used uniformly along a fixed path.
   *Bounds on one real interval.* Put $u_n=L^n f$.
   Since $a_m$ is not identically zero, there is a compact interval
   $J_0=[alpha_0,beta_0] subs I$, with $alpha_0<beta_0$, on which
-  $a_m$ does not vanish. For each positive integer $N$, set
+  $a_m$ does not vanish. For each $N in NN$, set
   $
-    E_N={x in J_0 st abs(u_n (x))<=N "for every" n>=0}.
+    E_N={x in J_0 st abs(u_n (x))<=N "for every" n in NN_0}.
   $
   These sets are closed and cover $J_0$. Baire's theorem gives an
   $E_N$ with nonempty relative interior. Choose a compact interval
@@ -363,7 +363,7 @@ radius, so it can be used uniformly along a fixed path.
   In particular, at a chosen
   $x_* in (alpha,beta)$,
   $
-    sup_(n>=0,0<=j<m)abs(u_n^((j)) (x_*))<=M_*
+    sup_(n in NN_0,0<=j<m)abs(u_n^((j)) (x_*))<=M_*
   $
   for some finite $M_*$.
 
@@ -425,13 +425,13 @@ radius, so it can be used uniformly along a fixed path.
   a constant $C$ such that
   $
     abs(u_n (z))<=C
-    quad (n>=0, abs(z-z_0)=rho).
+    quad (n in NN_0, abs(z-z_0)=rho).
   $
   Every $u_n$ is holomorphic on a neighborhood of the closed disk,
   including at $z_0$. The maximum-modulus principle gives
   $
     abs(u_n (z))<=C
-    quad (n>=0, abs(z-z_0)<=rho).
+    quad (n in NN_0, abs(z-z_0)<=rho).
   $
   Consequently, $(u_n)$ is locally bounded on all of $Omega$.
 
@@ -451,7 +451,7 @@ radius, so it can be used uniformly along a fixed path.
 == Analytic fixed-point limits
 
 #thm[Analytic fixed-point limits][
-  Let $m>=1$ be an integer and define
+  Let $m in NN$ and define
   $
     L=sum_(j=0)^m a_j D^j,
   $
@@ -468,7 +468,7 @@ radius, so it can be used uniformly along a fixed path.
 #text(style: "oblique", weight: "bold")[Proof:]
 #block[
   #enum[
-    Since $L^n f -> g$ pointwise, $((L^n f)(x))_(n>=0)$ is bounded for all $x in I$, so $sup_(n>=0) abs((L^n f)(x))<oo$. Hence, @prop:analytic-bounds applies, and we obtain that for every compact interval $K subs I$, there exist $C,r>0$ such that
+    Since $L^n f -> g$ pointwise, $((L^n f)(x))_(n in NN_0)$ is bounded for all $x in I$, so $sup_(n in NN_0) abs((L^n f)(x))<oo$. Hence, @prop:analytic-bounds applies, and we obtain that for every compact interval $K subs I$, there exist $C,r>0$ such that
     $
       norm((L^n f)^((q)))_K <= C q! r^(-q)
       quad "for all" n,q in NN_0. quad (suit.heart)
@@ -527,7 +527,7 @@ radius, so it can be used uniformly along a fixed path.
 ]
 
 #remark[
-  For analytic input, @thm:analytic-convergence applies to $D^r$ for every integer $r>=1$,
+  For analytic input, @thm:analytic-convergence applies to $D^r$ for every $r in NN$,
   and to $x D$ and $x^2 D$, including on intervals containing zero.
   It gives the corresponding fixed-point equations
   $g^((r))=g$, $x g'=g$, and $x^2 g'=g$. Our previous results
@@ -589,15 +589,15 @@ In particular, $L w_(H_n)=w_(H_(n+1))$ on each half-line.
   $
     eta(x):=cases(e^(-frac(1, x^2)) & quad "if" x!=0, 0 & quad "if" x=0).
   $
-  Then $eta in C^oo (RR)$ and $eta^((j)) (0)=0$ for every $j>=0$.
+  Then $eta in C^oo (RR)$ and $eta^((j)) (0)=0$ for every $j in NN_0$.
 ]<lem:flat>
 
 #pf[
-  First, for every integer $N>=0$,
+  First, for every $N in NN_0$,
   $
     abs(x)^(-N) e^(-frac(1, x^2)) --> 0 quad "as" x --> 0.
   $
-  To verify this, put $y=frac(1, x^2)$ and choose an integer $q>N/2$.
+  To verify this, put $y=frac(1, x^2)$ and choose $q in NN$ with $q>N/2$.
   Since $e^y>=frac(y^q, q!)$ for $y>0$, we have
   $0<=y^(N/2)e^(-y)<=q! y^(N/2-q) toinf(y) 0$.
 
@@ -617,7 +617,7 @@ In particular, $L w_(H_n)=w_(H_(n+1))$ on each half-line.
 ]
 
 Set $f=1-eta$. Then $f in C^oo (RR)$, $f(0)=1$, and
-$f^((j)) (0)=0$ for $j>=1$. Its Taylor series at zero is the
+$f^((j)) (0)=0$ for $j in NN$. Its Taylor series at zero is the
 constant one. Since $f(x)<1$ for every $x!=0$, it cannot agree with
 that Taylor series on any neighborhood of zero. Thus $f$ is not
 real analytic at zero.
@@ -693,7 +693,7 @@ $
 $
 
 There is also an explicit failure of uniform derivative bounds.
-Integrating the formula for $u_n$ by parts in $s$, for $n>=1$,
+Integrating the formula for $u_n$ by parts in $s$, for $n in NN$,
 gives
 $
   u_n (x)=1-n x^2 u_(n-1) (x) quad (x!=0).
