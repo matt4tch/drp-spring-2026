@@ -324,8 +324,16 @@ radius, so it can be used uniformly along a fixed path.
 ]<prop:analytic-bounds>
 
 #pf[
-  *Bounds on one real interval.*
-  Since $a_m$ is not identically zero, there is a compact interval
+  #block(breakable: false)[
+    *Claim 1*: There exist $x_* in I$ with $a_m (x_*)!=0$ and $M_*>0$
+    such that
+    $
+      abs((L^n f)^((j)) (x_*))<=M_*
+      quad "for all" n in NN_0, 0<=j<m.
+    $
+  ]
+
+  *Proof of Claim 1*: Since $a_m$ is not identically zero, there is a compact interval
   $J_0=[alpha_0,beta_0] subs I$, with $alpha_0<beta_0$, on which
   $a_m$ does not vanish. For each $N in NN$, set
   $
@@ -345,9 +353,9 @@ radius, so it can be used uniformly along a fixed path.
   $0<delta<=frac(beta-alpha, 2m)$, yields
   $
     norm((L^n f)^((m)))_J & <=N norm(frac(1, a_m))_J
-                        +C_m N sum_(j=0)^(m-1)norm(frac(a_j, a_m))_J delta^(-j) \
-                      & quad +C_m norm((L^n f)^((m)))_J
-                        sum_(j=0)^(m-1)norm(frac(a_j, a_m))_J delta^(m-j).
+                            +C_m N sum_(j=0)^(m-1)norm(frac(a_j, a_m))_J delta^(-j) \
+                          & quad +C_m norm((L^n f)^((m)))_J
+                            sum_(j=0)^(m-1)norm(frac(a_j, a_m))_J delta^(m-j).
   $
   All powers $m-j$ in the last sum are positive. Choose a fixed
   $delta>0$ small enough that the coefficient of
@@ -365,9 +373,14 @@ radius, so it can be used uniformly along a fixed path.
   $
     sup_(n in NN_0,0<=j<m)abs((L^n f)^((j)) (x_*))<=M_*
   $
-  for some finite $M_*$.
+  for some $M_*>0$. Since $a_m$ does not vanish on $J$, we also have
+  $a_m (x_*)!=0$. $square.stroked$
 
-  *A common holomorphic domain.* The functions $f,a_0,dots,a_m$
+  *Claim 2*. There is a connected open set $Omega subs CC$ containing $I$
+  on which $f,a_0,dots,a_m$ and every iterate $L^n f$, $n in NN_0$,
+  have holomorphic extensions.
+
+  *Proof of Claim 2*: The functions $f,a_0,dots,a_m$
   have holomorphic extensions on a common disk centered at each
   point of $I$. Choose these disks with real diameters contained
   in $I$, and let $Omega$ be their union. If two disks intersect,
@@ -377,15 +390,20 @@ radius, so it can be used uniformly along a fixed path.
   The set $Omega$ is connected, since each disk meets $I$.
 
   Differentiation and multiplication preserve holomorphy on $Omega$,
-  so all iterates $L^n f$ are holomorphic on this same domain.
-  The zero set
+  so all iterates $L^n f$ are holomorphic on this same domain. $square.stroked$
+
+  *Claim 3*. The family $(L^n f)_(n in NN_0)$ is locally bounded on $Omega$.
+
+  *Proof of Claim 3*: By Claim 2, $a_m$ is holomorphic on the connected
+  open set $Omega$. Since it is not identically zero, the zero set
   $
     Z={z in Omega st a_m (z)=0}
   $
-  has no accumulation point in $Omega$, because $a_m$ is holomorphic
-  and not identically zero. It is also closed in $Omega$.
+  has no accumulation point in $Omega$ and is closed in $Omega$.
+  By Claim 1, we may fix $x_* in I without Z$ and $M_*>0$ satisfying
+  the bounds in that claim.
 
-  *Propagation along paths.* The domain $Omega without Z$ is path
+  The domain $Omega without Z$ is path
   connected. Indeed, two points can be joined by a polygonal path
   in $Omega$. Its compact image meets only finitely many zeros,
   and small detours around those zeros give a path in $Omega without Z$.
@@ -418,7 +436,7 @@ radius, so it can be used uniformly along a fixed path.
   on a neighborhood of $z$. Thus the family $(L^n f)$ is locally
   bounded on $Omega without Z$.
 
-  *Bounds across a zero.* Fix $z_0 in Z$. Choose $rho>0$ such that
+  Now fix $z_0 in Z$. Choose $rho>0$ such that
   $overline(D(z_0,rho)) subs Omega$ and this disk contains no other
   zero. Its boundary circle is a compact subset of $Omega without Z$.
   A finite cover by neighborhoods with uniform orbit bounds gives
@@ -427,17 +445,18 @@ radius, so it can be used uniformly along a fixed path.
     abs((L^n f)(z))<=C
     quad (n in NN_0, abs(z-z_0)=rho).
   $
-  Every $L^n f$ is holomorphic on a neighborhood of the closed disk,
+  By Claim 2, every $L^n f$ is holomorphic on a neighborhood of the closed disk,
   including at $z_0$. The maximum-modulus principle gives
   $
     abs((L^n f)(z))<=C
     quad (n in NN_0, abs(z-z_0)<=rho).
   $
-  Consequently, $(L^n f)$ is locally bounded on all of $Omega$.
+  Consequently, $(L^n f)$ is locally bounded on all of $Omega$. $square.stroked$
 
-  *Bounds on derivatives.* Let $K subs I$ be a compact interval.
-  Choose $r>0$ so that its closed complex $r$-neighborhood is
-  contained in $Omega$. Local boundedness and a finite cover give
+  We now prove the proposition. Let $K subs I$ be a compact interval.
+  By Claim 2, $Omega$ is an open neighborhood of $K$, so we can choose
+  $r>0$ such that the closed complex $r$-neighborhood of $K$ is
+  contained in $Omega$. By Claim 3, local boundedness and a finite cover give
   a constant $C_K>0$ bounding every $L^n f$ on this compact neighborhood.
   Cauchy's estimates on disks of radius $r$ centered at $x in K$ give
   $
