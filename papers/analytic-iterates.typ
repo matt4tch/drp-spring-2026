@@ -692,52 +692,6 @@ radius, so it can be used uniformly along a fixed path.
 
 = A singular counterexample
 
-== Construction of the operator
-
-We construct the operator by reversing the change of variable and
-integrating factor from the first-order theorem @drp[Section 2].
-The construction starts with a sequence satisfying $H_n '=H_(n+1)$.
-
-For $t>0$ and $n in NN_0$, define
-$
-  H_n (t):=integral_0^1 s^n e^(s t) dif s.
-$
-Differentiating under the integral gives $H_n '=H_(n+1)$. This is
-justified on each compact $t$-interval by continuity and uniform
-boundedness of the integrand and its $t$-derivative on the rectangle.
-Also,
-$
-  H_0 (t)=frac(e^t-1, t).
-$
-Set $p(t)=t e^(-t)$, so that $p(t)H_0 (t)=1-e^(-t)$, and put
-$t(x)=frac(1, x^2)$ for $x!=0$. Then
-$p(t(x))H_0 (t(x))=1-e^(-frac(1, x^2))$, which extends smoothly
-to the origin with value one by @lem:flat.
-
-For $x!=0$,
-$
-  frac(dif t, dif x)=-frac(2, x^3),
-  quad -frac(x^3, 2) frac(dif t, dif x)=1.
-$
-Thus the operator $-frac(x^3, 2)D$ becomes differentiation with respect
-to $t$. Multiplication by $p$ introduces an extra term, which we
-cancel using $frac(p'(t), p(t))=1/t-1$. This leads to
-$
-  L h:=-frac(x^3, 2)h'+(1-x^2)h.
-$
-Both coefficients are polynomials, and the leading coefficient has
-exactly one zero, of order three, at the origin.
-
-For $H in C^oo ((0,oo))$, define
-$w_H (x)=p(t(x))H(t(x))$ on $RR without {0}$. Writing $t=t(x)$,
-the chain rule gives
-$
-  (L w_H)(x) & =frac(dif, dif t)[p(t)H(t)]+(1-1/t)p(t)H(t) \
-             & =p(t)H'(t)+[p'(t)+(1-1/t)p(t)]H(t) \
-             & =p(t)H'(t).
-$
-In particular, $L w_(H_n)=w_(H_(n+1))$ on each half-line.
-
 == Smoothness of the input
 
 #lemma[The flat exponential][
@@ -778,10 +732,78 @@ constant one. Since $f(x)<1$ for every $x!=0$, it cannot agree with
 that Taylor series on any neighborhood of zero. Thus $f$ is not
 real analytic at zero.
 
+== Construction of the operator
+
+#lemma[Change of variable and integrating factor][
+  Define
+  $
+    p(t):=t e^(-t) quad (t>0),
+    quad t(x):=frac(1, x^2) quad (x!=0),
+  $
+  and let
+  $
+    L:=-frac(x^3, 2)D+(1-x^2).
+  $
+  For each $H in C^oo ((0,oo))$, define
+  $
+    w_H (x):=p(t(x))H(t(x)) quad (x in RR without {0}).
+  $
+  Then
+  $
+    L w_H=w_(H') quad "on" RR without {0}.
+  $
+]<lem:change-of-variable>
+
+#pf[
+  Fix $H in C^oo ((0,oo))$ and $x!=0$, and write $t=t(x)$.
+  Since
+  $
+    t'(x)=-frac(2, x^3),
+    quad -frac(x^3, 2)t'(x)=1,
+  $
+  the chain rule gives
+  $
+    (L w_H)(x) & =frac(dif, dif t)[p(t)H(t)]+(1-x^2)p(t)H(t) \
+               & =p(t)H'(t)+[p'(t)+(1-1/t)p(t)]H(t).
+  $
+  Here we used $x^2=1/t$. Since $p(t)=t e^(-t)$,
+  $
+    p'(t)+(1-1/t)p(t)
+    =(1-t)e^(-t)+(t-1)e^(-t)=0.
+  $
+  Consequently,
+  $
+    (L w_H)(x)=p(t(x))H'(t(x))=w_(H') (x).
+  $
+  Since $x!=0$ was arbitrary, the identity holds on $RR without {0}$.
+]
+
+For the counterexample, we use the sequence
+$
+  H_n (t):=integral_0^1 s^n e^(s t) dif s
+  quad (t>0, n in NN_0).
+$
+Differentiating under the integral gives $H'_n=H_(n+1)$.
+Repeated differentiation is justified on each compact $t$-interval by
+continuity and uniform boundedness of the integrand and its $t$-derivatives
+on the rectangle. In particular, every $H_n$ is smooth on $(0,oo)$.
+Also,
+$
+  H_0 (t)=frac(e^t-1, t),
+  quad p(t)H_0 (t)=1-e^(-t).
+$
+Thus
+$
+  w_(H_0) (x)=1-e^(-frac(1, x^2)) quad (x!=0),
+$
+which extends smoothly to the origin with value one by @lem:flat.
+Both coefficients of $L$ are polynomials, and its leading coefficient has
+exactly one zero, of order three, at the origin.
+
 == Orbit formula and convergence
 
 #thm[A discontinuous limit with polynomial coefficients][
-  On $RR$, define
+  For $h in C^oo (RR)$, define
   $
     L h=-frac(x^3, 2)h'+(1-x^2)h,
     quad f=1-eta,
@@ -794,7 +816,7 @@ real analytic at zero.
       1 & quad "if" x=0.
     )
   $
-  Moreover, $0<=L^(n+1) f<=L^n f<=1$ on $RR$, and the sequence
+  Moreover, $0<=L^(n+1) f<=L^n f<=1$, and the sequence
   converges pointwise to the discontinuous function
   $
     g(x)=cases(1 & quad "if" x=0, 0 & quad "if" x!=0).
