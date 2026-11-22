@@ -333,190 +333,196 @@ radius, so it can be used uniformly along a fixed path.
     $
   ]
 
-  *Proof of Claim 1*: Since $a_m$ is not identically zero, there is a compact interval
-  $J_0=[alpha_0,beta_0] subs I$, with $alpha_0<beta_0$, on which
-  $a_m$ does not vanish. For each $N in NN$, define
-  $
-    E_N:={x in J_0 st abs((L^n f)(x))<=N "for every" n in NN_0}.
-  $
-  Note that $E_N$ is closed and ${E_n}_(n in NN)$ covers $J_0$. Baire Category Theorem gives an
-  $N in NN$ with $op("int")_(J_0) (E_N)!=em$. Hence there are
-  $x in J_0$ and $epsilon>0$ such that
-  $
-    (x-epsilon,x+epsilon) ∩ J_0 subs E_N.
-  $
-  Since $J_0$ is a nondegenerate interval, this intersection is an interval
-  of positive length. It therefore contains a compact interval
-  $J=[alpha,beta] subs E_N$ with $alpha<beta$. Thus
-  $norm(L^n f)_J<=N$ for all $n in NN_0$.
+  #pf(heading: [Proof of Claim 1])[
+    Since $a_m$ is not identically zero, there is a compact interval
+    $J_0=[alpha_0,beta_0] subs I$, with $alpha_0<beta_0$, on which
+    $a_m$ does not vanish. For each $N in NN$, define
+    $
+      E_N:={x in J_0 st abs((L^n f)(x))<=N "for every" n in NN_0}.
+    $
+    Note that $E_N$ is closed and ${E_n}_(n in NN)$ covers $J_0$. Baire Category Theorem gives an
+    $N in NN$ with $op("int")_(J_0) (E_N)!=em$. Hence there are
+    $x in J_0$ and $epsilon>0$ such that
+    $
+      (x-epsilon,x+epsilon) ∩ J_0 subs E_N.
+    $
+    Since $J_0$ is a nondegenerate interval, this intersection is an interval
+    of positive length. It therefore contains a compact interval
+    $J=[alpha,beta] subs E_N$ with $alpha<beta$. Thus
+    $norm(L^n f)_J<=N$ for all $n in NN_0$.
 
-  On $J$, the equation $L(L^n f)=L^(n+1) f$ gives
-  $
-    (L^n f)^((m))=frac(L^(n+1) f, a_m)
-    -sum_(j=0)^(m-1)frac(a_j, a_m)(L^n f)^((j)).
-  $
-  Since $f$ and the coefficients of $L$ are real analytic on $I$,
-  every $L^n f$ is real analytic on $I$, hence belongs to $C^m (I)$.
-  Since $J subs I$ and $I$ is open, @lem:interpolation applies to each $L^n f$.
-  For $0<delta<=frac(beta-alpha, 2m)$, this yields
-  $
-    norm((L^n f)^((m)))_J & <=N norm(frac(1, a_m))_J
-                            +C_m N sum_(j=0)^(m-1)norm(frac(a_j, a_m))_J delta^(-j) \
-                          & quad +C_m norm((L^n f)^((m)))_J
-                            sum_(j=0)^(m-1)norm(frac(a_j, a_m))_J delta^(m-j).
-  $
-  All powers $m-j$ in the last sum are positive. Choose a fixed
-  $delta>0$ small enough that the coefficient of
-  $norm((L^n f)^((m)))_J$ on the right is at most $1/2$. This norm is
-  finite for each $n$, since $(L^n f)^((m))$ is continuous on the
-  compact interval $J$. Subtracting $frac(1, 2) norm((L^n f)^((m)))_J$
-  from both sides of the resulting inequality gives
-  $
-    frac(1, 2) norm((L^n f)^((m)))_J
-    <=N norm(frac(1, a_m))_J
-    +C_m N sum_(j=0)^(m-1)norm(frac(a_j, a_m))_J delta^(-j).
-  $
-  Multiplying both sides by $2$, we obtain
-  $
-    norm((L^n f)^((m)))_J
-    <=2N norm(frac(1, a_m))_J
-    +2C_m N sum_(j=0)^(m-1)norm(frac(a_j, a_m))_J delta^(-j).
-  $
-  This bound is independent of $n$. Applying @lem:interpolation again bounds
-  $norm((L^n f)^((j)))_J$ uniformly in $n$ for every $0<=j<m$.
-  In particular, at a chosen
-  $x_* in (alpha,beta)$,
-  $
-    abs((L^n f)^((j)) (x_*))<=M_*
-    quad "for all" n in NN_0, 0<=j<m
-  $
-  for some $M_*>0$. Since $a_m$ does not vanish on $J$, we also have
-  $a_m (x_*)!=0$. $square.stroked$
+    On $J$, the equation $L(L^n f)=L^(n+1) f$ gives
+    $
+      (L^n f)^((m))=frac(L^(n+1) f, a_m)
+      -sum_(j=0)^(m-1)frac(a_j, a_m)(L^n f)^((j)).
+    $
+    Since $f$ and the coefficients of $L$ are real analytic on $I$,
+    every $L^n f$ is real analytic on $I$, hence belongs to $C^m (I)$.
+    Since $J subs I$ and $I$ is open, @lem:interpolation applies to each $L^n f$.
+    For $0<delta<=frac(beta-alpha, 2m)$, this yields
+    $
+      norm((L^n f)^((m)))_J & <=N norm(frac(1, a_m))_J
+                              +C_m N sum_(j=0)^(m-1)norm(frac(a_j, a_m))_J delta^(-j) \
+                            & quad +C_m norm((L^n f)^((m)))_J
+                              sum_(j=0)^(m-1)norm(frac(a_j, a_m))_J delta^(m-j).
+    $
+    All powers $m-j$ in the last sum are positive. Choose a fixed
+    $delta>0$ small enough that the coefficient of
+    $norm((L^n f)^((m)))_J$ on the right is at most $1/2$. This norm is
+    finite for each $n$, since $(L^n f)^((m))$ is continuous on the
+    compact interval $J$. Subtracting $frac(1, 2) norm((L^n f)^((m)))_J$
+    from both sides of the resulting inequality gives
+    $
+      frac(1, 2) norm((L^n f)^((m)))_J
+      <=N norm(frac(1, a_m))_J
+      +C_m N sum_(j=0)^(m-1)norm(frac(a_j, a_m))_J delta^(-j).
+    $
+    Multiplying both sides by $2$, we obtain
+    $
+      norm((L^n f)^((m)))_J
+      <=2N norm(frac(1, a_m))_J
+      +2C_m N sum_(j=0)^(m-1)norm(frac(a_j, a_m))_J delta^(-j).
+    $
+    This bound is independent of $n$. Applying @lem:interpolation again bounds
+    $norm((L^n f)^((j)))_J$ uniformly in $n$ for every $0<=j<m$.
+    In particular, at a chosen
+    $x_* in (alpha,beta)$,
+    $
+      abs((L^n f)^((j)) (x_*))<=M_*
+      quad "for all" n in NN_0, 0<=j<m
+    $
+    for some $M_*>0$. Since $a_m$ does not vanish on $J$, we also have
+    $a_m (x_*)!=0$.
+  ]
 
   *Claim 2*. There is a connected open set $Omega subs CC$ containing $I$
   on which $f,a_0,dots,a_m$ and every iterate $L^n f$ have holomorphic extensions.
 
-  *Proof of Claim 2*: Fix $x in I$. For each $h in {f,a_0,dots,a_m}$,
-  real analyticity gives $R_h>0$ such that $(x-R_h,x+R_h) subs I$ and
-  $
-    h(t)=sum_(k=0)^oo c_(h,k) (t-x)^k
-    quad "for" abs(t-x)<R_h.
-  $
-  Choose $0<rho_h<R_h$. Since the series converges at $t=x+rho_h$,
-  its terms are bounded, so there is $M_h>0$ such that
-  $abs(c_(h,k)) rho_h^k<=M_h$ for all $k in NN_0$. For complex $z$ with
-  $abs(z-x)<rho_h$, we therefore have
-  $
-    abs(c_(h,k) (z-x)^k)<=M_h lr((frac(abs(z-x), rho_h)))^k.
-  $
-  Comparison with a geometric series shows that
-  $sum_(k=0)^oo c_(h,k) (z-x)^k$ converges absolutely on $D(x,rho_h)$.
-  By the theorem on differentiation of power series, its sum is
-  holomorphic on this disk and agrees with $h$ on its real diameter.
-  Since there are only finitely many functions $f,a_0,dots,a_m$,
-  we can choose $r_x>0$ smaller than all their radii $rho_h$.
-  Thus they have holomorphic extensions on the common disk $D(x,r_x)$,
-  whose real diameter is contained in $I$.
+  #pf(heading: [Proof of Claim 2])[
+    Fix $x in I$. For each $h in {f,a_0,dots,a_m}$,
+    real analyticity gives $R_h>0$ such that $(x-R_h,x+R_h) subs I$ and
+    $
+      h(t)=sum_(k=0)^oo c_(h,k) (t-x)^k
+      quad "for" abs(t-x)<R_h.
+    $
+    Choose $0<rho_h<R_h$. Since the series converges at $t=x+rho_h$,
+    its terms are bounded, so there is $M_h>0$ such that
+    $abs(c_(h,k)) rho_h^k<=M_h$ for all $k in NN_0$. For complex $z$ with
+    $abs(z-x)<rho_h$, we therefore have
+    $
+      abs(c_(h,k) (z-x)^k)<=M_h lr((frac(abs(z-x), rho_h)))^k.
+    $
+    Comparison with a geometric series shows that
+    $sum_(k=0)^oo c_(h,k) (z-x)^k$ converges absolutely on $D(x,rho_h)$.
+    By the theorem on differentiation of power series, its sum is
+    holomorphic on this disk and agrees with $h$ on its real diameter.
+    Since there are only finitely many functions $f,a_0,dots,a_m$,
+    we can choose $r_x>0$ smaller than all their radii $rho_h$.
+    Thus they have holomorphic extensions on the common disk $D(x,r_x)$,
+    whose real diameter is contained in $I$.
 
-  Let $Omega=union.big_(x in I) D(x,r_x)$. This is an open set containing $I$.
-  If two of these disks intersect,
-  their intersection contains a real interval. The extensions agree
-  on that interval, hence on the intersection by the identity
-  theorem. They therefore define holomorphic functions on $Omega$.
-  The interval $I$ is connected, and every disk $D(x,r_x)$ is connected
-  and contains its center $x in I$. Thus
-  $
-    Omega=I union union.big_(x in I) D(x,r_x)
-  $
-  is connected as it is the union of the connected set $I$ with connected
-  sets that each have nonempty intersection with $I$.
+    Let $Omega=union.big_(x in I) D(x,r_x)$. This is an open set containing $I$.
+    If two of these disks intersect,
+    their intersection contains a real interval. The extensions agree
+    on that interval, hence on the intersection by the identity
+    theorem. They therefore define holomorphic functions on $Omega$.
+    The interval $I$ is connected, and every disk $D(x,r_x)$ is connected
+    and contains its center $x in I$. Thus
+    $
+      Omega=I union union.big_(x in I) D(x,r_x)
+    $
+    is connected as it is the union of the connected set $I$ with connected
+    sets that each have nonempty intersection with $I$.
 
-  Differentiation and multiplication preserve holomorphy on $Omega$,
-  so all iterates $L^n f$ are holomorphic on this same domain. $square.stroked$
+    Differentiation and multiplication preserve holomorphy on $Omega$,
+    so all iterates $L^n f$ are holomorphic on this same domain.
+  ]
 
   *Claim 3*. The family ${L^n f}_(n in NN_0)$ is locally bounded on $Omega$.
 
-  *Proof of Claim 3*: By Claim 2, $a_m$ is holomorphic on the connected
-  open set $Omega$. Since it is not identically zero, the zero set
-  $
-    Z={z in Omega st a_m (z)=0}
-  $
-  has no accumulation point in $Omega$ and is closed in $Omega$.
+  #pf(heading: [Proof of Claim 3])[
+    By Claim 2, $a_m$ is holomorphic on the connected
+    open set $Omega$. Since it is not identically zero, the zero set
+    $
+      Z={z in Omega st a_m (z)=0}
+    $
+    has no accumulation point in $Omega$ and is closed in $Omega$.
 
-  First, we prove local boundedness at every point of $Omega without Z$.
-  By Claim 1, we may fix $x_* in I without Z$ and $M_*>0$ satisfying
-  the bounds in that claim.
+    First, we prove local boundedness at every point of $Omega without Z$.
+    By Claim 1, we may fix $x_* in I without Z$ and $M_*>0$ satisfying
+    the bounds in that claim.
 
-  The domain $Omega without Z$ is path
-  connected. Indeed, two points can be joined by a polygonal path
-  in $Omega$. Its compact image meets only finitely many zeros,
-  and small detours around those zeros give a path in $Omega without Z$.
+    The domain $Omega without Z$ is path
+    connected. Indeed, two points can be joined by a polygonal path
+    in $Omega$. Its compact image meets only finitely many zeros,
+    and small detours around those zeros give a path in $Omega without Z$.
 
-  Fix $z in Omega without Z$ and a continuous path from $x_*$ to
-  $z$ in this domain. Its image $Gamma$ is compact. Choose $R>0$
-  small enough that the compact set
-  $
-    E=union.big_(w in Gamma)overline(D(w,R))
-  $
-  is contained in $Omega without Z$. To apply @lem:propagation, set
-  $
-    c=frac(1, a_m), quad b_j=-frac(a_j, a_m),
-    quad v_(n,j)=(L^n f)^((j)) quad (0<=j<m).
-  $
-  For every $n in NN_0$ and $0<=j<m-1$, the definition gives
-  $
-    v'_(n,j)=((L^n f)^((j)))'=(L^n f)^((j+1))=v_(n,j+1).
-  $
-  Also, $L(L^n f)=L^(n+1) f$ on $Omega$, so on $Omega without Z$,
-  $
-    v'_(n,m-1) & =(L^n f)^((m)) \
-               & =frac(L^(n+1) f, a_m)
-                 -sum_(j=0)^(m-1)frac(a_j, a_m)(L^n f)^((j)) \
-               & =c v_(n+1,0)+sum_(j=0)^(m-1)b_j v_(n,j).
-  $
-  Thus the derivative identities required by @lem:propagation hold.
-  By Claim 2, all $v_(n,j)$ are holomorphic on $Omega$.
-  Since $a_m$ has no zeros on $Omega without Z$, the coefficients
-  $c,b_0,dots,b_(m-1)$ are holomorphic there and hence bounded on the
-  compact set $E$. Set
-  $
-    C_0=max{1,norm(c)_E+sum_(j=0)^(m-1)norm(b_j)_E},
-    quad A=max{2/R,2C_0}.
-  $
-  These choices satisfy @lem:propagation on every disk of radius
-  $R$ centered on the path.
+    Fix $z in Omega without Z$ and a continuous path from $x_*$ to
+    $z$ in this domain. Its image $Gamma$ is compact. Choose $R>0$
+    small enough that the compact set
+    $
+      E=union.big_(w in Gamma)overline(D(w,R))
+    $
+    is contained in $Omega without Z$. To apply @lem:propagation, set
+    $
+      c=frac(1, a_m), quad b_j=-frac(a_j, a_m),
+      quad v_(n,j)=(L^n f)^((j)) quad (0<=j<m).
+    $
+    For every $n in NN_0$ and $0<=j<m-1$, the definition gives
+    $
+      v'_(n,j)=((L^n f)^((j)))'=(L^n f)^((j+1))=v_(n,j+1).
+    $
+    Also, $L(L^n f)=L^(n+1) f$ on $Omega$, so on $Omega without Z$,
+    $
+      v'_(n,m-1) & =(L^n f)^((m)) \
+                 & =frac(L^(n+1) f, a_m)
+                   -sum_(j=0)^(m-1)frac(a_j, a_m)(L^n f)^((j)) \
+                 & =c v_(n+1,0)+sum_(j=0)^(m-1)b_j v_(n,j).
+    $
+    Thus the derivative identities required by @lem:propagation hold.
+    By Claim 2, all $v_(n,j)$ are holomorphic on $Omega$.
+    Since $a_m$ has no zeros on $Omega without Z$, the coefficients
+    $c,b_0,dots,b_(m-1)$ are holomorphic there and hence bounded on the
+    compact set $E$. Set
+    $
+      C_0=max{1,norm(c)_E+sum_(j=0)^(m-1)norm(b_j)_E},
+      quad A=max{2/R,2C_0}.
+    $
+    These choices satisfy @lem:propagation on every disk of radius
+    $R$ centered on the path.
 
-  Uniform continuity of the path allows a finite subdivision whose
-  consecutive centers have distance less than $frac(1, 2A)$.
-  Starting with the bound $M_*$ at $x_*$, each application gives
-  a bound on the next disk at most twice the preceding bound.
-  After finitely many steps, all iterates $L^n f$ are uniformly bounded
-  on a neighborhood of $z$. Thus the family ${L^n f}_(n in NN_0)$ is locally
-  bounded on $Omega without Z$.
+    Uniform continuity of the path allows a finite subdivision whose
+    consecutive centers have distance less than $frac(1, 2A)$.
+    Starting with the bound $M_*$ at $x_*$, each application gives
+    a bound on the next disk at most twice the preceding bound.
+    After finitely many steps, all iterates $L^n f$ are uniformly bounded
+    on a neighborhood of $z$. Thus the family ${L^n f}_(n in NN_0)$ is locally
+    bounded on $Omega without Z$.
 
-  Next, we prove local boundedness at every point of $Z$.
-  Fix $z_0 in Z$. Choose $rho>0$ such that
-  $overline(D(z_0,rho)) subs Omega$ and this disk contains no other
-  zero. Its boundary circle is a compact subset of $Omega without Z$.
-  By the first step, every point of this boundary circle has a neighborhood
-  on which all $L^n f$ are bounded by a common constant independent of $n$.
-  Compactness gives a finite cover by these neighborhoods, hence
-  a constant $C$ such that
-  $
-    abs((L^n f)(z))<=C
-    quad (n in NN_0, abs(z-z_0)=rho).
-  $
-  By Claim 2, every $L^n f$ is holomorphic on a neighborhood of the closed disk,
-  including at $z_0$. The maximum-modulus principle gives
-  $
-    abs((L^n f)(z))<=C
-    quad (n in NN_0, abs(z-z_0)<=rho).
-  $
-  This bounds all $L^n f$ on the neighborhood $D(z_0,rho)$ of $z_0$,
-  so the family is locally bounded at $z_0$. Since $z_0 in Z$ was arbitrary,
-  the family is locally bounded at every point of $Z$.
-  Together with the first step, this proves local boundedness on all of
-  $Omega$. $square.stroked$
+    Next, we prove local boundedness at every point of $Z$.
+    Fix $z_0 in Z$. Choose $rho>0$ such that
+    $overline(D(z_0,rho)) subs Omega$ and this disk contains no other
+    zero. Its boundary circle is a compact subset of $Omega without Z$.
+    By the first step, every point of this boundary circle has a neighborhood
+    on which all $L^n f$ are bounded by a common constant independent of $n$.
+    Compactness gives a finite cover by these neighborhoods, hence
+    a constant $C$ such that
+    $
+      abs((L^n f)(z))<=C
+      quad (n in NN_0, abs(z-z_0)=rho).
+    $
+    By Claim 2, every $L^n f$ is holomorphic on a neighborhood of the closed disk,
+    including at $z_0$. The maximum-modulus principle gives
+    $
+      abs((L^n f)(z))<=C
+      quad (n in NN_0, abs(z-z_0)<=rho).
+    $
+    This bounds all $L^n f$ on the neighborhood $D(z_0,rho)$ of $z_0$,
+    so the family is locally bounded at $z_0$. Since $z_0 in Z$ was arbitrary,
+    the family is locally bounded at every point of $Z$.
+    Together with the first step, this proves local boundedness on all of
+    $Omega$.
+  ]
 
   For a nonempty set $A subs CC$, define the distance function
   $
@@ -621,8 +627,7 @@ radius, so it can be used uniformly along a fixed path.
   ]
 ]<thm:analytic-convergence>
 
-#text(style: "oblique", weight: "bold")[Proof:]
-#block[
+#pf[
   #enum[
     Since $L^n f -> g$ pointwise, $((L^n f)(x))_(n in NN_0)$ is bounded for all $x in I$, so $sup_(n in NN_0) abs((L^n f)(x))<oo$. Hence, @prop:analytic-bounds applies, and we obtain that for every compact interval $K subs I$, there exist $C,r>0$ such that
     $
@@ -671,7 +676,6 @@ radius, so it can be used uniformly along a fixed path.
     Thus $g$ equals its Taylor series on a neighborhood of $x_0$,
     so it is real analytic at $x_0$. Since $x_0 in I$ was arbitrary,
     $g$ is real analytic on $I$, as desired.
-    #qed()
   ]
 ]
 

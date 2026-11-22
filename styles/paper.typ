@@ -85,9 +85,9 @@
   $square$
 }
 
-#let pf(body) = block[
+#let pf(body, heading: [Proof]) = block[
   #set text(style: "oblique", weight: "bold")
-  Proof:
+  #heading:
   #set text(style: "normal", weight: "regular")
   #body
   #qed()
