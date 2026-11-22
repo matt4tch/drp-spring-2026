@@ -53,7 +53,7 @@ Typst downloads automatically when needed.
 
 ## Commit hook
 
-To compile the papers and presentation automatically before each commit,
+To compile the papers and presentations automatically before each commit,
 enable the repository's versioned Git hooks:
 
 ```sh
@@ -61,5 +61,6 @@ git config core.hooksPath .githooks
 ```
 
 The pre-commit hook runs `build.sh` and stages `papers/smooth-iterates.pdf`,
-`papers/analytic-iterates.pdf`, and `presentation/slides.pdf` for the current
+`papers/analytic-iterates.pdf`, `presentation/slides.pdf`, and
+`presentation-analytic/slides.pdf` for the current
 commit. It blocks the commit if a compilation fails.

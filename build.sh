@@ -9,7 +9,7 @@ fi
 
 project_root="$(CDPATH= cd "$(dirname "$0")" && pwd)"
 
-for source in papers/smooth-iterates.typ papers/analytic-iterates.typ presentation/slides.typ; do
+for source in papers/smooth-iterates.typ papers/analytic-iterates.typ presentation/slides.typ presentation-analytic/slides.typ; do
   output="${source%.typ}.pdf"
   printf 'Compiling %s...\n' "$source"
   typst compile --root "$project_root" "$project_root/$source" "$project_root/$output"

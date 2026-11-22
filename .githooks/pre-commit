@@ -7,5 +7,5 @@ cd "$repo_root"
 
 ./build.sh
 
-git add -- papers/smooth-iterates.pdf papers/analytic-iterates.pdf presentation/slides.pdf
+git add -- papers/smooth-iterates.pdf papers/analytic-iterates.pdf presentation/slides.pdf presentation-analytic/slides.pdf
 printf '%s\n' 'pre-commit: staged the paper and presentation PDFs.'
