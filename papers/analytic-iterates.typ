@@ -648,20 +648,13 @@ radius, so it can be used uniformly along a fixed path.
     Fix $x_0 in I$ and choose $s>0$ such that
     $K=[x_0-s,x_0+s] subs I$. Choose $C,r>0$ as in $(suit.heart)$
     for this interval $K$.
-    Fix $q in NN_0$. By $(circle.filled)$,
-    $(L^n f)^((q)) -> g^((q))$ uniformly on $K$. The reverse triangle
-    inequality gives
+    By $(circle.filled)$, $L^n f -> g$ in $C^oo_("loc") (I)$.
+    For each $q in NN_0$, the seminorm $h mapsto norm(h^((q)))_K$
+    is continuous in this topology. Thus $(suit.heart)$ gives
     $
-      abs(norm((L^n f)^((q)))_K-norm(g^((q)))_K)
-      <=norm((L^n f)^((q))-g^((q)))_K -> 0.
+      norm(g^((q)))_K = lim_(n->oo) norm((L^n f)^((q)))_K
+      <= C q! r^(-q) quad (q in NN_0).
     $
-    Since $C$ and $r$ are independent of $n$ and $q$, we have
-    $
-      norm(g^((q)))_K & = lim_(n->oo) norm((L^n f)^((q)))_K \
-                      & <= lim_(n->oo) C q! r^(-q) quad "(by" (suit.heart)")" \
-                      & = C q! r^(-q).
-    $
-    Since $q in NN_0$ was arbitrary, this bound holds for every derivative order.
     Fix $x$ with $abs(x-x_0)<min{s,r}$. Since $g$ is smooth,
     Taylor's theorem and the bound with $q=N+1$ give, for every $N in NN_0$,
     $
