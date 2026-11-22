@@ -769,8 +769,9 @@ exactly one zero, of order three, at the origin.
   multiplication by polynomial coefficients preserve smoothness,
   induction shows that every $L^n f$ is smooth on all of $RR$.
 
-  On $RR without {0}$, we have $f=w_(H_0)$ and
-  $L w_(H_n)=w_(H_(n+1))$. Induction therefore gives, with
+  On $RR without {0}$, we have $f=w_(H_0)$. By @lem:change-of-variable
+  and the identity $H_n '=H_(n+1)$, we have $L w_(H_n)=w_(H_(n+1))$.
+  Induction therefore gives, with
   $t=frac(1, x^2)$,
   $
     (L^n f)(x)=p(t)H_n (t)
