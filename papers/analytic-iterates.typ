@@ -524,89 +524,32 @@ radius, so it can be used uniformly along a fixed path.
     $Omega$.
   ]
 
-  For a nonempty set $A subs CC$, define the distance function
-  $
-    d_A:CC -> [0,oo), quad d_A (z):=inf_(a in A) abs(z-a).
-  $
-  It satisfies $abs(d_A (z)-d_A (w))<=abs(z-w)$ for all $z,w in CC$,
-  so it is continuous.
+  Fix a nonempty compact interval $K subs I$. If $Omega != CC$,
+  then $K$ and the closed set $CC without Omega$ are disjoint, so
+  their distance is positive. Choose $r>0$ smaller than that
+  distance. If $Omega=CC$, choose any $r>0$.
 
-  We now prove the proposition. It holds trivially if $K=em$, so let $K subs I$ be a nonempty compact interval.
-  By Claim 2, $Omega$ is an open neighborhood of $K$.
-  If $Omega!=CC$, then $CC \\ Omega != em$, so
-  $d_(CC without Omega)$ is defined and continuous.
-  For $x in K$, since $Omega$ is open and $x in K subs Omega$, there exists $epsilon_x>0$
-  such that $D(x,epsilon_x) subs Omega$. Every $z in CC without Omega$
-  therefore satisfies $abs(x-z)>=epsilon_x$, so
+  The union
   $
-    d_(CC without Omega) (x)=inf_(z in CC without Omega) abs(x-z)>=epsilon_x>0.
+    K_r = union.big_(x in K) overline(D(x,r))
   $
-  Since $d_(CC without Omega)$ is continuous and $K$ is nonempty and compact, EVT gives $x_0 in K$ such that
-  $
-    d_(CC without Omega) (x)>=d_(CC without Omega) (x_0)>0
-  $
-  for every $x in K$.
-  Set $epsilon:=d_(CC without Omega) (x_0)$.
-  Choose $r=epsilon/2$. If $Omega=CC$, choose any $r>0$ instead.
-  Define
-  $
-    K_r & :={z in CC st d_K (z)<=r} \
-        & =d_K^(-1) ([0,r]) \
-        & subs Omega
-  $
-  Since $[0,r] subs RR$ is closed and $d_K$ is continuous, $K_r$ is closed. To show that $K_r$ is bounded, choose $M>0$ such that $abs(x)<=M$
-  for every $x in K$. Fix $z in K_r$. The function $x mapsto abs(z-x)$
-  is continuous on the nonempty compact set $K$, so EVT gives $x_z in K$ at which it attains its minimum. Hence
-  $
-    abs(z-x_z)=min_(x in K) abs(z-x)
-    =inf_(x in K) abs(z-x)=d_K (z)<=r.
-  $
-  By the triangle inequality,
-  $
-    abs(z)<=abs(z-x_z)+abs(x_z)<=r+M.
-  $
-  Thus $K_r subs overline(D(0,M+r))$, so $K_r$ is bounded.
-  Since $K_r$ is closed and bounded in $CC$, it is compact by the
-  Heine--Borel theorem.
-  By Claim 3, for each $w in K_r$ there exist an open neighborhood
-  $U_w subs Omega$ of $w$ and a constant $B_w>0$ such that
-  $
-    abs((L^n f)(z))<=B_w
-  $
-  for all $z in U_w "and" n in NN_0$.
-  The sets ${U_w}_(w in K_r)$ form an open cover of $K_r$.
-  Since $K_r$ is compact, there exist $w_1,dots,w_ell in K_r$ such that
-  $
-    K_r subs union.big_(i=1)^ell U_(w_i).
-  $
-  Set $C_K:=max{B_(w_1),dots,B_(w_ell)}$. For any $z in K_r$, choose
-  $i$ with $z in U_(w_i)$. Then, for every $n in NN_0$,
-  $
-    abs((L^n f)(z))<=B_(w_i)<=C_K.
-  $
-  Thus, the same constant $C_K$ bounds every iterate on all of $K_r$.
+  is contained in $Omega$ by the choice of $r$. It is compact because
+  it is the image of $K times overline(D(0,r))$ under addition.
+  By Claim 3 and a finite subcover of $K_r$, there is a constant
+  $C_K>0$ bounding all the iterates $L^n f$ on $K_r$.
 
-  Fix $x in K$. If $abs(z-x)<=r$, then
-  $d_K (z)=inf_(y in K) abs(z-y)<=abs(z-x)<=r$, so
-  $
-    overline(D(x,r)) subs K_r subs Omega.
-  $
-  By Claim 2, each $L^n f$ is holomorphic on the open set $Omega$,
-  which contains this closed disk. Cauchy's derivative estimate therefore
-  gives, for every $n,q in NN_0$,
+  For each $x in K$, the closed disk $overline(D(x,r))$ lies in $K_r$.
+  By Claim 2 and Cauchy's derivative estimate, for every $n,q in NN_0$,
   $
     abs((L^n f)^((q)) (x)) & <=frac(q!, r^q) sup_(abs(z-x)=r) abs((L^n f)(z)) \
                            & <=C_K q! r^(-q).
   $
-  Since $C_K$ and $r$ are independent of $x$, $n$, and $q$, taking the
-  supremum over $x in K$ gives
+  The right-hand side is independent of $x$. Taking the supremum over
+  $x in K$ therefore gives, for every $n,q in NN_0$,
   $
-    norm((L^n f)^((q)))_K
-    =sup_(x in K) abs((L^n f)^((q)) (x))
-    <=C_K q! r^(-q)
+    norm((L^n f)^((q)))_K = sup_(x in K) abs((L^n f)^((q)) (x))
+    <= C_K q! r^(-q).
   $
-  for all $n,q in NN_0$.
-  This concludes the proof of the proposition.
 ]
 
 
@@ -627,6 +570,7 @@ radius, so it can be used uniformly along a fixed path.
   ]
 ]<thm:analytic-convergence>
 
+#pagebreak(weak: true)
 #pf[
   #enum[
     Since $L^n f -> g$ pointwise, $((L^n f)(x))_(n in NN_0)$ is bounded for all $x in I$, so $sup_(n in NN_0) abs((L^n f)(x))<oo$. Hence, @prop:analytic-bounds applies, and we obtain that for every compact interval $K subs I$, there exist $C,r>0$ such that
