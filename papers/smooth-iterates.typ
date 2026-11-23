@@ -9,16 +9,14 @@
   author: ("Jake Edmonstone", "Matthew Tchouikine"),
 )
 
-#notes-title("Iteration of Linear Differential Operators")
-#align(center)[
-  #strong[Jake Edmonstone and Matthew Tchouikine] \
-  Mentor: Paul Cusson \
-  University of Waterloo Directed Research Program
+#report-front-matter("Iteration of Linear Differential Operators")[
+  We study pointwise limits of iterates of linear differential operators
+  on smooth functions of one real variable. If the successive derivatives
+  of a smooth function converge pointwise, their limit satisfies $g'=g$.
+  We extend the fixed-point conclusion to first-order operators with
+  smooth coefficients and a nowhere-zero leading coefficient, and treat
+  the operators $x D$ and $x^2 D$ separately.
 ]
-
-#v(1em)
-#outline()
-#pagebreak()
 
 = Ordinary differentiation
 

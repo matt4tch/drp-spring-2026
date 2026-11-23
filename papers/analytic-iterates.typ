@@ -5,21 +5,15 @@
 #show: project-header
 
 #set document(
-  title: "Pointwise Limits of Differential-Operator Iterates: Analytic Input and a Singular Counterexample",
+  title: "Iteration of Linear Differential Operators: Analytic Input and a Singular Counterexample",
   author: ("Jake Edmonstone", "Matthew Tchouikine"),
 )
 
-#notes-title("Pointwise Limits of Differential-Operator Iterates")
-#align(center)[
-  #text(19pt)[Analytic Input and a Singular Counterexample] \
-  #v(0.6em)
-  #strong[Jake Edmonstone and Matthew Tchouikine] \
-  Mentor: Paul Cusson \
-  University of Waterloo Directed Research Program
-]
-
-#v(1em)
-*Abstract.* Let $L$ be a linear differential operator of positive order
+#report-front-matter(
+  "Iteration of Linear Differential Operators",
+  subtitle: "Analytic Input and a Singular Counterexample",
+)[
+Let $L$ be a linear differential operator of positive order
 with real-analytic coefficients on an open interval, allowing zeros
 of the leading coefficient. For real-analytic input $f$, we prove
 that pointwise boundedness of $(L^n f)$ implies local uniform bounds
@@ -28,9 +22,7 @@ its limit $g$ is real analytic, the convergence holds locally uniformly
 with all derivatives, and $L g=g$. For one such first-order operator
 with polynomial coefficients, we construct a smooth, nonanalytic input
 whose iterates converge to the indicator of the origin.
-
-#outline()
-#pagebreak()
+]
 
 = Introduction
 

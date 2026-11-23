@@ -19,10 +19,24 @@
   doc
 }
 
-#let notes-title(title) = {
-  align(center, text(24pt, weight: "bold", title))
-  v(1em)
-}
+#let report-front-matter(title, abstract, subtitle: none) = [
+  #align(center)[
+    #block(text(24pt, weight: "bold", title))
+    #if subtitle != none [
+      #block(text(19pt, subtitle))
+    ]
+    #v(0.6em)
+    #strong[Jake Edmonstone and Matthew Tchouikine] \
+    Mentor: Paul Cusson \
+    University of Waterloo Directed Research Program
+  ]
+
+  #v(1em)
+  *Abstract.* #abstract
+
+  #outline()
+  #pagebreak()
+]
 
 // Numbered theorem environments
 #let setup-shared-counters(level) = doc => {
