@@ -1,7 +1,7 @@
 #import "@preview/touying:0.7.4": *
 #import "../../styles/slides.typ": thm
 
-== What can fail when the leading coefficient vanishes
+== When the leading coefficient vanishes
 
 For $h in C^oo (RR)$, define
 $
@@ -12,7 +12,18 @@ Its iterates satisfy
 $
   (L_3^n f)(x) -> cases(1 & "if" x=0, 0 & "if" x!=0).
 $
-The limit is discontinuous at $0$, so it is not smooth. What if we require the input to be real analytic?
+Thus, when the leading coefficient is allowed to vanish, the limit need not be continuous (let alone smooth).
+
+== When the order exceeds one
+
+On $I=(-1,1)$, define $L h:=h'''$ for $h in C^oo (I)$.
+Its leading coefficient is identically $1$, so it is nowhere zero.
+
+*Claim.* There exists $f in C^oo (I)$ such that
+$
+  (L^n f)(x)=f^((3n)) (x) -> g(x) quad "for every" x in I,
+$
+yet $g in.not C^1 (I)$.
 
 == Strengthening the assumptions
 

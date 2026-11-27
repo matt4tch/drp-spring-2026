@@ -37,5 +37,9 @@ A change of variable and an integrating factor turn the iterates $L_2^n f$
 into successive derivatives of a single function. We then apply the
 ordinary-derivative result and translate the conclusion back to $g$.
 
-*The next question:* what happens for higher-order operators or when the
-leading coefficient vanishes?
+*Two natural generalizations:* what happens when
+#enum[
+  the leading coefficient is somewhere zero?
+][
+  the order of the operator exceeds one?
+]
