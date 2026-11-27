@@ -1,22 +1,16 @@
 #import "@preview/touying:0.7.4": *
 
-= Closing
+= Future directions
 
-== AI use
+== Higher order with a nowhere-zero leading coefficient
 
-*Disclosure draft — complete before presenting*
+Last term’s DRP settled the first-order case. What happens in order $m>=2$?
 
-- Tools used: [add names].
-- Tasks assisted: [identify the actual mathematical, writing, or coding work].
-- Verification: [describe what was checked and by whom].
-- Limitations: [identify any remaining unverified claims].
+Let $I$ be an open interval and $f,a_0,dots,a_m in C^oo (I)$, with
+$a_m (x)!=0$ for every $x in I$. Define
+$
+  (L h)(x)=sum_(j=0)^m a_j (x) h^((j)) (x).
+$
 
-// Replace these prompts with an accurate account of the project's actual AI use.
-// Do not describe proposed verification as completed work.
-
-== Discussion
-
-- Analytic input allows higher order and zeros of the leading coefficient.
-- Smooth input can have a discontinuous pointwise limit.
-
-*Questions?*
+*Question.* If $L^n f -> g$ pointwise on $I$, must $g$ be smooth
+and satisfy $L g=g$?

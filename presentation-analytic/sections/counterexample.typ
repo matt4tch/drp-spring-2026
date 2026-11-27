@@ -1,23 +1,6 @@
 #import "@preview/touying:0.7.4": *
 
-= Counterexample (time permitting)
-
-== Why smoothness alone is insufficient
-
-Define
-$
-  eta(x)=cases(e^(-1/x^2) & "if" x!=0, 0 & "if" x=0),
-  quad f=1-eta.
-$
-
-The function $f$ is smooth but not analytic at zero.
-For
-$
-  L=-frac(x^3,2)D+(1-x^2),
-$
-we will obtain a discontinuous pointwise limit.
-
-// Presenter prompt: explain the flat exponential; omit its full proof in a short talk.
+= Construction (time permitting)
 
 == Constructing functions we can iterate
 

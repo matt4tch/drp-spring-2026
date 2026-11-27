@@ -2,20 +2,6 @@
 
 = Proof of Theorem 3.3
 
-== Theorem 3.3: analytic fixed-point limits
-
-Let $I ⊆ RR$ be a nonempty open interval, $m in NN$, and
-$
-  L=sum_(j=0)^m a_j D^j.
-$
-Assume $f,a_0,dots,a_m$ are real analytic on $I$ and $a_m$ is not
-identically zero.
-
-If $L^n f -> g$ pointwise on $I$, then
-
-+ $L g=g$.
-+ $g$ is real analytic on $I$.
-
 == The estimate behind the proof
 
 Pointwise convergence implies

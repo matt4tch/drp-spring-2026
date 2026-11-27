@@ -36,7 +36,7 @@
     tertiary: theme-tertiary,
   ),
   config-info(
-    title: [Pointwise limits of differential-operator iterates],
+    title: [Iteration of linear differential operators 2.0],
     author: [Jake Edmonstone, Matthew Tchouikine],
     date: datetime.today(),
     institution: [
@@ -51,7 +51,7 @@
 
 #set text(size: 23pt)
 
-#title-slide(authors: ([Jake Edmonstone], [Matthew Tchouikine]))
+#title-slide(authors: ([Matthew Tchouikine], [Jake Bradley Edmonstone]))
 
 // Set to false to omit the optional counterexample slides.
 #let include-counterexample = true
