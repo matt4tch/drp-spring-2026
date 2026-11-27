@@ -1,6 +1,6 @@
 #import "@preview/touying:0.7.4": *
 
-= Construction (time permitting)
+= Constructing the first-order counterexample
 
 == Constructing functions we can iterate
 
@@ -24,8 +24,8 @@ Then $H'_n=H_(n+1)$ and $w_(H_0)=f$ away from zero.
 For $x!=0$, the iterate formula gives
 $
   0<=(L^n f)(x)
-  =frac(1,x^2) integral_0^1 s^n e^(-(1-s)/x^2) dif s
-  <=frac(1,x^2(n+1)) -> 0.
+  =frac(1, x^2) integral_0^1 s^n e^(-(1-s)/x^2) dif s
+  <=frac(1, x^2(n+1)) -> 0.
 $
 
 At zero, $(L h)(0)=h(0)$, so $(L^n f)(0)=1$ for every $n$.

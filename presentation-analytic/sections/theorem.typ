@@ -2,14 +2,15 @@
 
 = Proof of Theorem 3.3
 
-== The estimate behind the proof
+== Uniform derivative bounds for the iterates
 
-Pointwise convergence implies
+*Proposition 3.2* requires the iterates to be pointwise bounded.
+For each $x in I$, the sequence $(L^n f)(x)$ converges to $g(x)$, so
 $
   sup_(n in NN_0) abs((L^n f)(x))<oo quad (x in I).
 $
 
-*Proposition 3.2:* for each compact interval $K ⊆ I$, there exist
+The proposition therefore gives, for each compact interval $K ⊆ I$, constants
 $C,r>0$, independent of $n,q$, such that
 $
   norm((L^n f)^((q)))_K<=C q! r^(-q)
@@ -18,7 +19,7 @@ $
 
 // Presenter prompt: keep this as a roadmap; add a backup slide for a claim if needed.
 
-== Part 1: convergence of the derivatives
+== The derivatives converge locally uniformly
 
 The bound from Proposition 3.2 controls every derivative locally,
 uniformly in $n$.
@@ -35,7 +36,7 @@ $
   quad (x in I, j in NN_0).
 $
 
-== Part 1: the fixed-point equation
+== The limit satisfies $L g=g$
 
 Fix $x in I$. Since $L^(n+1) f -> g$ pointwise,
 $
@@ -48,16 +49,21 @@ $
 The sum is finite, and every derivative converges at $x$.
 Since $x$ was arbitrary, $L g=g$ on $I$.
 
-== Part 2: the Taylor remainder
+== Derivative bounds for the limit
 
 Fix $x_0 in I$ and $K=[x_0-s,x_0+s] ⊆ I$, where $s>0$.
-Uniform derivative convergence gives
+For each $q in NN_0$,
 $
-  norm(g^((q)))_K
-  =lim_(n->oo) norm((L^n f)^((q)))_K<=C q! r^(-q).
+  & g^((q)) =lim_(n->oo) (L^n f)^((q)) quad "uniformly on" K
+    && "(by Lemma 2.2)" \
+  ==> & norm(g^((q)))_K =lim_(n->oo) norm((L^n f)^((q)))_K
+    && "(by continuity of the sup seminorm)" \
+  & norm(g^((q)))_K <=C q! r^(-q) && "(by Proposition 3.2)"
 $
 
-For $abs(x-x_0)<min{s,r}$, Taylor's theorem gives
+== The limit equals its Taylor series locally
+
+For $abs(x-x_0)<min{s,r}$, Taylor's theorem and the derivative bound give
 $
   abs(g(x)-sum_(q=0)^N frac(g^((q)) (x_0), q!)(x-x_0)^q)
   <=C lr((frac(abs(x-x_0), r)))^(N+1) -> 0.
