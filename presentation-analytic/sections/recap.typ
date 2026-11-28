@@ -4,27 +4,26 @@
 
 == The question we started with
 
-Define $L_1 f:=f'$ for $f in C^oo (RR)$. Suppose
-$
-  (L_1^n f)(x) -> g(x) quad "for every" x in RR.
-$
-Must $g$ be smooth and satisfy $L_1 g=g$?
-
-// Presenter prompt: briefly recall the participants and previous talk.
-
-== The MathOverflow post
-
-#slide(
-  config: config-page(header: none, footer: none, margin: 8pt),
+#grid(
+  columns: (1fr, 1fr),
+  column-gutter: 18pt,
+  row-gutter: 5pt,
   align: center + horizon,
-)[
-  #image("../../presentation/assets/mathoverflow/question-crop-left-tight.png", height: 399pt)
-  #v(2pt)
-  #text(size: 14pt)[Paul Cusson’s MathOverflow question ·
-    #link("https://mathoverflow.net/a/413247")[Terence Tao’s answer, 6 January 2022]]
-]
+  link("https://mathoverflow.net/q/413165", image(
+    "../../presentation/assets/mathoverflow/paul-cusson-badge.png",
+    height: 31pt, alt: "Paul Cusson’s MathOverflow question",
+  )),
+  link("https://mathoverflow.net/a/413247", image(
+    "../../presentation/assets/mathoverflow/terence-tao-badge.png",
+    height: 31pt, alt: "Terence Tao’s MathOverflow answer",
+  )),
+  image("../../presentation/assets/mathoverflow/question-crop-left-tight.png",
+    width: 100%, alt: "Paul Cusson’s question on limits of successive derivatives."),
+  image("../../presentation/assets/mathoverflow/tao-theorem.png",
+    width: 100%, alt: "The analyticity theorem from Terence Tao’s answer."),
+)
 
-// Presenter prompt: explain Tao's analyticity result rather than reading the post.
+For $f in C^oo (RR)$, define $L_1 f:=f'$. If $L_1^n f -> g$ pointwise, must $g$ be smooth and satisfy $L_1 g=g$?
 
 == What the previous DRP established
 
