@@ -1,8 +1,8 @@
 #import "@preview/touying:0.7.4": *
 
-= Constructing the first-order counterexample
+= A discontinuous limit
 
-== Constructing functions we can iterate
+== Computing the iterates away from zero
 
 Set $t(x)=1/x^2$, $p(t)=t e^(-t)$, and
 $
@@ -19,7 +19,7 @@ Then $H'_n=H_(n+1)$ and $w_(H_0)=f$ away from zero.
 
 // Presenter prompt: show the chain-rule cancellation if time allows.
 
-== The pointwise limit
+== The limits at and away from zero
 
 For $x!=0$, the iterate formula gives
 $
