@@ -35,10 +35,3 @@ $
 A change of variable and an integrating factor turn the iterates $L_2^n f$
 into successive derivatives of a single function. We then apply the
 ordinary-derivative result and translate the conclusion back to $g$.
-
-*Two natural generalizations:* what happens when
-#enum[
-  the leading coefficient is somewhere zero?
-][
-  the order of the operator exceeds one?
-]

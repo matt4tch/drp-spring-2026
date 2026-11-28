@@ -66,7 +66,7 @@ Let $T_N (x)=sum_(q=0)^N frac(g^((q)) (x_0), q!)(x-x_0)^q$. Then
 $
   abs(g(x)-T_N (x))
     & <=frac(norm(g^((N+1)))_K,(N+1)!) abs(x-x_0)^(N+1) && "(Taylor remainder bound)" \
-    & <=C lr((frac(abs(x-x_0), r)))^(N+1) && ("slide 2.4 with" q=N+1).
+    & <=C lr((frac(abs(x-x_0), r)))^(N+1) && ("slide 3.4 with" q=N+1).
 $
 
 Since $abs(x-x_0)/r<1$, the bound tends to zero as $N -> oo$.

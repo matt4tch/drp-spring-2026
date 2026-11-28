@@ -1,6 +1,17 @@
 #import "@preview/touying:0.7.4": *
 #import "../../styles/slides.typ": thm
 
+= Generalizing the first-order result
+
+== Two natural generalizations
+
+What happens when
+#enum[
+  the leading coefficient is somewhere zero?
+][
+  the order of the operator exceeds one?
+]
+
 == When the leading coefficient vanishes
 
 For $h in C^oo (RR)$, define
@@ -20,9 +31,7 @@ On $I=(-1,1)$, define $L_4 h:=h'''$ for $h in C^oo (I)$.
 Its leading coefficient is identically $1$, so it is nowhere zero.
 
 *Claim.* There exists $f in C^oo (I)$ such that
-$
-  (L_4^n f)(x)=f^((3n)) (x) -> g(x) quad "for every" x in I,
-$
+$(L_4^n f)(x)=f^((3n)) (x)$ and $f^((3n)) (x) -> g(x) quad "for every" x in I,$
 yet $g in.not C^1 (I)$.
 
 == Strengthening the assumptions
